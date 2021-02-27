@@ -17,12 +17,22 @@ public class Point {
         return point.y;
     }
 
-    public void setX(Point point, double new_x){
+    public static void setX(Point point, double new_x){
         point.x = new_x;
     }
     
-    public void setY(Point point, double new_y){
+    public static void setY(Point point, double new_y){
         point.y = new_y;
+    }
+
+    public static void setXY(Point point, double new_x, double new_y) {
+        setX(point, new_x);
+        setY(point, new_y);
+    }
+
+    public static void setPoint(Point point, Point ajout) {
+        point.x = ajout.x;
+        point.y = ajout.y;
     }
 
     public static String toString(Point point) {
@@ -30,8 +40,14 @@ public class Point {
         return chaine;
     }
 
+    public static boolean comparePoint(Point p1, Point p2) {
+        if ((p1.x == p2.x) && (p1.y == p2.y)) {
+            return true;
+        }
+        return false;
+    }
+
     public static void print(Point point){
         System.out.println(toString(point));
     }
-
 }
