@@ -49,8 +49,8 @@ public class Tree<D> {
 //remplit un noeud vide avec la donnee d et 2 sous-arbres vides
 	public void insertEmpty(D d) {
 		data = d;
-		left = new Tree();
-		right = new Tree();
+		left = new Tree<D>();
+		right = new Tree<D>();
 	}
 	
 //calcul de la hauteur

@@ -2,13 +2,13 @@
 //Elle etend la classe Tree, sachant que les donnees sont a present comparables
 //Les doublons ne sont pas autorises
 
-public class BSTree<D extends Comparable> extends Tree<D> {
+public class BSTree<D extends Comparable<D>> extends Tree<D> {
 	
 //constructeurs
 	public BSTree() {
 		super();
 	}
-	public BSTree(D d, BSTree l, BSTree r) {
+	public BSTree(D d, BSTree<D> l, BSTree<D> r) {
 		super(d,l,r);
 	}
 	
@@ -51,8 +51,8 @@ public class BSTree<D extends Comparable> extends Tree<D> {
 //le type BSTree au lieu de Tree
 	public void insertEmpty(D d) {
 		setData(d);
-		setLeft(new BSTree());
-		setRight(new BSTree());
+		setLeft(new BSTree<D>());
+		setRight(new BSTree<D>());
 	}
 	
 //suppression recursive d'une donnee

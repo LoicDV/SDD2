@@ -2,7 +2,7 @@
 //Elle etend la classe BSTree decrivant les arbres binaires de recherche
 //Les doublons ne sont pas autorises
 
-public class AVLTree<D extends Comparable> extends BSTree<D> {
+public class AVLTree<D extends Comparable<D>> extends BSTree<D> {
 
 //Ajout de la hauteur dans la liste des variables d'instance
 //La hauteur est ainsi stockee dans la racine de l'arbre
@@ -36,8 +36,8 @@ public class AVLTree<D extends Comparable> extends BSTree<D> {
 //le type AVLTree au lieu de BSTree
 	public void insertEmpty(D d) {
 		setData(d);
-		setLeft(new AVLTree());
-		setRight(new AVLTree());
+		setLeft(new AVLTree<D>());
+		setRight(new AVLTree<D>());
 		height = 1;
 	}
 	
