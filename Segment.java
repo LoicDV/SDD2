@@ -5,7 +5,7 @@ public class Segment {
     
     // Constructeur.
     public Segment(Point p1, Point p2) {
-        if ((Point.getY(p1) > Point.getY(p2)) || ((Point.getY(p1) == Point.getY(p2)) && (Point.getX(p1) < (Point.getX(p2))))) {
+        if ((p1.getY() > p2.getY()) || ((p1.getY() == p2.getY()) && (p1.getX() < (p2.getX())))) {
             this.upper = p1;
             this.lower = p2;
         }
@@ -25,7 +25,7 @@ public class Segment {
     }
 
     public void setUpper(Segment s, Point new_point) {
-        if ((Point.getY(getLower(s)) > Point.getY(new_point)) || ((Point.getY(getLower(s)) == Point.getY(new_point)) && (Point.getX(getLower(s)) < (Point.getX(new_point))))) {
+        if ((getLower(s).getY() > new_point.getY()) || ((getLower(s).getY() == new_point.getY()) && (getLower(s).getX() < (new_point.getX())))) {
             s.upper = s.lower;
             s.lower = new_point;
         }
@@ -35,7 +35,7 @@ public class Segment {
     }
     
     public void setLower(Segment s, Point new_point) {
-        if ((Point.getY(getUpper(s)) < Point.getY(new_point)) || ((Point.getY(getUpper(s)) == Point.getY(new_point)) && (Point.getX(getUpper(s)) > (Point.getX(new_point))))) {
+        if ((getUpper(s).getY() < new_point.getY()) || ((getUpper(s).getY() == new_point.getY()) && (getUpper(s).getX() > (new_point.getX())))) {
             s.lower = s.upper;
             s.upper = new_point;
         }
@@ -46,20 +46,20 @@ public class Segment {
 
     // écriture de nos segments et retourne un string de notre segment.
     public static String toString(Segment s) {
-        String chaine = "(" + Point.toString(getUpper(s)) + ", "  + Point.toString(getLower(s)) + ")";
+        String chaine = "(" + getUpper(s).toString() + ", "  + getLower(s).toString() + ")";
         return chaine;
     }
 
     // Calcule la pente de notre segment et retourne un double qui est la pente
     public static double getPente(Segment s) {
-        double pente = (Point.getY(s.upper) - Point.getY(s.lower)) / (Point.getX(s.upper) - Point.getX(s.lower));
+        double pente = (s.upper.getY() - s.lower.getY()) / (s.upper.getX() - s.lower.getX());
         return pente;
     }
 
     // Calcule le parametre p de l'équation y = mx + p et retourne un double qui est le p.
     public static double getParam_P(Segment s) {
         double pente = getPente(s);
-        double param_p = Point.getY(s.upper) - pente * Point.getX(s.upper);
+        double param_p = s.upper.getY() - pente * s.upper.getX();
         return param_p;
     }
 
@@ -69,10 +69,10 @@ public class Segment {
         double pente = getPente(s);
         double param_p = getParam_P(s);
         
-        if ((Math.abs(Point.getY(p) - (pente * Point.getX(p) + param_p)) <= 0.00000001)
-        && (((Point.getY(s.lower) <= Point.getY(p)) || (Point.getY(s.lower) - Point.getY(p)) <= 0.00000001) && ((Point.getY(p) <= Point.getY(s.upper)) || (Point.getY(p) - Point.getY(s.upper)) <= 0.00000001))
-        && ((((Point.getX(s.lower) <= Point.getX(p)) || (Point.getX(s.lower) - Point.getX(p)) <= 0.00000001) && ((Point.getX(p) <= Point.getX(s.upper))) || (Point.getX(p) - Point.getX(s.upper)) <= 0.00000001)
-        || (((Point.getX(s.upper) <= Point.getX(p)) || (Point.getX(s.upper) - Point.getX(p)) <= 0.00000001) && ((Point.getX(p) <= Point.getX(s.lower))) || (Point.getX(p) - Point.getX(s.lower)) <= 0.00000001))) {
+        if ((Math.abs(p.getY() - (pente * p.getX() + param_p)) <= 0.00000001)
+        && (((s.lower.getY() <= p.getY()) || (s.lower.getY() - p.getY()) <= 0.00000001) && ((p.getY() <= s.upper.getY()) || (p.getY() - s.upper.getY()) <= 0.00000001))
+        && ((((s.lower.getX() <= p.getX()) || (s.lower.getX() - p.getX()) <= 0.00000001) && ((p.getX() <= s.upper.getX())) || (p.getX() - s.upper.getX()) <= 0.00000001)
+        || (((s.upper.getX() <= p.getX()) || (s.upper.getX() - p.getX()) <= 0.00000001) && ((p.getX() <= s.lower.getX())) || (p.getX() - s.lower.getX()) <= 0.00000001))) {
             verif = true;
         }
         return verif;
@@ -82,8 +82,8 @@ public class Segment {
     public static boolean isInVertical(Segment s, Point p) {
         boolean verif = false;
 
-        if ((Math.abs(Point.getX(p) - Point.getX(s.lower)) <= 0.00000001) &&
-        ((Point.getY(s.lower) <= Point.getY(p)) || (Point.getY(s.lower) - Point.getY(p)) <= 0.00000001) && ((Point.getY(p) <= Point.getY(s.upper))) || ((Point.getY(p) - Point.getY(s.upper)) <= 0.00000001)) {
+        if ((Math.abs(p.getX() - s.lower.getX()) <= 0.00000001) &&
+        ((s.lower.getY() <= p.getY()) || (s.lower.getY() - p.getY()) <= 0.00000001) && ((p.getY() <= s.upper.getY())) || ((p.getY() - s.upper.getY()) <= 0.00000001)) {
             verif = true;
         }
         return verif;
@@ -100,13 +100,13 @@ public class Segment {
         if (s2_pente == 0) {
             double x = (s2_param_p - s1_param_p) / s1_pente;
             double y = s2_param_p;
-            Point.setXY(point_intersection, x, y);
+            point_intersection.setXY(x, y);
         }
 
         else {
             double x = (s2_param_p - s1_param_p) / (s1_pente - s2_pente);
             double y = (s1_pente * x) + s1_param_p;
-            Point.setXY(point_intersection, x, y);
+            point_intersection.setXY(x, y);
         }        
         return point_intersection;
     }
@@ -114,7 +114,7 @@ public class Segment {
     // Regarde si un segment n'est pas un prolongment de l'autre.
     public static boolean isIntersectionExtremite(Segment s1, Segment s2) {
         boolean verif = false;
-        if (Point.comparePoint(s1.upper, s2.lower) || Point.comparePoint(s1.lower, s2.upper)) {
+        if (s1.upper.comparePoint(s2.lower) || s1.lower.comparePoint(s2.upper)) {
             verif = true;
         }
         return verif;
@@ -124,7 +124,7 @@ public class Segment {
     public static Point intersectionExtremite(Segment s1, Segment s2) {
         Point point_intersection = new Point(0, 0);
         
-        if (Point.comparePoint(s1.upper, s2.lower)) {
+        if (s1.upper.comparePoint(s2.lower)) {
             point_intersection = s1.upper;
         }
 
@@ -138,7 +138,7 @@ public class Segment {
     // Regarde si le segment est vertical ou non.
     public static boolean isVertical(Segment s) {
         boolean verif = false;
-        if (Point.getX(s.upper) == Point.getX(s.lower)) {
+        if (s.upper.getX() == s.lower.getX()) {
             verif = true;
         }
         return verif;
@@ -160,7 +160,6 @@ public class Segment {
 
             else {
                 point_intersection_droite = getIntersectionPointVertical(s1, s2, false, point_intersection_droite);
-                Point.print(point_intersection_droite);
                 if ((isInVertical(s1, point_intersection_droite)) && isIn(s2, point_intersection_droite)) {
                     verif = true;
                 }
@@ -170,7 +169,6 @@ public class Segment {
         else if (isVertical(s2)) {
             isOK = false;
             point_intersection_droite = getIntersectionPointVertical(s2, s1, false, point_intersection_droite);
-            Point.print(point_intersection_droite);
             if ((isIn(s1, point_intersection_droite)) && isInVertical(s2, point_intersection_droite)) {
                 verif = true;
             }
@@ -188,7 +186,6 @@ public class Segment {
 
             else {
                 point_intersection_droite = getIntersectionDroite(s1, s2);
-                Point.print(point_intersection_droite);
             }
         }
 
@@ -231,13 +228,13 @@ public class Segment {
             else if (s2_pente == 0) {
                 double x = (s2_param_p - s1_param_p) / s1_pente;
                 double y = s2_param_p;
-                Point.setXY(point_intersection, x, y);
+                point_intersection.setXY(x, y);
             }
 
             else {
                 double x = (s2_param_p - s1_param_p) / (s1_pente - s2_pente);
                 double y = (s1_pente * x) + s1_param_p;
-                Point.setXY(point_intersection, x, y);
+                point_intersection.setXY(x, y);
             } 
         }
         return point_intersection;
@@ -253,8 +250,8 @@ public class Segment {
         else {
             double pente = getPente(s2);
             double param_p = getParam_P(s2);
-            double y = pente * Point.getX(s1.upper) + param_p;
-            Point.setXY(point_intersection, Point.getX(s1.upper), y);
+            double y = pente * s1.upper.getX() + param_p;
+            point_intersection.setXY(s1.upper.getX(), y);
         }
         return point_intersection;
     }

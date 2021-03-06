@@ -9,45 +9,49 @@ public class Point {
         this.y = y;
     }
 
-    public static double getX(Point point){
-        return point.x;
+    // Assesseur/getteur
+    public double getX(){
+        return this.x;
     }
     
-    public static double getY(Point point){
-        return point.y;
+    public double getY(){
+        return this.y;
     }
 
-    public static void setX(Point point, double new_x){
-        point.x = new_x;
+    public void setX(double new_x){
+        this.x = new_x;
     }
     
-    public static void setY(Point point, double new_y){
-        point.y = new_y;
+    public void setY(double new_y){
+        this.y = new_y;
     }
 
-    public static void setXY(Point point, double new_x, double new_y) {
-        setX(point, new_x);
-        setY(point, new_y);
+    public void setXY(double new_x, double new_y) {
+        setX(new_x);
+        setY(new_y);
     }
 
-    public static void setPoint(Point point, Point ajout) {
-        point.x = ajout.x;
-        point.y = ajout.y;
+    public void setPoint(Point ajout) {
+        this.x = ajout.x;
+        this.y = ajout.y;
     }
 
-    public static String toString(Point point) {
-        String chaine = "(" + point.x + ", "  + point.y + ")";
+    // écriture de nos points et retourne un string de notre point.
+    public String toString() {
+        String chaine = "(" + this.x + ", "  + this.y + ")";
         return chaine;
     }
 
-    public static boolean comparePoint(Point p1, Point p2) {
-        if ((p1.x == p2.x) && (p1.y == p2.y)) {
+    // Compare les 2 points et retournent un booléen s'ils sont identiques.
+    public boolean comparePoint(Point p) {
+        if ((this.x == p.x) && (this.y == p.y)) {
             return true;
         }
         return false;
     }
 
-    public static void print(Point point){
-        System.out.println(toString(point));
+    // Affiche notre point dans la console.
+    public void print(){
+        System.out.println(this.toString());
     }
 }
