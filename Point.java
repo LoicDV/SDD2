@@ -4,25 +4,25 @@ public class Point {
     private double x, y;
 
     // Constructeur
-    public Point(double x, double y){
+    public Point(double x, double y) {
         this.x = x;
         this.y = y;
     }
 
     // Assesseur/getteur
-    public double getX(){
+    public double getX() {
         return this.x;
     }
     
-    public double getY(){
+    public double getY() {
         return this.y;
     }
 
-    public void setX(double new_x){
+    public void setX(double new_x) {
         this.x = new_x;
     }
     
-    public void setY(double new_y){
+    public void setY(double new_y) {
         this.y = new_y;
     }
 
@@ -50,8 +50,17 @@ public class Point {
         return false;
     }
 
+    // Retourne true si notre point est plus haut ou de même hauteur mais plus à gauche que celui en argument.
+    public boolean isUpper(Point p) {
+        boolean verif = false;
+        if ((this.getY() > p.getY()) || ((this.getY() == p.getY()) && (this.getX() < p.getX()))) {
+            verif = true;
+        }
+        return verif;
+    }
+
     // Affiche notre point dans la console.
-    public void print(){
+    public void print() {
         System.out.println(this.toString());
     }
 }
