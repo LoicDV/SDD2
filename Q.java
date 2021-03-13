@@ -57,6 +57,7 @@ public class Q extends AVL<Point> {
     public void suppressQRoot() {
         if (isLeaf()) {
             this.setData(null);
+            this.setHeight(0);
         }
         else {
             if (this.getLeftAVL().isEmpty()) {
@@ -65,6 +66,7 @@ public class Q extends AVL<Point> {
                 this.setData(head_new_Q);
                 this.setLeftAVL(new_Q.getLeftAVL());
                 this.setRightAVL(new_Q.getRightAVL());
+                this.setHeight(new_Q.getHeight());
             }
             else {
                 if (this.getRightAVL().isEmpty()) {
@@ -73,6 +75,7 @@ public class Q extends AVL<Point> {
                     this.setData(head_new_Q);
                     this.setLeftAVL(new_Q.getLeftAVL());
                     this.setRightAVL(new_Q.getRightAVL());
+                    this.setHeight(new_Q.getHeight());
                 }
                 else {
                     this.setData(suppressQMin());

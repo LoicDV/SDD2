@@ -57,11 +57,10 @@ public class AVL<Fg> {
 
     // Retourne true si la liste est vide, false sinon.
     public boolean isEmpty() {
-        boolean verif = false;
-        if (this.getHeight() == 0) {
-            verif = true;
+		if (this.getData() == null && this.leftAVL == null && this.rightAVL == null) {
+            return true;
         }
-        return verif;
+		return false;
     }
 
     // Retourne vrai si l'arbre gauche et droite sont vides, false sinon.
@@ -119,11 +118,6 @@ public class AVL<Fg> {
         return this.height;
     }
 
-    // Echange 2 données entre elle
-    public void tradeData() {
-
-    }
-
     //Calcul de la balance
 	public int balance() {
 		if (isEmpty()) 
@@ -178,4 +172,34 @@ public class AVL<Fg> {
             calculHeight();
         }
     }
+
+    public Fg findMax() {
+        Fg maximum;
+        if (this.getRightAVL().isEmpty()) {
+            maximum = this.getData();
+        }
+        else {
+            maximum = this.getRightAVL().findMax();
+        }
+        return maximum;
+    }
+
+    public Fg findMin() {
+        Fg minimum;
+        if (this.getLeftAVL().isEmpty()) {
+            minimum = this.getData();
+        }
+        else {
+            minimum = this.getLeftAVL().findMin();
+        }
+        return minimum;
+    }
+
+    public void inordre() {
+		if (!this.isEmpty()) {
+			this.getLeftAVL().inordre();
+			((Segment) this.getData()).print();
+			this.getRightAVL().inordre();
+		}
+	}
 }

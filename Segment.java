@@ -249,7 +249,7 @@ public class Segment {
     }
     
     // Affiche notre segment dans la console.
-    public void print(Segment s) {
+    public void print() {
         System.out.println(this.toString());
-    }
+    } 
 }
