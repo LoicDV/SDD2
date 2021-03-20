@@ -1,3 +1,4 @@
+package logique;
 public class Q extends AVL<Point> {
 
     // Construteurs

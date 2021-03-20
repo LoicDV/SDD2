@@ -1,3 +1,4 @@
+package logique;
 import java.lang.Math;
 
 public class AVL<Fg> {
@@ -48,7 +49,7 @@ public class AVL<Fg> {
     }
 
     public void setRightAVL(AVL<Fg> new_tree) {
-        this.leftAVL = new_tree;
+        this.rightAVL = new_tree;
     }
 
     public void setHeight(int new_height) {
@@ -57,10 +58,10 @@ public class AVL<Fg> {
 
     // Retourne true si la liste est vide, false sinon.
     public boolean isEmpty() {
-		if (this.getData() == null && this.leftAVL == null && this.rightAVL == null) {
+        if (this.getData() == null && this.leftAVL == null && this.rightAVL == null) {
             return true;
         }
-		return false;
+        return false;
     }
 
     // Retourne vrai si l'arbre gauche et droite sont vides, false sinon.
@@ -119,56 +120,66 @@ public class AVL<Fg> {
     }
 
     //Calcul de la balance
-	public int balance() {
-		if (isEmpty()) 
-			return 0;
-		else 
-			return getRightAVL().getHeight() - getLeftAVL().getHeight();
-	}
+    public int balance() {
+        int x = 0;
+        if (isEmpty() || isLeaf()) {
+            x = 0;
+        }
+        else if (this.getRightAVL() == null) {
+            x = - this.getLeftAVL().getHeight();
+        }
+        else if (this.getLeftAVL() == null) {
+            x = this.getRightAVL().getHeight();
+        }
+        else {
+            x = this.getRightAVL().getHeight() - this.getLeftAVL().getHeight();
+        }
+        return x;
+    }
 
     // Applique la rotation gauche.
     public void leftRotation() {
-		Fg data = this.getData();
-		AVL<Fg> right = this.getRightAVL();
-		this.setData(right.getData());
-		this.setRightAVL(right.getRightAVL());
-		right.setData(data);
-		right.setRightAVL(right.getLeftAVL());
-		right.setLeftAVL(this.getLeftAVL());
-		this.setLeftAVL(right);
-		right.calculHeight();
-		this.calculHeight();
-	}
+        Fg data = this.getData();
+        AVL<Fg> right = this.getRightAVL();
+        this.setData(right.getData());
+        this.setRightAVL(right.getRightAVL());
+        right.setData(data);
+        right.setRightAVL(right.getLeftAVL());
+        right.setLeftAVL(this.getLeftAVL());
+        this.setLeftAVL(right);
+        right.calculHeight();
+        this.calculHeight();
+    }
 
     //rotation droite
-	public void rightRotation() {
-		Fg data = this.getData();
-		AVL<Fg> left = this.getLeftAVL();
-		this.setData(left.getData());
-		this.setLeftAVL(left.getLeftAVL());
-		left.setData(data);
-		left.setLeftAVL(left.getRightAVL());
-		left.setRightAVL(getRightAVL());
-		setRightAVL(left);
-		left.calculHeight();
-		calculHeight();
-	}
+    public void rightRotation() {
+        Fg data = this.getData();
+        AVL<Fg> left = this.getLeftAVL();
+        this.setData(left.getData());
+        this.setLeftAVL(left.getLeftAVL());
+        left.setData(data);
+        left.setLeftAVL(left.getRightAVL());
+        left.setRightAVL(getRightAVL());
+        setRightAVL(left);
+        left.calculHeight();
+        calculHeight();
+    }
 
     // Rééquilibre notre AVL.
     public void equilibrate() {
         if (balance() == 2) {
-		    if (getRightAVL().balance() < 0) {
-			    getRightAVL().rightRotation();
+            if (getRightAVL().balance() < 0) {
+                getRightAVL().rightRotation();
             }
-		    leftRotation();
+            leftRotation();
         }
-	    else if (balance() == -2) {
-		    if (getLeftAVL().balance() > 0) {
-			    getLeftAVL().leftRotation();
+        else if (balance() == -2) {
+            if (getLeftAVL().balance() > 0) {
+                getLeftAVL().leftRotation();
             }
-			rightRotation();
+            rightRotation();
         }
-    	else {
+        else {
             calculHeight();
         }
     }
@@ -196,10 +207,16 @@ public class AVL<Fg> {
     }
 
     public void inordre() {
-		if (!this.isEmpty()) {
-			this.getLeftAVL().inordre();
-			((Segment) this.getData()).print();
-			this.getRightAVL().inordre();
-		}
-	}
+        if (this != null) {
+            if (this.getLeftAVL() != null) {
+                this.getLeftAVL().inordre();
+            }
+            if (this.getData() != null) {
+                ((Segment) this.getData()).print();
+            }
+            if (this.getRightAVL() != null) {
+                this.getRightAVL().inordre();
+            }
+        }
+    }
 }

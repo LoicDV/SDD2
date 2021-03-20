@@ -1,3 +1,4 @@
+package logique;
 public class Point {
     
     // Variables globales

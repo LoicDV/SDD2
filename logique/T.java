@@ -1,7 +1,9 @@
+package logique;
+
 public class T extends AVL<Segment> {
 
     // Construteurs
-    public T(Segment head, AVL<Segment> left, AVL<Segment> right) {
+    public T(Segment head, T left, T right) {
         super(head, left, right);
     }
 
