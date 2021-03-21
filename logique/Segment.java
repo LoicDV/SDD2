@@ -1,4 +1,5 @@
 package logique;
+
 public class Segment {
 
     // Variables globales.

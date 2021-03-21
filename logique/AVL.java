@@ -1,4 +1,5 @@
 package logique;
+
 import java.lang.Math;
 
 public class AVL<Fg> {

@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch ReadFile",
+            "request": "launch",
+            "mainClass": "GUI.ReadFile",
+            "projectName": "SDD2_6ecca69"
+        },
+        {
+            "type": "java",
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"
