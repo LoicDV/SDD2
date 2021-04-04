@@ -1,80 +1,116 @@
 package GUI;
 
+
+import java.io.File;
+import java.util.ArrayList;
+import logique.Point;
+
 // Import de base.
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.BorderPane;
 
 // Import menu.
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Line;
+
+// Import dessin
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.shape.Circle;
 
 public class Main extends Application {
 
+    private static ArrayList<Point[]> containers;
+    private static ArrayList<Line> set;
+    private static ArrayList<Circle> setCircle;
+    private static Stage stage;
+    private static File file;
+    private static BorderPane root;
+    private static Pane pane;
+    private static DisplayContainers grid;
+
     @Override
-    public void start(Stage stage) {
+    public void start(Stage primaryStage) {
 
-        // Menu.
-        // Onglet 1.
-        Menu menu1 = new Menu("File");
-        MenuItem menu1Item1 = new MenuItem("Open");
-        MenuItem menu1Item2 = new MenuItem("Save");
-        MenuItem menu1Item3 = new MenuItem("Save as...");
+        containers = new ArrayList<Point[]>();
+        set = new ArrayList<Line>();
+        setCircle = new ArrayList<Circle>();
+        stage = primaryStage;
+        file = null;
 
-        menu1.getItems().add(menu1Item1);
-        menu1.getItems().add(menu1Item2);
-        menu1.getItems().add(menu1Item3);
+        // Mettre la barre d'onglet en haut.
+        VBox vBox = new VBox(new MyMenuBar());
 
-        // Onglet 2.
-        Menu menu2 = new Menu("Run");
-        MenuItem menu2Item1 = new MenuItem("Compile");
-        MenuItem menu2Item2 = new MenuItem("Sweep line");
-        
-        menu2.getItems().add(menu2Item1);
-        menu2.getItems().add(menu2Item2);
+        // Zone de dessin.
+        ScrollPane scrollPaneDraw = new ScrollPane();
+        pane = new Pane();
+        scrollPaneDraw.setContent(pane);
 
-        // Onglet 3.
-        Menu menu3 = new Menu("Segment");
-        MenuItem menu3Item1 = new MenuItem("Add");
-        MenuItem menu3Item2 = new MenuItem("Change");
-        MenuItem menu3Item3 = new MenuItem("Remove");
+        // Zone de changement de Segment.
+        grid = new DisplayContainers();
 
-        menu3.getItems().add(menu3Item1);
-        menu3.getItems().add(menu3Item2);
-        menu3.getItems().add(menu3Item3);
-
-        // Onglet 4.
-        Menu menu4 = new Menu("Help");
-        
-        // Toute la barre.
-        MenuBar menuBar = new MenuBar();
-
-        menuBar.getMenus().add(menu1);
-        menuBar.getMenus().add(menu2);
-        menuBar.getMenus().add(menu3);
-        menuBar.getMenus().add(menu4);
-
-        // La mettre en haut.
-        VBox vBox = new VBox(menuBar);
-
-        // Stack.
-        // Mettre nos éléments dans le stack.
-        StackPane root = new StackPane();
-        root.getChildren().add(vBox);
+        // Mettre nos éléments dans la fenêtre.
+        root = new BorderPane();
+        root.setCenter(pane);
+        root.setTop(vBox);
+        root.setRight(grid);
 
         // Fenêtre.
         // Taille de la fenêtre.
-        Scene scene = new Scene(root, 300, 250);
+        Scene scene = new Scene(root, 800, 700);
 
         // Info de base de la fenetre initiale.
-        stage.setTitle("Map overlay");
-        stage.setScene(scene);
-        stage.show();
+        primaryStage.setTitle("Map overlay");
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 
+    public static Stage getStage() {
+        return stage;
+    }
+
+    public static Pane getPane() {
+        return pane;
+    }
+
+    public void setPane(Pane newPane) {
+        pane = newPane;
+    }
+
+    public static BorderPane getBorderPane() {
+        return root;
+    }
+
+    public static File getFile() {
+        return file;
+    }
+
+    public static void setFile(File newFile) {
+        file = newFile;
+    }
+
+    public static ArrayList<Point[]> getContainers() {
+        return containers;
+    }
+
+    public static ArrayList<Line> getSet() {
+        return set;
+    }
+
+    public static ArrayList<Circle> getSetCircle() {
+        return setCircle;
+    }
+
+    public static void setSetCircle() {
+        setCircle = new ArrayList<Circle>();
+    }
+
+    public static DisplayContainers getDisplayContainers() {
+        return grid;
+    }
+    
     public static void main(String[] args) {
         launch(args);
     }

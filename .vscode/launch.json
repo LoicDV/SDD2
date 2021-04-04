@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Intersections",
+            "request": "launch",
+            "mainClass": "logique.Intersections",
+            "projectName": "SDD2_6ecca69"
+        },
+        {
+            "type": "java",
             "name": "Launch ReadFile",
             "request": "launch",
             "mainClass": "GUI.ReadFile",

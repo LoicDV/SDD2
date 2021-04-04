@@ -15,10 +15,9 @@ import java.lang.NullPointerException;
 
 public class ReadFile {
     
-    public static ArrayList<Point[]> read(String infoString) {
+    public static ArrayList<Point[]> read(File file) {
 
         // Composant pour lire le fichier.
-        File file = null;
         FileReader fileReader = null;
         BufferedReader bufferedReader = null;
         
@@ -28,7 +27,6 @@ public class ReadFile {
         // Test avant.
         try {
             
-            file = new File(infoString);
             fileReader = new FileReader(file);
             bufferedReader = new BufferedReader(fileReader);
 
@@ -85,7 +83,7 @@ public class ReadFile {
         return stockTabPoints;
 
     }
-
+    /*
     // Fonction test pour voir si le stockTabPoints donne bien un tableau de Point[].
     public static void display(ArrayList<Point[]> tab) {
         for (Point[] smallTab : tab) {
@@ -96,12 +94,5 @@ public class ReadFile {
             }
         }
     }
-
-    public static void main(String[] args) {
-        
-        // Juste pour les tests.
-        ArrayList<Point[]> test = read(args[0]);
-        display(test);
-
-    }
+    */
 }
