@@ -18,7 +18,7 @@ public class MyMenuBar extends MenuBar{
             try {
                 new OpenScript();
             } catch (FileNotFoundException e) {
-                e.printStackTrace();
+                OpenScript.noFileOpen();
             }
         });
 

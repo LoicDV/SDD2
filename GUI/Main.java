@@ -16,7 +16,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
 
 // Import dessin
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 
@@ -44,9 +43,7 @@ public class Main extends Application {
         VBox vBox = new VBox(new MyMenuBar());
 
         // Zone de dessin.
-        ScrollPane scrollPaneDraw = new ScrollPane();
         pane = new Pane();
-        scrollPaneDraw.setContent(pane);
 
         // Zone de changement de Segment.
         grid = new DisplayContainers();
@@ -110,8 +107,8 @@ public class Main extends Application {
     public static DisplayContainers getDisplayContainers() {
         return grid;
     }
-    
-    public static void main(String[] args) {
+
+    public static void runApp(String[] args) {
         launch(args);
     }
 }

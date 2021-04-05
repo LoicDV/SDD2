@@ -17,6 +17,9 @@ public class Compilation {
         }
         Intersections set = new Intersections(newContains);
         ArrayList<Point> setIntersection = set.FindIntersections();
+        for (Point p : setIntersection) {
+            p.print();
+        }
         if (!flag) {
             // Simple Run.
             for (Point p : setIntersection) {

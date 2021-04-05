@@ -7,14 +7,14 @@ import logique.Point;
 import logique.Segment;
 
 // Imports JavaFX
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Alert.AlertType;
 
-public class DrawSegment extends Pane {
+public class DrawSegment extends ScrollPane{
 
     private static int zoom = 3;
     
@@ -35,21 +35,29 @@ public class DrawSegment extends Pane {
         grid.displayContainers();
     }
 
-    public static void addLine(Double point1X, Double point1Y, Double point2X, Double point2Y) {
-        if (noDoubleLine(point1X, point1Y, point2X, point2Y)) {
-            Line line = new Line(point1X * zoom, point1Y * zoom, point2X * zoom, point2Y * zoom);
+    public static void addLineDouble(Double point1X, Double point1Y, Double point2X, Double point2Y) {
+        Line line = new Line(point1X * zoom, point1Y * zoom, point2X * zoom, point2Y * zoom);
+        if (noDoubleLine(line, point1X, point1Y, point2X, point2Y, false)) {
             Main.getPane().getChildren().add(line);
             ArrayList<Line> set = Main.getSet();
             set.add(line);
             addContainers(point1X, point1Y, point2X, point2Y);
         }
         else {
-            AlertType alertType = AlertType.ERROR;
-            Alert alert = new Alert(alertType, "Warning in place");
-            alert.getDialogPane().setContentText("You can't add this Segment because you overlap another Segment !");
-            alert.getDialogPane().setHeaderText("AddSegment Warning");
-            alert.showAndWait();
+            doubleLineException();
         }
+    }
+
+    public static void doubleLineException() {
+        AlertType alertType = AlertType.ERROR;
+        Alert alert = new Alert(alertType, "Warning in place");
+        alert.getDialogPane().setContentText("You can't add this Segment because you overlap another Segment !");
+        alert.getDialogPane().setHeaderText("AddSegment Warning");
+        alert.showAndWait();
+    }
+
+    public static void addLineLine(Line line) {
+        Main.getPane().getChildren().add(line);
     }
 
     public static void addContainers(Double point1X, Double point1Y, Double point2X, Double point2Y) {
@@ -61,12 +69,16 @@ public class DrawSegment extends Pane {
         grid.displayContainers();
     }
 
-    public static boolean noDoubleLine(Double point1X, Double point1Y, Double point2X, Double point2Y) {
+    public static boolean noDoubleLine(Line linePane, Double point1X, Double point1Y, Double point2X, Double point2Y, boolean flag) {
         ArrayList<Point[]> containers = Main.getContainers();
+        Segment s = convertLineToSegment(linePane);
         Segment newSegment = new Segment(new Point(point1X, point1Y), new Point(point2X, point2Y));
         for (Point[] tab : containers) {
             Segment segment = new Segment(new Point(tab[0].getX(), tab[0].getY()), new Point(tab[1].getX(), tab[1].getY()));
-            if (segment.doesOverlap(newSegment)) {
+            if (flag && s.equalSegment(segment) && segment.doesOverlap(newSegment)) {
+                return false;
+            }
+            else if (!flag && segment.doesOverlap(newSegment)) {
                 return false;
             }
         }
@@ -78,5 +90,9 @@ public class DrawSegment extends Pane {
         circle.setFill(red);
         Main.getPane().getChildren().add(circle);
         Main.getSetCircle().add(circle);
+    }
+
+    public static Segment convertLineToSegment(Line line) {
+        return new Segment(new Point(line.getStartX(), line.getStartY()), new Point(line.getEndX(), line.getEndY()));
     }
 }

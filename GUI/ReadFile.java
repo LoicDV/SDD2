@@ -3,6 +3,9 @@ package GUI;
 import logique.Point;
 import java.util.ArrayList;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+
 // Lecture de fichier.
 import java.io.File;
 import java.io.FileReader;
@@ -11,7 +14,6 @@ import java.io.BufferedReader;
 // Exception liée au fichier.
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.lang.NullPointerException;
 
 public class ReadFile {
     
@@ -33,7 +35,7 @@ public class ReadFile {
         }
 
         catch (FileNotFoundException e) {
-            System.err.printf("Le fichier %s n'a pas été trouvé.", file.toString());
+            OpenScript.noFileOpen();
         }
 
         // Code.
@@ -73,26 +75,22 @@ public class ReadFile {
         }
 
         catch (IOException e) {
-            e.printStackTrace();
+            noFormatEditor();
         }
 
-        catch (NullPointerException e) {
-            System.err.println("Impossible de réouvrir le fichier " + file.toString() + ".");
+        catch (NumberFormatException e) {
+            noFormatEditor();
         }
 
         return stockTabPoints;
 
     }
-    /*
-    // Fonction test pour voir si le stockTabPoints donne bien un tableau de Point[].
-    public static void display(ArrayList<Point[]> tab) {
-        for (Point[] smallTab : tab) {
-            System.out.println("------------");
-            System.out.println(smallTab);
-            for (Point p : smallTab) {
-                p.print();
-            }
-        }
+
+    public static void noFormatEditor() {
+        AlertType alertType = AlertType.ERROR;
+        Alert alert = new Alert(alertType, "Warning in place");
+        alert.getDialogPane().setContentText("The format in the file are not good !");
+        alert.getDialogPane().setHeaderText("Editor Error");
+        alert.showAndWait();
     }
-    */
 }

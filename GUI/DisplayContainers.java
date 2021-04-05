@@ -5,8 +5,8 @@ import logique.Point;
 import logique.Segment;
 
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 
 public class DisplayContainers extends ScrollPane {
 
@@ -14,18 +14,18 @@ public class DisplayContainers extends ScrollPane {
         GridPane grid = new GridPane();
         grid.setGridLinesVisible(true);
         this.setContent(grid);
-        this.setPrefSize(250, 300);
+        this.setPrefSize(165, 300);
         ArrayList<Point[]> containers = Main.getContainers();
         int compteur = 0;
         for (Point[] tab : containers) {
-            TextField textField = new TextField();
-            textField.setPrefSize(248, 50);
+            Text text = new Text();
+            
             String string = (new Segment(tab[0], tab[1])).toString();
-            textField.setText(string);
-            textField.setOnMouseClicked(event -> {
-                new ChangeSegment(textField.getText());
+            text.setText(string);
+            text.setOnMouseClicked(event -> {
+                new ChangeSegment(text.getText());
             });
-            grid.add(textField, 0, compteur);
+            grid.add(text, 0, compteur);
             compteur++;
         }
     }

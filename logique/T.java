@@ -10,10 +10,6 @@ public class T extends AVL<Segment> {
     public T() {
         super();
     }
-    
-    /** 
-     * @return boolean
-     */
     /*
     public T getRightT() {
         return (T) getRightAVL();
@@ -33,24 +29,24 @@ public class T extends AVL<Segment> {
         if (head.isHorizontal()){
             if (segment.isHorizontal()){
                 if (left){
-                    if (head.getLower().getX() <= segment.getUpper().getX()){
+                    if (head.getLower().getX() <= segment.getUpper().getX() || head.getLower().getX() - segment.getUpper().getX() <= 0.00000001){
                         verif = true;
                     }
                 }
                 else {
-                    if (segment.getLower().getX() <= head.getUpper().getX()){
+                    if (segment.getLower().getX() <= head.getUpper().getX() || segment.getLower().getX() - head.getUpper().getX() <= 0.00000001){
                         verif = true;
                     }
                 }
             }
             else if (segment.isVertical()) {
                 if (left){
-                    if (head.getLower().getX() < segment.getUpper().getX()) {
+                    if (head.getLower().getX() < segment.getUpper().getX() || head.getLower().getX() - segment.getUpper().getX() <= 0.00000001) {
                         verif = true;
                     }
                 }
                 else {
-                    if (head.getLower().getX() >= segment.getUpper().getX()) {
+                    if (head.getLower().getX() >= segment.getUpper().getX() || segment.getUpper().getX() - head.getLower().getX() <= 0.00000001) {
                         verif = true;
                     }
                 }
@@ -60,12 +56,12 @@ public class T extends AVL<Segment> {
                 double segment_param_p = segment.getParam_P();
                 double segment_x = (h - segment_param_p) / segment_pente;
                 if (left) {
-                    if (head.getLower().getX() < segment_x){
+                    if (head.getLower().getX() < segment_x || head.getLower().getX() - segment_x <= 0.00000001){
                         verif = true;
                     }
                 }
                 else {
-                    if (head.getLower().getX() >= segment_x){
+                    if (head.getLower().getX() >= segment_x || segment_x - head.getLower().getX() <= 0.00000001){
                         verif = true; 
                     }
                 }
@@ -74,12 +70,12 @@ public class T extends AVL<Segment> {
         else if (segment.isHorizontal()) {
             if (head.isVertical()) {
                 if (left){
-                    if (segment.getLower().getX() >= head.getUpper().getX()) {
+                    if (segment.getLower().getX() >= head.getUpper().getX() || head.getUpper().getX() - segment.getLower().getX() <= 0.00000001) {
                         verif = true;
                     }
                 }
                 else {
-                    if (segment.getLower().getX() < head.getUpper().getX()) {
+                    if (segment.getLower().getX() < head.getUpper().getX() || segment.getLower().getX() - head.getUpper().getX() <= 0.00000001) {
                         verif = true;
                     }
                 }
@@ -89,12 +85,12 @@ public class T extends AVL<Segment> {
                 double head_param_p = head.getParam_P();
                 double head_x = (h - head_param_p) / head_pente;
                 if (left) {
-                    if (segment.getLower().getX() >= head_x){
+                    if (segment.getLower().getX() >= head_x || head_x - segment.getLower().getX() <= 0.00000001){
                         verif = true;
                     }
                 }
                 else {
-                    if (segment.getLower().getX() < head_x){
+                    if (segment.getLower().getX() < head_x || segment.getLower().getX() - head_x <= 0.00000001){
                         verif = true; 
                     }
                 }
@@ -104,12 +100,12 @@ public class T extends AVL<Segment> {
         else if (head.isVertical()) {
             if (segment.isVertical()) {
                 if (left) {
-                    if (head.getUpper().getX() <= segment.getUpper().getX()) {
+                    if (head.getUpper().getX() <= segment.getUpper().getX() || head.getUpper().getX() - segment.getUpper().getX() <= 0.00000001) {
                         verif = true;
                     }
                 }
                 else {
-                    if (head.getUpper().getX() >= segment.getUpper().getX()) {
+                    if (head.getUpper().getX() >= segment.getUpper().getX() || segment.getUpper().getX() - head.getUpper().getX() <= 0.00000001) {
                         verif = true;
                     }
                 }
@@ -120,12 +116,12 @@ public class T extends AVL<Segment> {
                 double segment_x = (h - segment_param_p) / segment_pente;
                 double head_x = head.getUpper().getX();
                 if (left) {
-                    if (head_x <= segment_x) {
+                    if (head_x <= segment_x || head_x - segment_x <= 0.00000001) {
                         verif = true;
                     }
                 }
                 else {
-                    if (head_x >= segment_x) {
+                    if (head_x >= segment_x || segment_x - head_x <= 0.00000001) {
                         verif = true;
                     }
                 }
@@ -138,12 +134,12 @@ public class T extends AVL<Segment> {
             double head_x = (h - head_param_p) / head_pente;
             double segment_x = segment.getUpper().getX();
             if (left) {
-                if (head_x <= segment_x) {
+                if (head_x <= segment_x || head_x - segment_x <= 0.00000001) {
                     verif = true;
                 }
             }
             else {
-                if (head_x >= segment_x) {
+                if (head_x >= segment_x || segment_x - head_x <= 0.00000001) {
                     verif = true;
                 }
             }
@@ -159,12 +155,12 @@ public class T extends AVL<Segment> {
             double segment_x = (h - segment_param_p) / segment_pente;
 
             if (left) {
-                if (head_x <= segment_x) {
+                if (head_x <= segment_x || head_x - segment_x <= 0.00000001) {
                     verif = true;
                 }
             }
             else {
-                if (head_x >= segment_x) {
+                if (head_x >= segment_x || segment_x - head_x <= 0.00000001) {
                     verif = true;
                 }
             }
@@ -172,11 +168,6 @@ public class T extends AVL<Segment> {
         return verif;
     }
 
-    
-    /** 
-     * @param segment
-     * @param h
-     */
     // Ajoute une donnée dans la struture T.
     public void insertT(Segment segment, double h) {
         if (this.isEmpty()) {
@@ -203,31 +194,24 @@ public class T extends AVL<Segment> {
                     //this.getRightAVL().setData(this.getData());
                     //this.setData(segment);
                     this.setRightAVL(new T(getData(), null, null));
+                    this.setData(segment);
                     this.equilibrate();
                 }
                 else {
                     ((T) this.getLeftAVL()).insertT(segment, h);
+                    this.setData(this.getLeftAVL().findMax());
                     this.equilibrate();
                 }
             }
         }
     }
 
-    
-    /** 
-     * @param segment
-     */
     // Ajoute une donnée dans la struture T qui est vide.
     public void insertTEmpty(Segment segment) {
         this.setHeight(this.getHeight() + 1);
         this.setData(segment);
     }
 
-    
-    /** 
-     * @param segment
-     * @param h
-     */
     // Supprime segment de la structure T.
     public void suppressT(Segment segment, double h) {
         if (!this.isEmpty()) {
@@ -279,11 +263,6 @@ public class T extends AVL<Segment> {
         }
     }
 
-    
-    /** 
-     * @param h
-     * @return Segment
-     */
     public Segment suppressTMin(double h) {
         Segment minimum;
         if (this.getLeftAVL().isEmpty()) {
@@ -301,11 +280,6 @@ public class T extends AVL<Segment> {
         return minimum;
     }
 
-    
-    /** 
-     * @param h
-     * @return Segment
-     */
     public Segment suppressTMax(double h) {
         Segment maximum;
         if (this.getRightAVL().isEmpty()) {
@@ -324,10 +298,6 @@ public class T extends AVL<Segment> {
         return maximum;
     }
 
-    
-    /** 
-     * @param h
-     */
     // Supprime la racine de T.
     public void suppressTRoot(double h) {
         if(isLeaf()) {
