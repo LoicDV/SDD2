@@ -174,33 +174,35 @@ public class T extends AVL<Segment> {
             this.insertTEmpty(segment);
         }
         else {
-            if (this.isLeftOrRight(segment, h, true)) {
-                if (this.rightIsEmpty()) {
-                    this.setRightAVL(new T(segment, null, null));
-                    //this.getRightAVL().setData(segment);
-                    //this.getLeftAVL().setData(this.getData());
-                    this.setLeftAVL(new T(getData(), null, null));
-                    this.equilibrate();
+            if (!this.getData().equalSegment(segment)){
+                if (this.isLeftOrRight(segment, h, true)) {
+                    if (this.rightIsEmpty()) {
+                        this.setRightAVL(new T(segment, null, null));
+                        //this.getRightAVL().setData(segment);
+                        //this.getLeftAVL().setData(this.getData());
+                        this.setLeftAVL(new T(getData(), null, null));
+                        this.equilibrate();
+                    }
+                    else {
+                        ((T) this.getRightAVL()).insertT(segment, h);
+                        this.equilibrate();
+                    }
                 }
                 else {
-                    ((T) this.getRightAVL()).insertT(segment, h);
-                    this.equilibrate();
-                }
-            }
-            else {
-                if (this.leftIsEmpty()) {
-                    this.setLeftAVL(new T(segment, null, null));
-                    //this.getLeftAVL().setData(segment);
-                    //this.getRightAVL().setData(this.getData());
-                    //this.setData(segment);
-                    this.setRightAVL(new T(getData(), null, null));
-                    this.setData(segment);
-                    this.equilibrate();
-                }
-                else {
-                    ((T) this.getLeftAVL()).insertT(segment, h);
-                    this.setData(this.getLeftAVL().findMax());
-                    this.equilibrate();
+                    if (this.leftIsEmpty()) {
+                        this.setLeftAVL(new T(segment, null, null));
+                        //this.getLeftAVL().setData(segment);
+                        //this.getRightAVL().setData(this.getData());
+                        //this.setData(segment);
+                        this.setRightAVL(new T(getData(), null, null));
+                        this.setData(segment);
+                        this.equilibrate();
+                    }
+                    else {
+                        ((T) this.getLeftAVL()).insertT(segment, h);
+                        this.setData(this.getLeftAVL().findMax());
+                        this.equilibrate();
+                    }
                 }
             }
         }

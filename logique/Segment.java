@@ -22,27 +22,15 @@ public class Segment {
         }  
     }
 
-    
-    /** 
-     * @return Point
-     */
     // Assesseur/getteur.
     public Point getUpper() {
         return this.upper;
     }
     
-    
-    /** 
-     * @return Point
-     */
     public Point getLower() {
         return this.lower;
     }
 
-    
-    /** 
-     * @param new_point
-     */
     public void setUpper(Point new_point) {
         if (this.getLower().isUpper(new_point)) {
             this.upper = this.lower;
@@ -53,10 +41,6 @@ public class Segment {
         }
     }
     
-    
-    /** 
-     * @param new_point
-     */
     public void setLower(Point new_point) {
         if (new_point.isUpper(this.getUpper())) {
             this.lower = this.upper;
@@ -67,30 +51,18 @@ public class Segment {
         }
     }
 
-    
-    /** 
-     * @return String
-     */
     // écriture de nos segments et retourne un string de notre segment.
     public String toString() {
-        String chaine = this.getUpper().toString() + " "  + this.getLower().toString();
+        String chaine = this.getUpper().toString() + " " + this.getLower().toString();
         return chaine;
     }
 
-    
-    /** 
-     * @return double
-     */
     // Calcule la pente de notre segment et retourne un double qui est la pente
     public double getPente() {
         double pente = (this.getUpper().getY() - this.getLower().getY()) / (this.getUpper().getX() - this.getLower().getX());
         return pente;
     }
 
-    
-    /** 
-     * @return double
-     */
     // Calcule le parametre p de l'équation y = mx + p et retourne un double qui est le p.
     public double getParam_P() {
         double pente = this.getPente();
@@ -98,11 +70,6 @@ public class Segment {
         return param_p;
     }
 
-    
-    /** 
-     * @param p
-     * @return boolean
-     */
     // Regarde si le point est dans le segment NON VERTICAL.
     public boolean isIn(Point p) {
         boolean verif = false;
@@ -118,11 +85,6 @@ public class Segment {
         return verif;
     }
 
-    
-    /** 
-     * @param p
-     * @return boolean
-     */
     // Regarde si le point est dans le segment VERTICAL.
     public boolean isInVertical(Point p) {
         boolean verif = false;
@@ -135,11 +97,6 @@ public class Segment {
         return verif;
     }
     
-    
-    /** 
-     * @param p
-     * @return boolean
-     */
     public boolean isInHorizontale(Point p) {
         boolean verif = false;
         if ((Math.abs(p.getY() - this.getLower().getY()) <= 0.00000001) &&
@@ -151,11 +108,6 @@ public class Segment {
     }
     
 
-    
-    /** 
-     * @param s
-     * @return Point
-     */
     // Calcule l'intersection de nos segments PROLONGES (droites) et le retourne.
     public Point getIntersectionDroite(Segment s) {
         Point point_intersection = new Point(0, 0);
@@ -178,11 +130,6 @@ public class Segment {
         return point_intersection;
     }
 
-    
-    /** 
-     * @param s
-     * @return boolean
-     */
     // Regarde si un segment n'est pas un prolongment de l'autre.
     public boolean isIntersectionExtremite(Segment s) {
         boolean verif = false;
@@ -192,11 +139,6 @@ public class Segment {
         return verif;
     }
     
-    
-    /** 
-     * @param s
-     * @return Point
-     */
     // Calcule l'intersection entre nos 2 segments (qui est une extremité).
     public Point intersectionExtremite(Segment s) {
         Point point_intersection = new Point(0, 0);
@@ -212,10 +154,6 @@ public class Segment {
         return point_intersection;
     }
 
-    
-    /** 
-     * @return boolean
-     */
     // Regarde si le segment est vertical ou non.
     public boolean isVertical() {
         boolean verif = false;
@@ -225,11 +163,6 @@ public class Segment {
         return verif;
     }
 
-    
-    /** 
-     * @param s
-     * @return boolean
-     */
     // Teste s'il y a une intersection ou non avec nos segments.
     public boolean isIntersection(Segment s) {
         boolean verif = false;
@@ -320,11 +253,6 @@ public class Segment {
         return verif;
     }
 
-    
-    /** 
-     * @param s
-     * @return Point
-     */
     // Calcule l'intersection EXISTANTE de nos segments et retourne un objet Point.
     public Point getIntersectionPoint(Segment s) {
         Point point_intersection = new Point(0, 0);
@@ -368,13 +296,6 @@ public class Segment {
         return point_intersection;
     }
 
-    
-    /** 
-     * @param s
-     * @param sIsVertical
-     * @param point_intersection
-     * @return Point
-     */
     // Calcule le point d'intersection entre nos segments dont s1 qui est vertical et retourne un Point.
     public Point getIntersectionPointVertical(Segment s, boolean sIsVertical, Point point_intersection) {
         
@@ -396,13 +317,6 @@ public class Segment {
         System.out.println(this.toString());
     }
     
-    
-    /** 
-     * @param segment
-     * @param h
-     * @param left
-     * @return boolean
-     */
     public boolean isLeftOrRight(Segment segment, double h, boolean left) {
         boolean verif = false;
         
@@ -547,11 +461,6 @@ public class Segment {
         return verif;
     }
 
-    
-    /** 
-     * @param s
-     * @return boolean
-     */
     public boolean equalSegment(Segment s){
         boolean verif = false;
         if  (this.getUpper().equalPoint(s.getUpper()) && this.getLower().equalPoint(s.getLower())){
@@ -560,10 +469,6 @@ public class Segment {
         return verif;
     }
 
-    
-    /** 
-     * @return boolean
-     */
     public boolean isHorizontal(){
         boolean verif = false;
         if (this.getUpper().getY() == this.getLower().getY()){
@@ -572,11 +477,6 @@ public class Segment {
         return verif;
     }
 
-    
-    /** 
-     * @param s
-     * @return boolean
-     */
     public boolean doesOverlap(Segment s){
         boolean verif = false;
         if (this.isVertical() && (!this.getUpper().equalPoint(this.getLower()))){

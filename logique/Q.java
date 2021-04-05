@@ -11,12 +11,6 @@ public class Q extends AVL<Point> {
         super();
     }
 
-    
-    /** 
-     * @param point
-     * @param insertionUpper
-     * @param s
-     */
     // Ajoute une donnée dans la struture Q.
     public void insertQ(Point point, boolean insertionUpper, Segment s) {
         if (isEmpty()) {
@@ -24,9 +18,6 @@ public class Q extends AVL<Point> {
         }
         else {
             Point head = this.getData();
-            if (insertionUpper || head.getX() == point.getX() || head.getY() == point.getY()){
-                head.getIsUpperOf().add(s);
-            }
             if (point.isUpper(head)) {
                 if (this.leftIsEmpty()){
                     this.setLeftAVL(new Q(point, null, null));
@@ -52,20 +43,12 @@ public class Q extends AVL<Point> {
         }
     }
 
-    
-    /** 
-     * @param point
-     */
     // Ajoute une donnée dans la struture Q qui est vide.
     public void insertQEmpty(Point point) {
         this.setData(point);
         this.setHeight(this.getHeight() + 1);
     }
 
-    
-    /** 
-     * @param point
-     */
     // Supprime point de la structure Q.
     public void suppressQ(Point point) {
         if (!isEmpty()) {
@@ -120,10 +103,6 @@ public class Q extends AVL<Point> {
         }
     }
 
-    
-    /** 
-     * @return Point
-     */
     // Supprime le minimum de Q.
     public Point suppressQMin() {
         if (this.leftIsEmpty()) {
@@ -166,10 +145,6 @@ public class Q extends AVL<Point> {
 		}
 	}
 
-    
-    /** 
-     * @return Point
-     */
     public Point findMinQ(){
         Point minimum;
         if (this.leftIsEmpty()) {

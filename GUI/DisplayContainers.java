@@ -19,7 +19,6 @@ public class DisplayContainers extends ScrollPane {
         int compteur = 0;
         for (Point[] tab : containers) {
             Text text = new Text();
-            
             String string = (new Segment(tab[0], tab[1])).toString();
             text.setText(string);
             text.setOnMouseClicked(event -> {

@@ -23,76 +23,40 @@ public class AVL<Fg> {
         this.height = 0;
     }
 
-    
-    /** 
-     * @return Fg
-     */
     // Assesseur/getteur.
     public Fg getData() {
         return this.data;
     }
 
-    
-    /** 
-     * @return AVL<Fg>
-     */
     public AVL<Fg> getLeftAVL() {
         return this.leftAVL;
     }
 
-    
-    /** 
-     * @return AVL<Fg>
-     */
     public AVL<Fg> getRightAVL() {
         return this.rightAVL;
     }
 
-    
-    /** 
-     * @return int
-     */
     public int getHeight() {
         return this.height;
     }
 
-    
-    /** 
-     * @param new_data
-     */
     // Attention utiliser seulement si le changement respecte l'ordre interne de l'arbre.
     public void setData(Fg new_data) {
         this.data = new_data;
     }
 
-    
-    /** 
-     * @param new_tree
-     */
     public void setLeftAVL(AVL<Fg> new_tree) {
         this.leftAVL = new_tree;
     }
 
-    
-    /** 
-     * @param new_tree
-     */
     public void setRightAVL(AVL<Fg> new_tree) {
         this.rightAVL = new_tree;
     }
 
-    
-    /** 
-     * @param new_height
-     */
     public void setHeight(int new_height) {
         this.height = new_height;
     }
 
-    
-    /** 
-     * @return boolean
-     */
     // Retourne true si la liste est vide, false sinon.
     public boolean isEmpty() {
 		if (this.getData() == null && this.leftAVL == null && this.rightAVL == null) {
@@ -101,10 +65,6 @@ public class AVL<Fg> {
 		return false;
     }
 
-    
-    /** 
-     * @return boolean
-     */
     // Retourne vrai si l'arbre gauche et droite sont vides, false sinon.
     public boolean isLeaf() {
         boolean verif = false;
@@ -114,10 +74,6 @@ public class AVL<Fg> {
         return verif;
     }
 
-    
-    /** 
-     * @return boolean
-     */
     // Teste si l'arbre gauche est vide.
     public boolean leftIsEmpty() {
         boolean verif = false;
@@ -127,10 +83,6 @@ public class AVL<Fg> {
         return verif;
     }
 
-    
-    /** 
-     * @return boolean
-     */
     // Teste si l'arbre droit est vide.
     public boolean rightIsEmpty() {
         boolean verif = false;
@@ -140,10 +92,6 @@ public class AVL<Fg> {
         return verif;
     }
     
-    
-    /** 
-     * @return int
-     */
     // Calcule la hauteur d'un arbre.
     public int calculHeight() {
         
@@ -172,10 +120,6 @@ public class AVL<Fg> {
         return this.height;
     }
 
-    
-    /** 
-     * @return int
-     */
     //Calcul de la balance
 	public int balance() {
         int x = 0;
@@ -242,10 +186,6 @@ public class AVL<Fg> {
         }
     }
 
-    
-    /** 
-     * @return Fg
-     */
     public Fg findMax() {
         Fg maximum;
         if (this.rightIsEmpty()) {
@@ -257,10 +197,6 @@ public class AVL<Fg> {
         return maximum;
     }
 
-    
-    /** 
-     * @return Fg
-     */
     public Fg findMin() {
         Fg minimum;
         if (this.leftIsEmpty()) {
