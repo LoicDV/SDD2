@@ -1,6 +1,5 @@
 package GUI;
 
-
 import java.io.File;
 import java.util.ArrayList;
 import logique.Point;
@@ -17,6 +16,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
 
 // Import dessin
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 
@@ -44,14 +44,16 @@ public class Main extends Application {
         VBox vBox = new VBox(new MyMenuBar());
 
         // Zone de dessin.
+        ScrollPane scrollPane = new ScrollPane();
         pane = new Pane();
+        scrollPane.setContent(pane);
 
         // Zone de changement de Segment.
         grid = new DisplayContainers();
 
         // Mettre nos éléments dans la fenêtre.
         root = new BorderPane();
-        root.setCenter(pane);
+        root.setCenter(scrollPane);
         root.setTop(vBox);
         root.setRight(grid);
 
