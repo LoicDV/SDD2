@@ -41,7 +41,8 @@ public class T extends AVL<Segment> {
             }
             else if (segment.isVertical()) {
                 if (left){
-                    if (head.getLower().getX() < segment.getUpper().getX() || head.getLower().getX() - segment.getUpper().getX() <= 0.00000001) {
+                    if (head.getLower().getX() < segment.getUpper().getX() 
+                    || (head.getLower().getX() - segment.getUpper().getX() <= 0.00000001 && head.getLower().getX() != segment.getUpper().getX())) {
                         verif = true;
                     }
                 }
@@ -56,7 +57,8 @@ public class T extends AVL<Segment> {
                 double segment_param_p = segment.getParam_P();
                 double segment_x = (h - segment_param_p) / segment_pente;
                 if (left) {
-                    if (head.getLower().getX() < segment_x || head.getLower().getX() - segment_x <= 0.00000001){
+                    if (head.getLower().getX() < segment_x 
+                    || (head.getLower().getX() - segment_x <= 0.00000001 && head.getLower().getX() != segment_x)){
                         verif = true;
                     }
                 }
@@ -75,7 +77,8 @@ public class T extends AVL<Segment> {
                     }
                 }
                 else {
-                    if (segment.getLower().getX() < head.getUpper().getX() || segment.getLower().getX() - head.getUpper().getX() <= 0.00000001) {
+                    if (segment.getLower().getX() < head.getUpper().getX() 
+                    || (segment.getLower().getX() - head.getUpper().getX() <= 0.00000001 && segment.getLower().getX() != head.getUpper().getX())) {
                         verif = true;
                     }
                 }
@@ -90,7 +93,8 @@ public class T extends AVL<Segment> {
                     }
                 }
                 else {
-                    if (segment.getLower().getX() < head_x || segment.getLower().getX() - head_x <= 0.00000001){
+                    if (segment.getLower().getX() < head_x 
+                    || (segment.getLower().getX() - head_x <= 0.00000001 && segment.getLower().getX() != head_x)){
                         verif = true; 
                     }
                 }

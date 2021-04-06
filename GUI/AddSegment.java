@@ -3,13 +3,12 @@ package GUI;
 // Import de base.
 import javafx.stage.Stage;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 
 // Zone de saisie.
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 
 
@@ -67,6 +66,7 @@ public class AddSegment extends Stage {
         stage.setScene(scene);
         stage.setTitle("Add Segment");
         stage.setResizable(false);
+        stage.getIcons().add(new Image("ressources/settings.jpg"));
         stage.showAndWait();
 
         try {
@@ -76,15 +76,7 @@ public class AddSegment extends Stage {
             Double point2Y = Double.parseDouble(textField_y2.getText());
             DrawSegment.addLineDouble(point1X, point1Y, point2X, point2Y);
         } catch (NumberFormatException e) {
-            noAddSegment();
+            Exception.noAddSegment();
         }
-    }
-
-    public static void noAddSegment() {
-        AlertType alertType = AlertType.ERROR;
-        Alert alert = new Alert(alertType, "Warning in place");
-        alert.getDialogPane().setContentText("No numbers in the field !");
-        alert.getDialogPane().setHeaderText("Numbers Error");
-        alert.showAndWait();
     }
 }

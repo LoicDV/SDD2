@@ -10,9 +10,7 @@ import logique.Segment;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
-import javafx.scene.control.Alert;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.Alert.AlertType;
 
 public class DrawSegment extends ScrollPane{
 
@@ -44,18 +42,10 @@ public class DrawSegment extends ScrollPane{
             addContainers(point1X, point1Y, point2X, point2Y);
         }
         else {
-            doubleLineException();
+            Exception.doubleLineException();
         }
     }
-
-    public static void doubleLineException() {
-        AlertType alertType = AlertType.ERROR;
-        Alert alert = new Alert(alertType, "Warning in place");
-        alert.getDialogPane().setContentText("You can't add this Segment because you overlap another Segment !");
-        alert.getDialogPane().setHeaderText("AddSegment Warning");
-        alert.showAndWait();
-    }
-
+    
     public static void addLineLine(Line line) {
         Main.getPane().getChildren().add(line);
     }

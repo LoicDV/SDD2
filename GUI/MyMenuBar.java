@@ -1,7 +1,5 @@
 package GUI;
 
-import java.io.FileNotFoundException;
-
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -15,11 +13,7 @@ public class MyMenuBar extends MenuBar{
 
         MenuItem menu1Item1 = new MenuItem("Open");
         menu1Item1.setOnAction(event -> {
-            try {
-                new OpenScript();
-            } catch (FileNotFoundException e) {
-                OpenScript.noFileOpen();
-            }
+            new OpenScript();
         });
 
         MenuItem menu1Item2 = new MenuItem("Save");

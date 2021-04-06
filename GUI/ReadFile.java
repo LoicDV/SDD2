@@ -3,9 +3,6 @@ package GUI;
 import logique.Point;
 import java.util.ArrayList;
 
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-
 // Lecture de fichier.
 import java.io.File;
 import java.io.FileReader;
@@ -35,7 +32,7 @@ public class ReadFile {
         }
 
         catch (FileNotFoundException e) {
-            OpenScript.noFileOpen();
+            Exception.noFileOpen();
         }
 
         // Code.
@@ -75,22 +72,14 @@ public class ReadFile {
         }
 
         catch (IOException e) {
-            noFormatEditor();
+            Exception.noFormatEditor();
         }
 
         catch (NumberFormatException e) {
-            noFormatEditor();
+            Exception.noFormatEditor();
         }
 
         return stockTabPoints;
 
-    }
-
-    public static void noFormatEditor() {
-        AlertType alertType = AlertType.ERROR;
-        Alert alert = new Alert(alertType, "Warning in place");
-        alert.getDialogPane().setContentText("The format in the file are not good !");
-        alert.getDialogPane().setHeaderText("Editor Error");
-        alert.showAndWait();
     }
 }

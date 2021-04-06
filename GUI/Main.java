@@ -9,6 +9,7 @@ import logique.Point;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 
 // Import menu.
@@ -61,6 +62,7 @@ public class Main extends Application {
         // Info de base de la fenetre initiale.
         primaryStage.setTitle("Map overlay");
         primaryStage.setScene(scene);
+        primaryStage.getIcons().add(new Image("ressources/map_overlay.jpg"));
         primaryStage.show();
     }
 

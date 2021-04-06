@@ -7,6 +7,7 @@ import logique.Point;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -29,6 +30,9 @@ public class ChangeSegment {
         Button btnChange = new Button("Change");
         Button btnRemove = new Button("Remove");
         Button btnNothing = new Button("Nothing");
+        btnChange.setPrefSize(150, 50);
+        btnRemove.setPrefSize(150, 50);
+        btnNothing.setPrefSize(150, 50);
 
         String[] tabText = text.split(" ");
         Line line = new Line(Double.parseDouble(tabText[0]) * zoom,
@@ -57,12 +61,16 @@ public class ChangeSegment {
         layout2.setCenter(btnRemove);
         BorderPane layout3 = new BorderPane();
         layout3.setCenter(btnNothing);
+
         layout.getChildren().addAll(layout1, layout2, layout3);
+        layout.setSpacing(100);
         
         Scene scene = new Scene(layout, 400, 300);
 
         stage.setScene(scene);
+        stage.setTitle("Effect on a segment");
         stage.setResizable(false);
+        stage.getIcons().add(new Image("ressources/settings.jpg"));
         stage.show();
     }
 
@@ -112,6 +120,7 @@ public class ChangeSegment {
         stage.setScene(scene);
         stage.setTitle("Change Segment");
         stage.setResizable(false);
+        stage.getIcons().add(new Image("ressources/settings.jpg"));
         stage.showAndWait();
 
         try {
@@ -123,10 +132,10 @@ public class ChangeSegment {
                 coordSegment(line, point1X, point1Y, point2X, point2Y);
             }
             else {
-                DrawSegment.doubleLineException();
+                Exception.doubleLineException();
             }
         } catch (NumberFormatException e) {
-            AddSegment.noAddSegment();
+            Exception.noAddSegment();
         }
     }
 
@@ -141,7 +150,7 @@ public class ChangeSegment {
                 set.set(i, newLine);
                 containers.set(i, new Point[]{new Point(point1X, point1Y), new Point(point2X, point2Y)});
                 pane.getChildren().remove(i);
-                pane.getChildren().add(newLine);
+                pane.getChildren().add(i, newLine);;
                 grid.displayContainers();
             }
         }
