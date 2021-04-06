@@ -30,6 +30,7 @@ public class Main extends Application {
     private static BorderPane root;
     private static Pane pane;
     private static DisplayContainers grid;
+    private static ScrollPane scrollPane;
 
     @Override
     public void start(Stage primaryStage) {
@@ -44,7 +45,7 @@ public class Main extends Application {
         VBox vBox = new VBox(new MyMenuBar());
 
         // Zone de dessin.
-        ScrollPane scrollPane = new ScrollPane();
+        scrollPane = new ScrollPane();
         pane = new Pane();
         scrollPane.setContent(pane);
 
@@ -82,6 +83,10 @@ public class Main extends Application {
 
     public static BorderPane getBorderPane() {
         return root;
+    }
+
+    public static ScrollPane getScrollPane() {
+        return scrollPane;
     }
 
     public static File getFile() {

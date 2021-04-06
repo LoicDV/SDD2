@@ -31,6 +31,7 @@ public class DrawSegment extends ScrollPane{
         }
         DisplayContainers grid = Main.getDisplayContainers();
         grid.displayContainers();
+        updatScrollPane();
     }
 
     public static void addLineDouble(Double point1X, Double point1Y, Double point2X, Double point2Y) {
@@ -40,6 +41,7 @@ public class DrawSegment extends ScrollPane{
             ArrayList<Line> set = Main.getSet();
             set.add(line);
             addContainers(point1X, point1Y, point2X, point2Y);
+            updatScrollPane();
         }
         else {
             Exception.doubleLineException();
@@ -68,8 +70,10 @@ public class DrawSegment extends ScrollPane{
             if (flag && s.equalSegment(segment) && segment.doesOverlap(newSegment)) {
                 return false;
             }
-            else if (!flag && segment.doesOverlap(newSegment)) {
-                return false;
+            else if (!flag) {
+                if (segment.doesOverlap(newSegment)) {
+                    return false;
+                }
             }
         }
         return true;
@@ -85,4 +89,9 @@ public class DrawSegment extends ScrollPane{
     public static Segment convertLineToSegment(Line line) {
         return new Segment(new Point(line.getStartX(), line.getStartY()), new Point(line.getEndX(), line.getEndY()));
     }
+
+    private static void updatScrollPane() {
+        Main.getScrollPane().setPrefViewportWidth(Main.getPane().getPrefWidth());
+        Main.getScrollPane().setPrefViewportHeight(Main.getPane().getPrefHeight());
+}
 }

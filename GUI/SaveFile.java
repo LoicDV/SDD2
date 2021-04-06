@@ -32,7 +32,7 @@ public class SaveFile {
             fileChooser.getExtensionFilters().addAll(new ExtensionFilter("TXT files (*.txt)", "*.txt"));
             File selectedFile = fileChooser.showSaveDialog(Main.getStage());
             try {
-                if (Main.getFile() == null) {
+                if (selectedFile == null) {
                     Exception.noSaveDone();
                 }
                 else {

@@ -19,19 +19,18 @@ public class Compilation {
         }
         Intersections set = new Intersections(newContains);
         ArrayList<Point> setIntersection = set.FindIntersections();
-        
-        if (!flag) {
+
+        if (flag) {
             // Simple Run.
             for (Point p : setIntersection) {
                 DrawSegment.drawCircle(p.getX(), p.getY(), Color.rgb(255, 0, 0));
             }
+            DisplayIntersection.displayIntersection();
         }
         else {
             // Sweep Line.
-            
-            for (Point p : setIntersection) {
-                DrawSegment.drawCircle(p.getX(), p.getY(), Color.rgb(255, 0, 0));
-            }
+            DisplayIntersection.displayIntersectionSweep();
         }
+        
     }
 }

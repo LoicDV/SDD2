@@ -2,7 +2,16 @@ package logique;
 
 public class T extends AVL<Segment> {
 
+    private Segment head;
+    private T left;
+    private T right;
+
     // Construteurs
+    /**
+     * @param head Segment.
+     * @param left T.
+     * @param right T.
+     */
     public T(Segment head, T left, T right) {
         super(head, left, right);
     }
@@ -10,18 +19,62 @@ public class T extends AVL<Segment> {
     public T() {
         super();
     }
-    /*
+
+    // Assesseur/getteur.
+
+    /**
+     * Recupere le point en racine.
+     */
+    public Segment getHeadT() {
+        return this.head;
+    }
+
+    /**
+     * Recupere le sous arbre gauche.
+     */
+    public T getLeftT() {
+        return this.left;
+    }
+
+    /**
+     * Recupere le sous arbre droit.
+     */
     public T getRightT() {
-        return (T) getRightAVL();
+        return this.right;
     }
 
-    public void setRightT(T new_tree){
-        setRightAVL(new_tree);
+    /** 
+     * @param newSegment Segment.
+     * Remplace la donnee par notre nouveau segment.
+     */
+    public void setHeadT(Segment newSegment) {
+        this.head = newSegment;
     }
-    */
 
-    // Retourne true si le segment en racine se trouve à gauche (si boolean left = true)
-    // ou à droite (si boolean left = false) du segment en parametre.
+    /** 
+     * @param newTreeT T.
+     * Remplace notre sous-arbre gauche par le nouvel arbre T.
+     */
+    public void setLeftT(T newTreeT) {
+        this.left = newTreeT;
+    }
+    
+    /** 
+     * @param newTreeT T.
+     * Remplace notre sous-arbre droit par le nouvel arbre T.
+     */
+    public void setRightT(T newTreeT) {
+        this.right = newTreeT;
+    }
+    
+    /** 
+     * @param segment Segment.
+     * @param h double.
+     * @param left boolean.
+     * @return boolean.
+     * Retourne true si le segment en racine se trouve a gauche (si boolean left = true)
+     * ou a droite (si boolean left = false) du segment en parametre.
+     */
     public boolean isLeftOrRight(Segment segment, double h, boolean left) {
         boolean verif = false;
         Segment head = this.getData();
@@ -171,8 +224,12 @@ public class T extends AVL<Segment> {
         }
         return verif;
     }
-
-    // Ajoute une donnée dans la struture T.
+    
+    /** 
+     * @param segment Segment.
+     * @param h double.
+     * Ajoute une donnee dans la struture T.
+     */
     public void insertT(Segment segment, double h) {
         if (this.isEmpty()) {
             this.insertTEmpty(segment);
@@ -181,153 +238,146 @@ public class T extends AVL<Segment> {
             if (!this.getData().equalSegment(segment)){
                 if (this.isLeftOrRight(segment, h, true)) {
                     if (this.rightIsEmpty()) {
-                        this.setRightAVL(new T(segment, null, null));
-                        //this.getRightAVL().setData(segment);
-                        //this.getLeftAVL().setData(this.getData());
-                        this.setLeftAVL(new T(getData(), null, null));
+                        this.setRightT(new T(segment, null, null));
+                        this.setLeftT(new T(getData(), null, null));
                         this.equilibrate();
                     }
                     else {
-                        ((T) this.getRightAVL()).insertT(segment, h);
+                        this.getRightT().insertT(segment, h);
                         this.equilibrate();
                     }
                 }
                 else {
                     if (this.leftIsEmpty()) {
-                        this.setLeftAVL(new T(segment, null, null));
-                        //this.getLeftAVL().setData(segment);
-                        //this.getRightAVL().setData(this.getData());
-                        //this.setData(segment);
-                        this.setRightAVL(new T(getData(), null, null));
+                        this.setLeftT(new T(segment, null, null));
+                        this.setRightT(new T(getData(), null, null));
                         this.setData(segment);
                         this.equilibrate();
                     }
                     else {
-                        ((T) this.getLeftAVL()).insertT(segment, h);
-                        this.setData(this.getLeftAVL().findMax());
+                        this.getLeftT().insertT(segment, h);
+                        this.setData(this.getLeftT().findMax());
                         this.equilibrate();
                     }
                 }
             }
         }
     }
-
-    // Ajoute une donnée dans la struture T qui est vide.
+    
+    /** 
+     * @param segment Segment.
+     * Ajoute une donnee dans la struture T qui est vide.
+     */
     public void insertTEmpty(Segment segment) {
         this.setHeight(this.getHeight() + 1);
         this.setData(segment);
     }
-
-    // Supprime segment de la structure T.
+    
+    /** 
+     * @param segment Segment.
+     * @param h double.
+     * Supprime segment de la structure T.
+     */
     public void suppressT(Segment segment, double h) {
         if (!this.isEmpty()) {
             if (this.getData().equals(segment)) {
                 this.suppressTRoot(h);
             }
             else if (isLeftOrRight(segment, h, true)) {
-                if (!rightIsEmpty() && this.getRightAVL().isLeaf()) {
-                    if (this.getRightAVL().getData().equals(segment)) {
-                        Segment s = this.getLeftAVL().getData();
-                        Integer hauteur = this.getLeftAVL().getHeight();
-                        if (!this.getLeftAVL().leftIsEmpty()){
-                            this.setRightAVL(this.getLeftAVL().getRightAVL());
-                            this.setLeftAVL(this.getLeftAVL().getLeftAVL());
+                if (!rightIsEmpty() && this.getRightT().isLeaf()) {
+                    if (this.getRightT().getData().equals(segment)) {
+                        Segment s = this.getLeftT().getData();
+                        Integer hauteur = this.getLeftT().getHeight();
+                        if (!this.getLeftT().leftIsEmpty()){
+                            this.setRightT(this.getLeftT().getRightT());
+                            this.setLeftT(this.getLeftT().getLeftT());
                         }
                         else {
-                            this.setRightAVL(null);
-                            this.setLeftAVL(null);
+                            this.setRightT(null);
+                            this.setLeftT(null);
                         }
                         this.setData(s);
                         this.setHeight(hauteur);
-                        //((T) this.getRightAVL()).suppressTRoot(h);
-                        //this.suppressTRoot(h);
                     }
                 }
                 else {
-                    ((T) this.getRightAVL()).suppressT(segment, h);
+                    this.getRightT().suppressT(segment, h);
                     this.equilibrate();
                 }
             }
             else {
-                //le cas suivant est inutile si arbre gauche restreint à une feuille 
-                //alors la donnée est la même que la racine
-                /*
-                if (!this.leftIsEmpty() && this.getLeftAVL().isLeaf()) {
-                    if (this.getLeftAVL().getData().equals(segment)) {
-                        ((T) this.getLeftAVL()).suppressTRoot(h);
-                        ((T) this.getRightAVL()).suppressTMax(h);
-                        this.equilibrate();
-                    }
-                }
-                else {
-                */
-                if (!this.leftIsEmpty() && !this.getLeftAVL().isLeaf()){
-                    ((T) this.getLeftAVL()).suppressT(segment, h);
+                if (!this.leftIsEmpty() && !this.getLeftT().isLeaf()){
+                    this.getLeftT().suppressT(segment, h);
                     this.equilibrate();
                 }
             }
         }
     }
-
+    
+    /** 
+     * @param h double.
+     * @return Segment.
+     * Supprime le minimum de l'arbre T et le retourne.
+     */
     public Segment suppressTMin(double h) {
         Segment minimum;
-        if (this.getLeftAVL().isEmpty()) {
+        if (this.getLeftT().isEmpty()) {
             minimum = this.getData();
-            //this.setData(this.getLeftAVL().getData());
-            //this.setHeight(this.getLeftAVL().getHeight());
-            //this.setLeftAVL(this.getLeftAVL().getRightAVL());
-            //this.setRightAVL(this.getLeftAVL().getLeftAVL());
             this.suppressTRoot(h);
         }
         else {
-            minimum = ((T) this.getLeftAVL()).suppressTMin(h);
+            minimum = this.getLeftT().suppressTMin(h);
             this.equilibrate();
         }
         return minimum;
     }
-
+    
+    /** 
+     * @param h double.
+     * @return Segment.
+     * Supprime le maximum de l'arbre T et le retourne.
+     */
     public Segment suppressTMax(double h) {
         Segment maximum;
-        if (this.getRightAVL().isEmpty()) {
+        if (this.getRightT().isEmpty()) {
             maximum = this.getData();
-            //this.setData(this.getRightAVL().getData());
-            //this.setHeight(this.getRightAVL().getHeight());
-            //this.setRightAVL(this.getRightAVL().getRightAVL());
-            //this.setLeftAVL(this.getRightAVL().getRightAVL());
             this.suppressTRoot(h);
         }
         else {
-            maximum = ((T) this.getRightAVL()).suppressTMax(h);
+            maximum = this.getRightT().suppressTMax(h);
             this.equilibrate();
         }
         
         return maximum;
     }
-
-    // Supprime la racine de T.
+    
+    /** 
+     * @param h double.
+     * Supprime la racine de T.
+     */
     public void suppressTRoot(double h) {
         if(isLeaf()) {
             this.setData(null);
             this.setHeight(0);
         }
         else {
-            if (this.getLeftAVL().isLeaf()) {
-                Segment s = this.getRightAVL().getData();
-                Integer hauteur = this.getRightAVL().getHeight();
-                if (!this.getRightAVL().leftIsEmpty()){
-                    this.setLeftAVL(this.getRightAVL().getLeftAVL());
-                    this.setRightAVL(this.getRightAVL().getRightAVL());
+            if (this.getLeftT().isLeaf()) {
+                Segment s = this.getRightT().getData();
+                Integer hauteur = this.getRightT().getHeight();
+                if (!this.getRightT().leftIsEmpty()){
+                    this.setLeftT(this.getRightT().getLeftT());
+                    this.setRightT(this.getRightT().getRightT());
                 }
                 else {
-                    this.setLeftAVL(null);
-                    this.setRightAVL(null);
+                    this.setLeftT(null);
+                    this.setRightT(null);
                 }
                 this.setData(s);
                 this.setHeight(hauteur);
             }
             else {
-                ((T) this.getLeftAVL()).suppressT(this.getData(), h); //pas ce qui est fait au cours
-                this.setData(this.getLeftAVL().findMax());
+                this.getLeftT().suppressT(this.getData(), h); //pas ce qui est fait au cours
+                this.setData(this.getLeftT().findMax());
                 this.equilibrate();
             }
         }

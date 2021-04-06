@@ -2,8 +2,17 @@ package logique;
 
 public class Q extends AVL<Point> {
 
+    private Point data;
+    private Q left;
+    private Q right;
+
     // Construteurs
-    public Q(Point data, AVL<Point> left, AVL<Point> right) {
+    /**
+     * @param data Point.
+     * @param left Q
+     * @param right Q
+     */
+    public Q(Point data, Q left, Q right) {
         super(data, left, right);
     }
 
@@ -11,7 +20,60 @@ public class Q extends AVL<Point> {
         super();
     }
 
-    // Ajoute une donnée dans la struture Q.
+    // Assesseur/getteur.
+
+    /**
+     * Recupere le point en racine.
+     */
+    public Point getDataQ() {
+        return this.data;
+    }
+
+    /**
+     * Recupere le sous arbre gauche.
+     */
+    public Q getLeftQ() {
+        return this.left;
+    }
+
+    /**
+     * Recupere le sous arbre droit.
+     */
+    public Q getRightQ() {
+        return this.right;
+    }
+
+    /** 
+     * @param newPoint Point.
+     * Remplace la donnee par notre nouveau point.
+     */
+    public void setDataQ(Point newPoint) {
+        this.data = newPoint;
+    }
+
+    /** 
+     * @param newTreeQ Q.
+     * Remplace notre sous-arbre gauche par le nouvel arbre Q.
+     */
+    public void setLeftQ(Q newTreeQ) {
+        this.left = newTreeQ;
+    }
+
+    
+    /** 
+     * @param newTreeQ Q.
+     * Remplace notre sous-arbre droit par le nouvel arbre Q.
+     */
+    public void setRightQ(Q newTreeQ) {
+        this.right = newTreeQ;
+    }
+
+    /** 
+     * @param point Point.
+     * @param insertionUpper boolean.
+     * @param s Segment.
+     * Ajoute une donnee dans la struture Q.
+     */
     public void insertQ(Point point, boolean insertionUpper, Segment s) {
         if (isEmpty()) {
             this.insertQEmpty(point);
@@ -24,7 +86,7 @@ public class Q extends AVL<Point> {
                     this.equilibrate();
                 }
                 else{
-                    ((Q) this.getLeftAVL()).insertQ(point, insertionUpper, s);
+                    this.getLeftQ().insertQ(point, insertionUpper, s);
                     this.equilibrate();
                 }
             }
@@ -35,7 +97,7 @@ public class Q extends AVL<Point> {
                         this.equilibrate();
                     }
                     else{
-                        ((Q) this.getRightAVL()).insertQ(point, insertionUpper, s);
+                        this.getRightQ().insertQ(point, insertionUpper, s);
                         this.equilibrate();
                     }
                 }
@@ -43,25 +105,33 @@ public class Q extends AVL<Point> {
         }
     }
 
-    // Ajoute une donnée dans la struture Q qui est vide.
+    
+    /** 
+     * @param point Point.
+     * Ajoute une donnee dans la struture Q qui est vide.
+     */
     public void insertQEmpty(Point point) {
         this.setData(point);
         this.setHeight(this.getHeight() + 1);
     }
 
-    // Supprime point de la structure Q.
+    
+    /** 
+     * @param point
+     * Supprime point de la structure Q.
+     */
     public void suppressQ(Point point) {
         if (!isEmpty()) {
             Point head = this.getData();
             if (point.isUpper(head)) {
                 if (!this.leftIsEmpty()){
-                    ((Q) this.getLeftAVL()).suppressQ(point);
+                    this.getLeftQ().suppressQ(point);
                     this.equilibrate();
                 }
             }
             else if (head.isUpper(point)) {
                 if (!this.rightIsEmpty()){
-                    ((Q) this.getRightAVL()).suppressQ(point);
+                    this.getRightQ().suppressQ(point);
                     this.equilibrate();
                 }
             }
@@ -71,7 +141,9 @@ public class Q extends AVL<Point> {
         }
     }
 
-    // Supprime la racine de Q.
+    /**
+     * Supprime la racine de Q.
+     */ 
     public void suppressQRoot() {
         if (this.isLeaf()) {
             this.setData(null);
@@ -96,62 +168,58 @@ public class Q extends AVL<Point> {
                     this.setHeight(new_Q.getHeight());
                 }
                 else {
-                    this.setData(((Q) this.getLeftAVL()).suppressQMin());
+                    this.setData(this.getLeftQ().suppressQMin());
                     this.equilibrate();
                 }
             }
         }
     }
 
-    // Supprime le minimum de Q.
+    /** 
+     * @return Point.
+     * Supprime le minimum de Q.
+     */
     public Point suppressQMin() {
         if (this.leftIsEmpty()) {
             Point min = this.getData();
-            /*
-            if (!this.rightIsEmpty()){
-                AVL<Point> new_Q = this.getRightAVL();
-                Point head_new_Q = new_Q.getData();
-                this.setData(head_new_Q);
-                this.setLeftAVL(new_Q.getLeftAVL());
-                this.setRightAVL(new_Q.getRightAVL()); 
-            }
-            else {
-                this.setData(null);
-                this.setLeftAVL(null);
-                this.setRightAVL(null);
-            }
-            */
             this.suppressQRoot();
             return min;
         }
         else {
-            Point min = ((Q) this.getLeftAVL()).suppressQMin();
+            Point min = this.getLeftQ().suppressQMin();
             this.equilibrate();
             return min;
         }
     }
 
+    /**
+     * Execute l'affichage inordre sur l'arbre Q.
+     */
     public void inordreQ() {
 		if (this != null) {
             if (this.getLeftAVL() != null) {
-                ((Q) this.getLeftAVL()).inordreQ();
+                this.getLeftQ().inordreQ();
             }
             if (this.getData() != null) {
-                ((Point) this.getData()).print();
+                this.getData().print();
             }
             if (this.getRightAVL() != null) {
-                ((Q) this.getRightAVL()).inordreQ();
+                this.getRightQ().inordreQ();
             }
 		}
 	}
 
+    /** 
+     * @return Point.
+     * Trouve le point le plus a gauche de l'arbre (minimum des points suivant la definition de Q).
+     */
     public Point findMinQ(){
         Point minimum;
         if (this.leftIsEmpty()) {
             minimum = this.getData();
         }
         else {
-            minimum = ((Q) this.getLeftAVL()).findMinQ();
+            minimum = this.getLeftQ().findMinQ();
         }
         return minimum;
     }

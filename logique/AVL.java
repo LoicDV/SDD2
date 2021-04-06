@@ -9,6 +9,11 @@ public class AVL<Fg> {
     private int height;
     
     // Constructeurs.
+    /**
+     * @param data Object.
+     * @param leftAVL AVL<Object>.
+     * @param rightAVL AVL<Object>.
+     */
     public AVL(Fg data, AVL<Fg> leftAVL, AVL<Fg> rightAVL) {
         this.data = data;
         this.leftAVL = leftAVL;
@@ -24,48 +29,79 @@ public class AVL<Fg> {
     }
 
     // Assesseur/getteur.
+
+    /** 
+     * @return Object.
+     */
     public Fg getData() {
         return this.data;
     }
-
+    
+    /** 
+     * @return AVL<Object>.
+     */
     public AVL<Fg> getLeftAVL() {
         return this.leftAVL;
     }
-
+    
+    /** 
+     * @return AVL<Object>.
+     */
     public AVL<Fg> getRightAVL() {
         return this.rightAVL;
     }
-
+    
+    /** 
+     * @return int.
+     */
     public int getHeight() {
         return this.height;
     }
-
+    
+    /** 
+     * @param new_data Object.
+     */
     // Attention utiliser seulement si le changement respecte l'ordre interne de l'arbre.
     public void setData(Fg new_data) {
         this.data = new_data;
     }
-
+    
+    /** 
+     * @param new_tree AVL<Object>.
+     */
     public void setLeftAVL(AVL<Fg> new_tree) {
         this.leftAVL = new_tree;
     }
-
+    
+    /** 
+     * @param new_tree AVL<Object>.
+     */
     public void setRightAVL(AVL<Fg> new_tree) {
         this.rightAVL = new_tree;
     }
-
+    
+    /** 
+     * @param new_height int.
+     */
     public void setHeight(int new_height) {
         this.height = new_height;
     }
-
-    // Retourne true si la liste est vide, false sinon.
+    
+    /** 
+     * @return boolean.
+     * Retourne true si la liste est vide, false sinon.
+     */
     public boolean isEmpty() {
 		if (this.getData() == null && this.leftAVL == null && this.rightAVL == null) {
             return true;
         }
 		return false;
     }
-
-    // Retourne vrai si l'arbre gauche et droite sont vides, false sinon.
+    
+    /** 
+     * @return boolean.
+     * Retourne vrai si l'arbre gauche et droite sont vides, false sinon.
+     */
     public boolean isLeaf() {
         boolean verif = false;
         if (this.leftIsEmpty() && (this.rightIsEmpty())) {
@@ -74,7 +110,10 @@ public class AVL<Fg> {
         return verif;
     }
 
-    // Teste si l'arbre gauche est vide.
+    /** 
+     * @return boolean.
+     * Teste si l'arbre gauche est vide.
+     */
     public boolean leftIsEmpty() {
         boolean verif = false;
         if (this.getLeftAVL() == null || this.getLeftAVL().getData() == null) {
@@ -82,8 +121,11 @@ public class AVL<Fg> {
         }
         return verif;
     }
-
-    // Teste si l'arbre droit est vide.
+    
+    /** 
+     * @return boolean.
+     * Teste si l'arbre droit est vide.
+     */
     public boolean rightIsEmpty() {
         boolean verif = false;
         if (this.getRightAVL() == null || this.getRightAVL().getData() == null) {
@@ -92,7 +134,10 @@ public class AVL<Fg> {
         return verif;
     }
     
-    // Calcule la hauteur d'un arbre.
+    /** 
+     * @return int.
+     * Calcule la hauteur d'un arbre.
+     */
     public int calculHeight() {
         
         if (isEmpty()) {
@@ -119,14 +164,15 @@ public class AVL<Fg> {
         }
         return this.height;
     }
-
-    //Calcul de la balance
+    
+    /** 
+     * @return int.
+     * Calcul de la balance.
+     */
 	public int balance() {
         int x = 0;
 		if (isEmpty() || isLeaf()) 
 			x = 0;
-		//else 
-		//	return getRightAVL().getHeight() - getLeftAVL().getHeight();
         else if (getRightAVL() == null) {
             x = - getLeftAVL().getHeight();
         }
@@ -139,7 +185,9 @@ public class AVL<Fg> {
         return x;
 	}
 
-    // Applique la rotation gauche.
+    /** 
+     * Applique la rotation gauche.
+     */ 
     public void leftRotation() {
 		Fg data = this.getData();
 		AVL<Fg> right = this.getRightAVL();
@@ -153,7 +201,9 @@ public class AVL<Fg> {
 		this.calculHeight();
 	}
 
-    //rotation droite
+    /** 
+     * Applique la rotation droite.
+     */
 	public void rightRotation() {
 		Fg data = this.getData();
 		AVL<Fg> left = this.getLeftAVL();
@@ -167,7 +217,9 @@ public class AVL<Fg> {
 		calculHeight();
 	}
 
-    // Rééquilibre notre AVL.
+    /**
+     * Rééquilibre notre AVL.
+     */
     public void equilibrate() {
         if (balance() == 2) {
 		    if (getRightAVL().balance() < 0) {
@@ -185,7 +237,10 @@ public class AVL<Fg> {
             calculHeight();
         }
     }
-
+    
+    /** 
+     * @return Object.
+     */
     public Fg findMax() {
         Fg maximum;
         if (this.rightIsEmpty()) {
@@ -196,7 +251,10 @@ public class AVL<Fg> {
         }
         return maximum;
     }
-
+    
+    /** 
+     * @return Object.
+     */
     public Fg findMin() {
         Fg minimum;
         if (this.leftIsEmpty()) {

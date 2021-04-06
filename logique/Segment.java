@@ -6,6 +6,10 @@ public class Segment {
     private Point upper, lower;
     
     // Constructeur.
+    /**
+     * @param p1 Point.
+     * @param p2 Point.
+     */
     public Segment(Point p1, Point p2) {
         if (p1.isUpper(p2)) {
             this.upper = p1; 
@@ -23,14 +27,23 @@ public class Segment {
     }
 
     // Assesseur/getteur.
+    /** 
+     * @return Point.
+     */
     public Point getUpper() {
         return this.upper;
     }
     
+    /** 
+     * @return Point.
+     */
     public Point getLower() {
         return this.lower;
     }
-
+    
+    /** 
+     * @param new_point Point.
+     */
     public void setUpper(Point new_point) {
         if (this.getLower().isUpper(new_point)) {
             this.upper = this.lower;
@@ -41,6 +54,9 @@ public class Segment {
         }
     }
     
+    /** 
+     * @param new_point Point.
+     */
     public void setLower(Point new_point) {
         if (new_point.isUpper(this.getUpper())) {
             this.lower = this.upper;
@@ -51,26 +67,39 @@ public class Segment {
         }
     }
 
-    // écriture de nos segments et retourne un string de notre segment.
+    /** 
+     * @return String.
+     * Ecriture de nos segments et retourne un string de notre segment.
+     */
     public String toString() {
         String chaine = this.getUpper().toString() + " " + this.getLower().toString();
         return chaine;
     }
-
-    // Calcule la pente de notre segment et retourne un double qui est la pente
+    
+    /** 
+     * @return double.
+     * Calcule la pente de notre segment et retourne un double qui est la pente.
+     */
     public double getPente() {
         double pente = (this.getUpper().getY() - this.getLower().getY()) / (this.getUpper().getX() - this.getLower().getX());
         return pente;
     }
-
-    // Calcule le parametre p de l'équation y = mx + p et retourne un double qui est le p.
+    
+    /** 
+     * @return double.
+     * Calcule le parametre 'p' de l'equation 'y = mx + p' et retourne un double qui est le p.
+     */
     public double getParam_P() {
         double pente = this.getPente();
         double param_p = this.getUpper().getY() - pente * this.getUpper().getX();
         return param_p;
     }
-
-    // Regarde si le point est dans le segment NON VERTICAL.
+    
+    /** 
+     * @param p Point.
+     * @return boolean.
+     * Regarde si le point est dans le segment NON VERTICAL.
+     */
     public boolean isIn(Point p) {
         boolean verif = false;
         double pente = this.getPente();
@@ -85,7 +114,12 @@ public class Segment {
         return verif;
     }
 
-    // Regarde si le point est dans le segment VERTICAL.
+    
+    /** 
+     * @param p Point.
+     * @return boolean.
+     * Regarde si le point est dans le segment VERTICAL.
+     */
     public boolean isInVertical(Point p) {
         boolean verif = false;
 
@@ -95,8 +129,12 @@ public class Segment {
             verif = true;
         }
         return verif;
-    }
+    } 
     
+    /** 
+     * @param p Point.
+     * @return boolean.
+     */
     public boolean isInHorizontale(Point p) {
         boolean verif = false;
         if ((Math.abs(p.getY() - this.getLower().getY()) <= 0.00000001) &&
@@ -106,9 +144,12 @@ public class Segment {
         }
         return verif;
     }
-    
 
-    // Calcule l'intersection de nos segments PROLONGES (droites) et le retourne.
+    /** 
+     * @param s Segment.
+     * @return Point.
+     * Calcule l'intersection de nos segments PROLONGES (droites) et le retourne.
+     */
     public Point getIntersectionDroite(Segment s) {
         Point point_intersection = new Point(0, 0);
         double s1_pente = this.getPente();
@@ -129,17 +170,25 @@ public class Segment {
         }        
         return point_intersection;
     }
-
-    // Regarde si un segment n'est pas un prolongment de l'autre.
+ 
+    /** 
+     * @param s Segment.
+     * @return boolean.
+     * Regarde si un segment n'est pas un prolongment de l'autre.
+     */
     public boolean isIntersectionExtremite(Segment s) {
         boolean verif = false;
         if (this.getUpper().comparePoint(s.getLower()) || this.getLower().comparePoint(s.getUpper()) || this.getUpper().comparePoint(s.getUpper()) || this.getLower().comparePoint(s.getLower())) {
             verif = true;
         }
         return verif;
-    }
+    } 
     
-    // Calcule l'intersection entre nos 2 segments (qui est une extremité).
+    /** 
+     * @param s Segment.
+     * @return Point.
+     * Calcule l'intersection entre nos 2 segments (qui est une extremite).
+     */
     public Point intersectionExtremite(Segment s) {
         Point point_intersection = new Point(0, 0);
         
@@ -154,7 +203,10 @@ public class Segment {
         return point_intersection;
     }
 
-    // Regarde si le segment est vertical ou non.
+    /** 
+     * @return boolean.
+     * Regarde si le segment est vertical ou non.
+     */
     public boolean isVertical() {
         boolean verif = false;
         if (this.getUpper().getX() == this.getLower().getX()) {
@@ -163,7 +215,11 @@ public class Segment {
         return verif;
     }
 
-    // Teste s'il y a une intersection ou non avec nos segments.
+    /** 
+     * @param s Segment.
+     * @return boolean.
+     * Teste s'il y a une intersection ou non avec nos segments.
+     */
     public boolean isIntersection(Segment s) {
         boolean verif = false;
         Point point_intersection_droite = new Point(0, 0);
@@ -253,7 +309,11 @@ public class Segment {
         return verif;
     }
 
-    // Calcule l'intersection EXISTANTE de nos segments et retourne un objet Point.
+    /** 
+     * @param s Segment.
+     * @return Point.
+     * Calcule l'intersection EXISTANTE de nos segments et retourne un objet Point.
+     */
     public Point getIntersectionPoint(Segment s) {
         Point point_intersection = new Point(0, 0);
 
@@ -295,8 +355,14 @@ public class Segment {
         }
         return point_intersection;
     }
-
-    // Calcule le point d'intersection entre nos segments dont s1 qui est vertical et retourne un Point.
+    
+    /** 
+     * @param s Segment.
+     * @param sIsVertical boolean.
+     * @param point_intersection Point.
+     * @return Point.
+     * Calcule le point d'intersection entre nos segments dont s1 qui est vertical et retourne un Point.
+     */
     public Point getIntersectionPointVertical(Segment s, boolean sIsVertical, Point point_intersection) {
         
         if (sIsVertical && s.isVertical()) {
@@ -312,11 +378,19 @@ public class Segment {
         return point_intersection;
     }
     
-    // Affiche notre segment dans la console.
+    /**
+     * Affiche notre segment dans la console.
+     */
     public void print() {
         System.out.println(this.toString());
     }
     
+    /** 
+     * @param segment Segment.
+     * @param h double.
+     * @param left boolean.
+     * @return boolean.
+     */
     public boolean isLeftOrRight(Segment segment, double h, boolean left) {
         boolean verif = false;
         
@@ -460,7 +534,11 @@ public class Segment {
         }
         return verif;
     }
-
+    
+    /** 
+     * @param s Segment.
+     * @return boolean.
+     */
     public boolean equalSegment(Segment s){
         boolean verif = false;
         if  (this.getUpper().equalPoint(s.getUpper()) && this.getLower().equalPoint(s.getLower())){
@@ -468,7 +546,10 @@ public class Segment {
         }
         return verif;
     }
-
+    
+    /** 
+     * @return boolean.
+     */
     public boolean isHorizontal(){
         boolean verif = false;
         if (this.getUpper().getY() == this.getLower().getY()){
@@ -476,33 +557,37 @@ public class Segment {
         }
         return verif;
     }
-
+    
+    /** 
+     * @param s Segment.
+     * @return boolean.
+     */
     public boolean doesOverlap(Segment s){
         boolean verif = false;
         if (this.isVertical() && (!this.getUpper().equalPoint(this.getLower()))){
             if (s.isVertical() && (!s.getUpper().equalPoint(s.getLower())) && s.getLower().getX() == this.getLower().getX()
-            && (((this.getUpper().getY() > s.getLower().getY()) 
-            || this.getLower().getY() < s.getUpper().getY())
-            || (s.getUpper().getY() > this.getLower().getY() 
-            || s.getLower().getY() < this.getUpper().getY()))){
+            && ((this.getUpper().getY() <= s.getUpper().getY() && this.getUpper().getY() > s.getLower().getY())
+            || (this.getLower().getY() < s.getUpper().getY() && s.getUpper().getY() <= this.getUpper().getY())
+            || (this.getUpper().getY() <= s.getUpper().getY() && this.getLower().getY() >= s.getLower().getY())
+            || (s.getUpper().getY() <= this.getUpper().getY() && s.getLower().getY() >= this.getLower().getY()))){
                 verif = true;
             }
         }
         else if (this.isHorizontal() && (!this.getUpper().equalPoint(this.getLower()))) {
             if (s.isHorizontal() && (!s.getUpper().equalPoint(s.getLower())) && s.getLower().getY() == this.getLower().getY()
-            && (((this.getUpper().getX() < s.getLower().getX()) 
-            || this.getLower().getX() > s.getUpper().getX())
-            || (s.getUpper().getX() < this.getLower().getX() 
-            || s.getLower().getX() > this.getUpper().getX()))){
+            && ((this.getUpper().getX() <= s.getUpper().getX() && s.getUpper().getX() < this.getLower().getX())
+            || (s.getUpper().getX() <= this.getUpper().getX() && this.getUpper().getX() < s.getLower().getX())
+            || (s.getUpper().getX() <= this.getUpper().getX() && s.getLower().getX() >= this.getLower().getX())
+            || (this.getUpper().getX() <= s.getUpper().getX() && this.getLower().getX() >= s.getLower().getX()))){
                 verif = true;
             }
         }
         else {
             if (this.getPente() == s.getPente() && this.getParam_P() == s.getParam_P()){
-                if (((this.getUpper().getY() > s.getLower().getY()) 
-                || this.getLower().getY() < s.getUpper().getY())
-                || (s.getUpper().getY() > this.getLower().getY() 
-                || s.getLower().getY() < this.getUpper().getY())) {
+                if ((this.getUpper().getY() <= s.getUpper().getY() && this.getUpper().getY() > s.getLower().getY())
+                || (this.getLower().getY() < s.getUpper().getY() && s.getUpper().getY() <= this.getUpper().getY())
+                || (this.getUpper().getY() <= s.getUpper().getY() && this.getLower().getY() >= s.getLower().getY())
+                || (s.getUpper().getY() <= this.getUpper().getY() && s.getLower().getY() >= this.getLower().getY())) {
                     verif = true;
                 }
             }
