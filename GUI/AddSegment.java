@@ -4,6 +4,7 @@ package GUI;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.stage.Modality;
 
 // Zone de saisie.
 import javafx.scene.control.TextField;
@@ -67,6 +68,7 @@ public class AddSegment extends Stage {
         stage.setTitle("Add Segment");
         stage.setResizable(false);
         stage.getIcons().add(new Image("ressources/settings.jpg"));
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.showAndWait();
 
         try {

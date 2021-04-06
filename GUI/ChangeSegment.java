@@ -13,6 +13,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class ChangeSegment {
@@ -71,6 +72,7 @@ public class ChangeSegment {
         stage.setTitle("Effect on a segment");
         stage.setResizable(false);
         stage.getIcons().add(new Image("ressources/settings.jpg"));
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
     }
 
