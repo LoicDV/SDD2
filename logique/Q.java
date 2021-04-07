@@ -82,7 +82,7 @@ public class Q extends AVL<Point> {
             Point head = this.getData();
             if (point.isUpper(head)) {
                 if (this.leftIsEmpty()){
-                    this.setLeftAVL(new Q(point, null, null));
+                    this.setLeftQ(new Q(point, null, null));
                     this.equilibrate();
                 }
                 else{
@@ -93,7 +93,7 @@ public class Q extends AVL<Point> {
             else {
                 if (head.isUpper(point)) {
                     if (this.rightIsEmpty()){
-                        this.setRightAVL(new Q(point, null, null));
+                        this.setRightQ(new Q(point, null, null));
                         this.equilibrate();
                     }
                     else{
@@ -151,20 +151,20 @@ public class Q extends AVL<Point> {
         }
         else {
             if (this.leftIsEmpty()) {
-                AVL<Point> new_Q = this.getRightAVL();
+                Q new_Q = this.getRightQ();
                 Point head_new_Q = new_Q.getData();
                 this.setData(head_new_Q);
-                this.setLeftAVL(new_Q.getLeftAVL());
-                this.setRightAVL(new_Q.getRightAVL());
+                this.setLeftQ(new_Q.getLeftQ());
+                this.setRightQ(new_Q.getRightQ());
                 this.setHeight(new_Q.getHeight());
             }
             else {
                 if (this.rightIsEmpty()) {
-                    AVL<Point> new_Q = this.getLeftAVL();
+                    Q new_Q = this.getLeftQ();
                     Point head_new_Q = new_Q.getData();
                     this.setData(head_new_Q);
-                    this.setLeftAVL(new_Q.getLeftAVL());
-                    this.setRightAVL(new_Q.getRightAVL());
+                    this.setLeftQ(new_Q.getLeftQ());
+                    this.setRightQ(new_Q.getRightQ());
                     this.setHeight(new_Q.getHeight());
                 }
                 else {
@@ -197,13 +197,13 @@ public class Q extends AVL<Point> {
      */
     public void inordreQ() {
 		if (this != null) {
-            if (this.getLeftAVL() != null) {
+            if (this.getLeftQ() != null) {
                 this.getLeftQ().inordreQ();
             }
             if (this.getData() != null) {
                 this.getData().print();
             }
-            if (this.getRightAVL() != null) {
+            if (this.getRightQ() != null) {
                 this.getRightQ().inordreQ();
             }
 		}

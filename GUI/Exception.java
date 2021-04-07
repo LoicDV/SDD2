@@ -1,10 +1,14 @@
 package GUI;
 
+// Import JavaFX.
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
 public class Exception extends Throwable {
 
+    /**
+     * Exception sur le fait de ne pas avoir su rajouter de segment car pas de donnee.
+     */
     public static void noAddSegment() {
         AlertType alertType = AlertType.ERROR;
         Alert alert = new Alert(alertType);
@@ -14,6 +18,9 @@ public class Exception extends Throwable {
         alert.showAndWait();
     }
 
+    /**
+     * Exception sur le fait de ne pas avoir su ouvrir de fichier car aucun selectionne.
+     */
     public static void noFileOpen() {
         AlertType alertType = AlertType.WARNING;
         Alert alert = new Alert(alertType);
@@ -23,6 +30,9 @@ public class Exception extends Throwable {
         alert.showAndWait();
     }
 
+    /**
+     * Exception sur le fait de ne pas avoir su rajouter de segment car overlap un autre.
+     */
     public static void doubleLineException() {
         AlertType alertType = AlertType.ERROR;
         Alert alert = new Alert(alertType);
@@ -32,6 +42,9 @@ public class Exception extends Throwable {
         alert.showAndWait();
     }
 
+    /**
+     * Exception sur le fait de ne pas avoir su ouvir le fichier car pas le bon format a l'interieur.
+     */
     public static void noFormatEditor() {
         AlertType alertType = AlertType.ERROR;
         Alert alert = new Alert(alertType);
@@ -41,6 +54,9 @@ public class Exception extends Throwable {
         alert.showAndWait();
     }
 
+    /**
+     * Exception sur le fait de ne pas avoir su sauvegarder le fichier car pas de fichier ouvert precedemment.
+     */
     public static void noSaveDone() {
         AlertType alertType = AlertType.ERROR;
         Alert alert = new Alert(alertType);
@@ -50,6 +66,9 @@ public class Exception extends Throwable {
         alert.showAndWait();
     }
 
+    /**
+     * Exception sur le fait de ne pas avoir su sauvegarder car pas ouvert de fichier au prealable.
+     */
     public static void noFileTake() {
         AlertType alertType = AlertType.WARNING;
         Alert alert = new Alert(alertType);
@@ -59,6 +78,9 @@ public class Exception extends Throwable {
         alert.showAndWait();
     }
 
+    /**
+     * Exception sur le fait de ne pas avoir su ouvrir le fichier car pas le bon format.
+     */
     public static void noGoodFile() {
         AlertType alertType = AlertType.ERROR;
         Alert alert = new Alert(alertType);

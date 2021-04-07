@@ -1,27 +1,27 @@
 package GUI;
 
-import java.io.File;
-import java.util.ArrayList;
+// Import logique.
 import logique.Point;
 
-// Import de base.
+// Import basique.
+import java.util.ArrayList;
+import java.io.File;
+
+// Import JavaFX.
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.layout.BorderPane;
-
-// Import menu.
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Line;
-
-// Import dessin
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Circle;
 
 public class Main extends Application {
-
+    
+    // Variables globales.
     private static ArrayList<Point[]> containers;
     private static ArrayList<Line> set;
     private static ArrayList<Circle> setCircle;
@@ -32,6 +32,11 @@ public class Main extends Application {
     private static DisplayContainers grid;
     private static ScrollPane scrollPane;
 
+    
+    /** 
+     * @param primaryStage
+     * Cree et ouvre notre fenetre principale de notre map overlay.
+     */
     @Override
     public void start(Stage primaryStage) {
 
@@ -52,71 +57,121 @@ public class Main extends Application {
         // Zone de changement de Segment.
         grid = new DisplayContainers();
 
-        // Mettre nos éléments dans la fenêtre.
+        // Mettre nos elements dans la fenetre.
         root = new BorderPane();
         root.setCenter(scrollPane);
         root.setTop(vBox);
         root.setRight(grid);
 
-        // Fenêtre.
-        // Taille de la fenêtre.
+        // Contenu de la fenetre.
         Scene scene = new Scene(root, 800, 700);
 
-        // Info de base de la fenetre initiale.
+        // Settings de la fenetre.
         primaryStage.setTitle("Map overlay");
         primaryStage.setScene(scene);
         primaryStage.getIcons().add(new Image("ressources/map_overlay.jpg"));
         primaryStage.show();
     }
 
+    /** 
+     * @return Stage.
+     * Retourne le Stage de la fenetre.
+     */
     public static Stage getStage() {
         return stage;
     }
 
+    /** 
+     * @return Pane.
+     * Retourne le Pane de la fenetre.
+     */
     public static Pane getPane() {
         return pane;
     }
 
+    /** 
+     * @param newPane Pane.
+     * Remplace l'ancien Pane par le nouveau en parametre.
+     */
     public void setPane(Pane newPane) {
         pane = newPane;
     }
 
+    /** 
+     * @return BorderPane.
+     * Retourne le BorderPane de la fenetre.
+     */
     public static BorderPane getBorderPane() {
         return root;
     }
-
+    
+    /** 
+     * @return ScrollPane.
+     * Retourne la ScrollPane de la fenetre.
+     */
     public static ScrollPane getScrollPane() {
         return scrollPane;
     }
 
+    /** 
+     * @return File.
+     * Retourne la File de la fenetre.
+     */
     public static File getFile() {
         return file;
     }
 
+    /** 
+     * @param newFile File.
+     * Remplace l'ancien File par le nouveau en parametre.
+     */
     public static void setFile(File newFile) {
         file = newFile;
     }
 
+    /** 
+     * @return ArrayList<Point[]>.
+     * Retourne le ArrayList<Point[]> de la fenetre.
+     */
     public static ArrayList<Point[]> getContainers() {
         return containers;
     }
-
+    
+    /** 
+     * @return ArrayList<Line>.
+     * Retourne le ArrayList<Line> de la fenetre.
+     */
     public static ArrayList<Line> getSet() {
         return set;
     }
 
+    /** 
+     * @return ArrayList<Circle>.
+     * Retourne le ArrayList<Circle> de la fenetre.
+     */
     public static ArrayList<Circle> getSetCircle() {
         return setCircle;
     }
 
+    /**
+     * Remplace l'ancien ArrayList par une nouvelle vide.
+     */
     public static void setSetCircle() {
         setCircle = new ArrayList<Circle>();
     }
 
+    /** 
+     * @return DisplayContainers.
+     * Retourne le DisplayContainers de la fenetre.
+     */
     public static DisplayContainers getDisplayContainers() {
         return grid;
     }
 
+    /** 
+     * @param args
+     * Lance notre fenetre.
+     */
     public static void runApp(String[] args) {
         launch(args);
     }

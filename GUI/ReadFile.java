@@ -1,26 +1,30 @@
 package GUI;
 
+// Import logique.
 import logique.Point;
-import java.util.ArrayList;
 
-// Lecture de fichier.
+// Import basique.
+import java.util.ArrayList;
 import java.io.File;
 import java.io.FileReader;
 import java.io.BufferedReader;
-
-// Exception liée au fichier.
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class ReadFile {
     
+    /**
+     * @param file File.
+     * @return ArrayList<Point[]>.
+     * Lis le fichier en parametre pour obtenir les segments et les retourne en ArrayList<Point[]>.
+     */
     public static ArrayList<Point[]> read(File file) {
 
         // Composant pour lire le fichier.
         FileReader fileReader = null;
         BufferedReader bufferedReader = null;
         
-        // Tableau -> Tableau de points à 2 dimensions.
+        // Tableau -> Tableau de points a 2 dimensions.
         ArrayList<Point[]> stockTabPoints = new ArrayList<Point[]>();
 
         // Test avant.
@@ -53,7 +57,7 @@ public class ReadFile {
                 
                 }
 
-                // Création des 2 points.
+                // Creation des 2 points.
                 Point p1 = new Point(tabDoubles[0], tabDoubles[1]);
                 Point p2 = new Point(tabDoubles[2], tabDoubles[3]);
 
