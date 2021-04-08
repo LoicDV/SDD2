@@ -1,0 +1,42 @@
+logique/Segment.java
+ src.main.java.logique.Segment
+logique/AVL.java
+ src.main.java.logique.AVL
+GUI/DrawSegment.java
+ src.main.java.GUI.DrawSegment
+logique/Point.java
+ src.main.java.logique.Point
+logique/Intersections.java
+ src.main.java.logique.Intersections
+GUI/ClearPane.java
+ src.main.java.GUI.ClearPane
+GUI/Main.java
+ src.main.java.GUI.Main
+GUI/ReadFile.java
+ src.main.java.GUI.ReadFile
+GUI/SaveFile.java
+ src.main.java.GUI.SaveFile
+logique/T.java
+ src.main.java.logique.T
+GUI/Exception.java
+ src.main.java.GUI.Exception
+GUI/Compilation.java
+ src.main.java.GUI.Compilation
+logique/Q.java
+ src.main.java.logique.Q
+GUI/DisplayIntersection.java
+ src.main.java.GUI.DisplayIntersection
+Test.java
+ src.main.java.Test
+GUI/OpenScript.java
+ src.main.java.GUI.OpenScript
+GUI/Helper.java
+ src.main.java.GUI.Helper
+GUI/MyMenuBar.java
+ src.main.java.GUI.MyMenuBar
+GUI/AddSegment.java
+ src.main.java.GUI.AddSegment
+GUI/ChangeSegment.java
+ src.main.java.GUI.ChangeSegment
+GUI/DisplayContainers.java
+ src.main.java.GUI.DisplayContainers

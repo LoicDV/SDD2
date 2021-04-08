@@ -8,42 +8,14 @@
             "type": "java",
             "name": "Launch Test",
             "request": "launch",
-            "mainClass": "Test",
+            "mainClass": "src.main.java.Test",
             "projectName": "SDD2_6ecca69"
         },
         {
             "type": "java",
-            "name": "Launch Intersections",
+            "name": "Launch Test",
             "request": "launch",
-            "mainClass": "logique.Intersections",
-            "projectName": "SDD2_6ecca69"
-        },
-        {
-            "type": "java",
-            "name": "Launch ReadFile",
-            "request": "launch",
-            "mainClass": "GUI.ReadFile",
-            "projectName": "SDD2_6ecca69"
-        },
-        {
-            "type": "java",
-            "name": "Launch Current File",
-            "request": "launch",
-            "mainClass": "${file}"
-        },
-        {
-            "type": "java",
-            "name": "Launch Main",
-            "request": "launch",
-            "vmArgs": "--module-path C:/Users/Utilisateur/Desktop/javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.fxml",
-            "mainClass": "GUI.Main",
-            "projectName": "SDD2_6ecca69"
-        },
-        {
-            "type": "java",
-            "name": "Launch Main(1)",
-            "request": "launch",
-            "mainClass": "logique.Main",
+            "mainClass": "src.Test",
             "projectName": "SDD2_6ecca69"
         }
     ]
