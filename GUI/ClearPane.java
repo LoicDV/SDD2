@@ -49,6 +49,9 @@ public class ClearPane {
      * Retire un segment de notre zone de dessin.
      */
     public static void removeSegment(Line line) {
+        // On retire tous les cercles.
+        Compilation.noCircle();
+        
         // Notre ArrayList de ligne
         ArrayList<Line> set = Main.getSet();
         

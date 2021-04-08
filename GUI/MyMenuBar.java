@@ -70,6 +70,50 @@ public class MyMenuBar extends MenuBar{
         // Onglet 4.
         Menu menu4 = new Menu("Help");
 
+        // Sous-menu 4.
+        MenuItem menu4item1 = new MenuItem("Open a file");
+        menu4item1.setOnAction(event -> {
+            new Helper(1);
+        });
+        MenuItem menu4item2 = new MenuItem("Save a file");
+        menu4item2.setOnAction(event -> {
+            new Helper(2);
+        });
+        MenuItem menu4item3 = new MenuItem("Add a segment");
+        menu4item3.setOnAction(event -> {
+            new Helper(3);
+        });
+        MenuItem menu4item4 = new MenuItem("Remove a segment");
+        menu4item4.setOnAction(event -> {
+            new Helper(4);
+        });
+        MenuItem menu4item5 = new MenuItem("Change a segment");
+        menu4item5.setOnAction(event -> {
+            new Helper(5);
+        });
+        MenuItem menu4item6 = new MenuItem("Clear the window");
+        menu4item6.setOnAction(event -> {
+            new Helper(6);
+        });
+        MenuItem menu4item7 = new MenuItem("Get Intersection(s)");
+        menu4item7.setOnAction(event -> {
+            new Helper(7);
+        });
+        MenuItem menu4item8 = new MenuItem("Get Sweep Line");
+        menu4item8.setOnAction(event -> {
+            new Helper(8);
+        });
+
+        // Ajout du sous-menu 4 au menu 4.
+        menu4.getItems().add(menu4item1);
+        menu4.getItems().add(menu4item2);
+        menu4.getItems().add(menu4item3);
+        menu4.getItems().add(menu4item4);
+        menu4.getItems().add(menu4item5);
+        menu4.getItems().add(menu4item6);
+        menu4.getItems().add(menu4item7);
+        menu4.getItems().add(menu4item8);
+
         // Ajout de l'ensemble des menus.
         this.getMenus().add(menu1);
         this.getMenus().add(menu2);

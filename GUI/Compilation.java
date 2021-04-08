@@ -70,7 +70,7 @@ public class Compilation {
             // On regarde si l'objet est un cercle.
             else if (pane.getChildren().get(index - 1) instanceof Circle) {
                 pane.getChildren().remove(index - 1);
-                Main.getSetCircle().remove(index - 1);
+                Main.getSetCircle().remove(Main.getSetCircle().size() - 1);
             }
             else {
                 flag = false;
