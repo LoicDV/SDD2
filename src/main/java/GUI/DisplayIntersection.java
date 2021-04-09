@@ -66,125 +66,170 @@ public class DisplayIntersection {
     }
 
     /**
+     * @param sweepLine1 Line.
+     * @param sweepLine2 Line.
+     * @param setLowerAndUpperPoints ArrayList de Point.
+     * @param setIntersection ArrayList de Point.
+     * @param compteurLowerUpper int.
+     * @param compteurIntersection int.
+     * @param flag boolean
      * Produit la compilation avec la sweepLine
      */
-    public static int[] displayIntersectionSweep(ArrayList<Point> setLowerAndUpperPoints, ArrayList<Point> setIntersection, int compteurLowerUpper, int compteurIntersection) {
-        
-        // Notre sweepLine ainsi que notre pane (pour eviter de faire trop de fois le meme appel/creation).
-        Line sweepLine = new Line();
+    public static int[] displayIntersectionSweep(Line sweepLine1, Line sweepLine2, ArrayList<Point> setLowerAndUpperPoints, ArrayList<Point> setIntersection, int compteurLowerUpper, int compteurIntersection, boolean flag) {
 
-        // Si les 2 listes ne sont pas vides.
-        if (setLowerAndUpperPoints.size() != compteurLowerUpper && setIntersection.size() != compteurIntersection) {
-            
-            // Au debut, pas retirer la sweepLine.
-            if ((compteurIntersection + compteurLowerUpper) == 0) {
-
-                if (setLowerAndUpperPoints.get(compteurLowerUpper).equalPoint(setIntersection.get(compteurIntersection))) {
-                    
-                    // Rajout du point d'intersection.
-                    intersectionSweepLine(sweepLine, setIntersection, compteurIntersection);
-                    
-                    // On incremente les 2 listes car meme point.
-                    compteurLowerUpper++;
-                    compteurIntersection++;
-
-                    displayIntersection();
-                }
-                else if (setLowerAndUpperPoints.get(compteurLowerUpper).isUpper(setIntersection.get(compteurIntersection))) {
+        // Etape par etape.
+        if (flag) {
+            // Si les 2 listes ne sont pas vides.
+            if (setLowerAndUpperPoints.size() != compteurLowerUpper && setIntersection.size() != compteurIntersection) {
                 
-                    LowerAndUpperSweepLine(sweepLine, setLowerAndUpperPoints, compteurLowerUpper);
+                // Au debut, pas retirer la sweepLine.
+                if ((compteurIntersection + compteurLowerUpper) == 0) {
+
+                    if (setLowerAndUpperPoints.get(compteurLowerUpper).equalPoint(setIntersection.get(compteurIntersection))) {
+                        
+                        // Rajout du point d'intersection.
+                        intersectionSweepLine(sweepLine1, sweepLine2, setIntersection, compteurIntersection);
+                        
+                        // On incremente les 2 listes car meme point.
+                        compteurLowerUpper++;
+                        compteurIntersection++;
+
+                    }
+                    else if (setLowerAndUpperPoints.get(compteurLowerUpper).isUpper(setIntersection.get(compteurIntersection))) {
+                    
+                        LowerAndUpperSweepLine(sweepLine1, sweepLine2, setLowerAndUpperPoints, compteurLowerUpper);
+
+                        compteurLowerUpper++;
+                    }
+                    else {
+
+                        // Rajout du point d'intersection.
+                        intersectionSweepLine(sweepLine1, sweepLine2, setIntersection, compteurIntersection);
+                        
+                        compteurIntersection++;
+                    }
+
+                }
+
+                else {
+
+                    // On retire la sweep line.
+                    Main.getPane().getChildren().remove(Main.getPane().getChildren().size()-1);
+                    Main.getPane().getChildren().remove(Main.getPane().getChildren().size()-1);
+                    if (setLowerAndUpperPoints.get(compteurLowerUpper).equalPoint(setIntersection.get(compteurIntersection))) {
+                        
+                        // Rajout du point d'intersection.
+                        intersectionSweepLine(sweepLine1, sweepLine2, setIntersection, compteurIntersection);
+                        
+                        // On incremente les 2 listes car meme point.
+                        compteurLowerUpper++;
+                        compteurIntersection++;
+                    }
+                    else if (setLowerAndUpperPoints.get(compteurLowerUpper).isUpper(setIntersection.get(compteurIntersection))) {
+
+                        LowerAndUpperSweepLine(sweepLine1, sweepLine2, setLowerAndUpperPoints, compteurLowerUpper);
+
+                        compteurLowerUpper++;
+                    }
+                    else {
+
+                        // Rajout du point d'intersection.
+                        intersectionSweepLine(sweepLine1, sweepLine2, setIntersection, compteurIntersection);
+                        
+                        compteurIntersection++;
+                    }
+                }
+            }
+
+            // Quand il n'y a plus de points d'intersections.
+            else if (setLowerAndUpperPoints.size() != compteurLowerUpper) {
+
+                // Au debut, pas retirer la sweepLine.
+                if (compteurLowerUpper == 0) {
+                    
+                    LowerAndUpperSweepLine(sweepLine1, sweepLine2, setLowerAndUpperPoints, compteurLowerUpper);
 
                     compteurLowerUpper++;
                 }
                 else {
 
-                    // Rajout du point d'intersection.
-                    intersectionSweepLine(sweepLine, setIntersection, compteurIntersection);
-                    
-                    compteurIntersection++;
-                    displayIntersection();
-                }
+                    // On retire la sweep line.
+                    Main.getPane().getChildren().remove(Main.getPane().getChildren().size()-1);
+                    Main.getPane().getChildren().remove(Main.getPane().getChildren().size()-1);
 
+                    LowerAndUpperSweepLine(sweepLine1, sweepLine2, setLowerAndUpperPoints, compteurLowerUpper);
+
+                    compteurLowerUpper++;
+                }
             }
 
-            else {
+            // Quand il n'y a plus de points Uppers et Lowers.
+            else if (setIntersection.size() != compteurIntersection) {
 
-                // On retire la sweep line.
+                // Au debut, pas retirer la sweepLine.
+                if (compteurIntersection == 0) {
+
+                    // Rajout du point d'intersection.
+                    intersectionSweepLine(sweepLine1, sweepLine2, setIntersection, compteurIntersection);
+
+                    compteurIntersection++;
+                }
+                else {
+
+                    // On retire la sweep line.
+                    Main.getPane().getChildren().remove(Main.getPane().getChildren().size()-1);
+                    Main.getPane().getChildren().remove(Main.getPane().getChildren().size()-1);
+
+                    // Rajout du point d'intersection.
+                    intersectionSweepLine(sweepLine1, sweepLine2, setIntersection, compteurIntersection);
+
+                    compteurIntersection++;
+                }
+            }
+            else {
                 Main.getPane().getChildren().remove(Main.getPane().getChildren().size()-1);
+                Main.getPane().getChildren().remove(Main.getPane().getChildren().size()-1);
+            }
+        }
+        // Tout d'un coup.
+        else {
+            if (compteurIntersection + compteurLowerUpper != 0) {
+                Main.getPane().getChildren().remove(Main.getPane().getChildren().size()-1);
+                Main.getPane().getChildren().remove(Main.getPane().getChildren().size()-1);
+            }
+            while (setLowerAndUpperPoints.size() != compteurLowerUpper && setIntersection.size() != compteurIntersection) {
                 if (setLowerAndUpperPoints.get(compteurLowerUpper).equalPoint(setIntersection.get(compteurIntersection))) {
-                    
+                        
                     // Rajout du point d'intersection.
-                    intersectionSweepLine(sweepLine, setIntersection, compteurIntersection);
+                    DrawSegment.drawCircle(setIntersection.get(compteurIntersection).getX(), setIntersection.get(compteurIntersection).getY(), Color.rgb(255, 0, 0));
                     
                     // On incremente les 2 listes car meme point.
                     compteurLowerUpper++;
                     compteurIntersection++;
-                    displayIntersection();
                 }
                 else if (setLowerAndUpperPoints.get(compteurLowerUpper).isUpper(setIntersection.get(compteurIntersection))) {
-
-                    LowerAndUpperSweepLine(sweepLine, setLowerAndUpperPoints, compteurLowerUpper);
-
+                    
                     compteurLowerUpper++;
                 }
                 else {
 
                     // Rajout du point d'intersection.
-                    intersectionSweepLine(sweepLine, setIntersection, compteurIntersection);
+                    DrawSegment.drawCircle(setIntersection.get(compteurIntersection).getX(), setIntersection.get(compteurIntersection).getY(), Color.rgb(255, 0, 0));
                     
                     compteurIntersection++;
-                    displayIntersection();
                 }
             }
-        }
+            while (setLowerAndUpperPoints.size() != compteurLowerUpper) {
 
-        // Quand il n'y a plus de points d'intersections.
-        else if (setLowerAndUpperPoints.size() != compteurLowerUpper) {
-
-            // Au debut, pas retirer la sweepLine.
-            if (compteurLowerUpper == 0) {
-                
-                LowerAndUpperSweepLine(sweepLine, setLowerAndUpperPoints, compteurLowerUpper);
-
-                compteurLowerUpper++;
+                    compteurLowerUpper++;
             }
-            else {
-
-                // On retire la sweep line.
-                Main.getPane().getChildren().remove(Main.getPane().getChildren().size()-1); ////////////////////////
-
-                LowerAndUpperSweepLine(sweepLine, setLowerAndUpperPoints, compteurLowerUpper);
-
-                compteurLowerUpper++;
-            }
-        }
-
-        // Quand il n'y a plus de points Uppers et Lowers.
-        else if (setIntersection.size() != compteurIntersection) {
-
-            // Au debut, pas retirer la sweepLine.
-            if (compteurIntersection == 0) {
+            while (setIntersection.size() != compteurIntersection) {
 
                 // Rajout du point d'intersection.
-                intersectionSweepLine(sweepLine, setIntersection, compteurIntersection);
-
+                DrawSegment.drawCircle(setIntersection.get(compteurIntersection).getX(), setIntersection.get(compteurIntersection).getY(), Color.rgb(255, 0, 0));
+                    
                 compteurIntersection++;
-                displayIntersection();
             }
-            else {
-
-                // On retire la sweep line.
-                Main.getPane().getChildren().remove(Main.getPane().getChildren().size()-1); ////////////////////////
-
-                // Rajout du point d'intersection.
-                intersectionSweepLine(sweepLine, setIntersection, compteurIntersection);
-
-                compteurIntersection++;
-                displayIntersection();
-            }
-        }
-        else {
-            Main.getPane().getChildren().remove(Main.getPane().getChildren().size()-1);
         }
         return new int[]{compteurLowerUpper, compteurIntersection};
     }
@@ -208,24 +253,50 @@ public class DisplayIntersection {
 		}
     }
 
-    public static void intersectionSweepLine(Line sweepLine, ArrayList<Point> setIntersection, int compteurIntersection) {
+    /**
+     * @param sweepLine1 Line.
+     * @param sweepLine2 Line.
+     * @param setIntersection ArrayList de Point.
+     * @param compteurIntersection int.
+     * Affiche sur notre fenetre le point d'intersection ainsi que la sweep line.
+     */
+    public static void intersectionSweepLine(Line sweepLine1, Line sweepLine2, ArrayList<Point> setIntersection, int compteurIntersection) {
         // Point d'intersection donc on le marque.
         DrawSegment.drawCircle(setIntersection.get(compteurIntersection).getX(), setIntersection.get(compteurIntersection).getY(), Color.rgb(255, 0, 0));
                     
         // On remet la sweepLine au bon endroit.
-        sweepLine.setStartX(setIntersection.get(compteurIntersection).getX() * zoom - 200);
-        sweepLine.setEndX(setIntersection.get(compteurIntersection).getX() * zoom + 200);
-        sweepLine.setStartY(setIntersection.get(compteurIntersection).getY() * zoom);
-        sweepLine.setEndY(setIntersection.get(compteurIntersection).getY() * zoom);
-        Main.getPane().getChildren().add(sweepLine);
+        sweepLine1.setStartX(setIntersection.get(compteurIntersection).getX() * zoom - 200);
+        sweepLine1.setEndX(setIntersection.get(compteurIntersection).getX() * zoom + 200);
+        sweepLine1.setStartY(setIntersection.get(compteurIntersection).getY() * zoom);
+        sweepLine1.setEndY(setIntersection.get(compteurIntersection).getY() * zoom);
+        Main.getPane().getChildren().add(sweepLine1);
+
+        sweepLine2.setStartX(setIntersection.get(compteurIntersection).getX() * zoom);
+        sweepLine2.setEndX(setIntersection.get(compteurIntersection).getX() * zoom);
+        sweepLine2.setStartY(setIntersection.get(compteurIntersection).getY() * zoom - 10);
+        sweepLine2.setEndY(setIntersection.get(compteurIntersection).getY() * zoom + 10);
+        Main.getPane().getChildren().add(sweepLine2);
     }
 
-    public static void LowerAndUpperSweepLine (Line sweepLine, ArrayList<Point> setLowerAndUpperPoints, int compteurLowerUpper) {
+    /**
+     * @param sweepLine1 Line.
+     * @param sweepLine2 Line.
+     * @param setLowerAndUpperPoints ArrayList de Point.
+     * @param compteurLowerUpper int.
+     * Affiche sur notre fenetre un point Lower ou Upper ainsi que la sweep line.
+     */
+    public static void LowerAndUpperSweepLine (Line sweepLine1, Line sweepLine2, ArrayList<Point> setLowerAndUpperPoints, int compteurLowerUpper) {
         // On remet la sweepLine au bon endroit.
-        sweepLine.setStartX(setLowerAndUpperPoints.get(compteurLowerUpper).getX() * zoom - 200);
-        sweepLine.setEndX(setLowerAndUpperPoints.get(compteurLowerUpper).getX() * zoom + 200);
-        sweepLine.setStartY(setLowerAndUpperPoints.get(compteurLowerUpper).getY() * zoom);
-        sweepLine.setEndY(setLowerAndUpperPoints.get(compteurLowerUpper).getY() * zoom);
-        Main.getPane().getChildren().add(sweepLine);
+        sweepLine1.setStartX(setLowerAndUpperPoints.get(compteurLowerUpper).getX() * zoom - 200);
+        sweepLine1.setEndX(setLowerAndUpperPoints.get(compteurLowerUpper).getX() * zoom + 200);
+        sweepLine1.setStartY(setLowerAndUpperPoints.get(compteurLowerUpper).getY() * zoom);
+        sweepLine1.setEndY(setLowerAndUpperPoints.get(compteurLowerUpper).getY() * zoom);
+        Main.getPane().getChildren().add(sweepLine1);
+
+        sweepLine2.setStartX(setLowerAndUpperPoints.get(compteurLowerUpper).getX() * zoom);
+        sweepLine2.setEndX(setLowerAndUpperPoints.get(compteurLowerUpper).getX() * zoom);
+        sweepLine2.setStartY(setLowerAndUpperPoints.get(compteurLowerUpper).getY() * zoom - 10);
+        sweepLine2.setEndY(setLowerAndUpperPoints.get(compteurLowerUpper).getY() * zoom + 10);
+        Main.getPane().getChildren().add(sweepLine2);
     }
 }

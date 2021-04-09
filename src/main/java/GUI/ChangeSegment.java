@@ -135,6 +135,7 @@ public class ChangeSegment {
         Button button = new Button("Change");
         button.setOnAction(e -> {
             stage.close();
+            isDoubleTextField(line, textField_x1, textField_y1, textField_x2, textField_y2);
         });
         
         // Notre Pane pour stocker notre bouton et le centrer.
@@ -149,13 +150,18 @@ public class ChangeSegment {
         // Le contenu de la fenetre
         Scene scene = new Scene(layout, 400, 300);
 
+        stage.setOnCloseRequest(event -> {
+            stage.close();
+        });
         // Setup de la fenetre.
         stage.setScene(scene);
         stage.setTitle("Change Segment");
         stage.setResizable(false);
         stage.getIcons().add(new Image("settings.jpg"));
         stage.showAndWait();
+    }
 
+    public static void isDoubleTextField(Line line, TextField textField_x1, TextField textField_y1, TextField textField_x2, TextField textField_y2) {
         try {
             // Nos coordonnees.
             Double point1X = Double.parseDouble(textField_x1.getText());

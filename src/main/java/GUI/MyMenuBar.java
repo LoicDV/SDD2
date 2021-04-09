@@ -58,14 +58,19 @@ public class MyMenuBar extends MenuBar{
         menu3Item1.setOnAction(event -> {
             new AddSegment();
         });
-        MenuItem menu3Item2 = new MenuItem("Clear");
+        MenuItem menu3Item2 = new MenuItem("Clear Window");
         menu3Item2.setOnAction(event -> {
             new ClearPane();
+        });
+        MenuItem menu3Item3 = new MenuItem("Clear Intersection");
+        menu3Item2.setOnAction(event -> {
+            Compilation.noCircle();
         });
 
         // Ajout du sous-menu 3 au menu 3.
         menu3.getItems().add(menu3Item1);
         menu3.getItems().add(menu3Item2);
+        menu3.getItems().add(menu3Item3);
 
         // Onglet 4.
         Menu menu4 = new Menu("Help");

@@ -128,7 +128,7 @@ public class DrawSegment extends ScrollPane{
      * Dessine des cercles de couleurs pour les intersections et les stocke dans une ArrayList.
      */
     public static void drawCircle(double posX, double posY, Color red) {
-        Circle circle = new Circle(posX * zoom, posY * zoom, 5);
+        Circle circle = new Circle(posX * zoom, posY * zoom, 3);
         // Remplis les cercles.
         circle.setFill(red);
         // Ajout du cercle.

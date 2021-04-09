@@ -35,9 +35,9 @@ public class Helper {
             // Sauvegarder un fichier.
             case 2:
                 Text case2text1 = new Text("1. Reach the menu titled 'File'.");
-                Text case2text2 = new Text("2. If you haven't opened file before, select 'Save as...'.");
-                Text case2text3 = new Text("If you already have opened a file and you want to save on this file, select 'Save'.");
-                Text case2text4 = new Text("If you already have opened a file and you don't want to save on this file, select 'Save as...'");
+                Text case2text2 = new Text("2. - If you haven't opened file before, select 'Save as...'.");
+                Text case2text3 = new Text("    - If you already have opened a file and you want to save on this file, select 'Save'.");
+                Text case2text4 = new Text("    - If you already have opened a file and you don't want to save on this file, select 'Save as...'");
                 Text case2text5 = new Text("3. ONLY IF YOU PICKED 'Save as...'");
                 Text case2text6 = new Text("Find a file with .txt extension you want to save.");
                 vBox.getChildren().addAll(case2text1, case2text2, case2text3, case2text4, case2text5, case2text6);
@@ -52,7 +52,7 @@ public class Helper {
                 break;
             // Enlever un segment.
             case 4:
-                Text case4text1 = new Text("1. Look on the list of segements on your right and click on the segment you want to remove.");
+                Text case4text1 = new Text("1. Look on the list of segments on your right and click on the segment you want to remove.");
                 Text case4text2 = new Text("2. A pop-up will appear and you have to click on the button 'Change'.");
                 Text case4text3 = new Text("3. Write numbers in the 4 text fields and click on 'Change'.");
                 Text case4text4 = new Text("A check will be done on background to see if you overlap another segment already in the Pane.");
@@ -60,7 +60,7 @@ public class Helper {
                 break;
             // Ajuster un segment.
             case 5:
-                Text case5text1 = new Text("1. Look on the list of segements on your right and click on the segment you want to change.");
+                Text case5text1 = new Text("1. Look on the list of segments on your right and click on the segment you want to change.");
                 Text case5text2 = new Text("2. A pop-up will appear and you have to click on the button 'Change'.");
                 Text case5text3 = new Text("3. Write numbers in the 4 text fields and click on 'Change'.");
                 Text case5text4 = new Text("A check will be done on background to see if you overlap another segment already in the Pane.");
@@ -85,14 +85,14 @@ public class Helper {
                 Text case8text1 = new Text("1. Reach the menu titled 'Run'.");
                 Text case8text2 = new Text("2. Select Sweep Line.");
                 Text case8text3 = new Text("Will find all intersection points and display them in a pop-up.");
-                Text case8text4 = new Text("4. A pop-up will appear with 2 buttons.");
-                Text case8text5 = new Text(" '>' for one step // '>>' to finish the compile and get all intersections.");
+                Text case8text4 = new Text("3. With the pop-up, 2 buttons will appear inside.");
+                Text case8text5 = new Text(" '>' for one step // '>>>' to finish the compile and get all intersections.");
                 vBox.getChildren().addAll(case8text1, case8text2, case8text3, case8text4, case8text5);
                 break;
         }
  
         // Contenu de la fenetre
-        Scene scene = new Scene(vBox, 500, 100);
+        Scene scene = new Scene(vBox, 600, 100);
          
         // Settings de la fenetre.
         stage.setTitle("Helper");

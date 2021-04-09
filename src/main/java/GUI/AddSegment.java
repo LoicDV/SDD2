@@ -62,6 +62,7 @@ public class AddSegment extends Stage {
         // Notre bouton add.
         Button button = new Button("Add");
         button.setOnAction(e -> {
+            addSegment(textField_x1, textField_y1, textField_x2, textField_y2);
             stage.close();
         });
         
@@ -85,7 +86,9 @@ public class AddSegment extends Stage {
         // Empeche l'utilisateur d'utiliser la fenetre principale lorsque celle-ci est a l'ecran.
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.showAndWait();
+    }
 
+    public static void addSegment(TextField textField_x1, TextField textField_y1, TextField textField_x2, TextField textField_y2) {
         try {
             // Nos coordonnees.
             Double point1X = Double.parseDouble(textField_x1.getText());

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class Intersections {
 
     private ArrayList<Segment> intersections;
-    public double compteur = 1;
 
     public Intersections(){
         this.intersections = new ArrayList<Segment>();
@@ -27,7 +26,7 @@ public class Intersections {
         Q treeQ = new Q();
         for (int i = 0; i < this.getIntersections().size(); i++){
             Segment new_segment = this.getIntersections().get(i);
-            treeQ.insertQ(new_segment.getUpper(), true, new_segment); // on devrait aussi savoir que new_segment contient son upper
+            treeQ.insertQ(new_segment.getUpper(), true, new_segment); 
             treeQ.insertQ(new_segment.getLower(), false, new_segment);
         }
         return treeQ;
@@ -40,7 +39,6 @@ public class Intersections {
         while (!treeQ.isEmpty()){
             Point nextEvent = treeQ.suppressQMin();
             HandleEventPoint(nextEvent, treeQ, treeT, solutions);
-            compteur++;
         }
         return solutions;
     }
@@ -54,13 +52,14 @@ public class Intersections {
             if (new_event.getX() - Math.floor(new_event.getX()) <= 0.00000001){
                 new_event.setX(Math.floor(new_event.getX()));
             }
-            if ((new_event.getY() < h) || (new_event.getY() == h && new_event.getX() > p.getX())) { //mettre isUpper
+            if ((new_event.getY() < h) || (new_event.getY() == h && new_event.getX() > p.getX())) { 
                 treeQ.insertQ(new_event, false, null);
             }
         }
     }
 
     public void HandleEventPoint(Point p, Q treeQ, T treeT, ArrayList<Point> solutions){
+        ArrayList<Segment> justPoint = new ArrayList<Segment>();
         ArrayList<Segment> uP = p.getIsUpperOf();
         ArrayList<Segment> lP = new ArrayList<Segment>();
         ArrayList<Segment> cP = new ArrayList<Segment>();
@@ -86,6 +85,9 @@ public class Intersections {
         double h = p.getY() - 0.000001;
         for (int i = 0; i< uP.size(); i++) { // on insère à hauteur h pour bien avoir l'ordre en dessous de l'intersection
             treeT.insertT(uP.get(i), h, p.getY(), p.getX());
+            if (uP.get(i).getUpper().equalPoint(uP.get(i).getLower())){
+                justPoint.add(uP.get(i));
+            }
         }
         for (int i = 0; i< cP.size(); i++) {
             treeT.insertT(cP.get(i), h, p.getY(), p.getX());
@@ -100,31 +102,34 @@ public class Intersections {
         else{
             if (uP.size() > 0){
                 Segment s_lm = getLeftMost(treeT, p, uP.get(0));
-                Segment s_l = getLeftNeighborSegment(treeT, s_lm, null, p.getY() - 0.000001, p.getY(), p.getX(), treeT.findMin().equalSegment(s_lm), true);
+                Segment s_l = getLeftNeighborSegment(treeT, s_lm, null, p.getY() - 0.000001, p.getY(), p.getX(), true);
                 if (s_lm != null && s_l != null){
                     FindNewEvent(s_lm, s_l, p, p.getY(), treeQ);
                 }
                 Segment s_rm = getRightMost(treeT, p, uP.get(0), null);
-                Segment s_r = getRightNeighborSegment(treeT, s_rm, null, p.getY() - 0.000001, p.getY(), p.getX(), treeT.findMax().equalSegment(s_rm), true);
+                Segment s_r = getRightNeighborSegment(treeT, s_rm, null, p.getY() - 0.000001, p.getY(), p.getX(), true);
                 if (s_rm != null && s_r != null){
                     FindNewEvent(s_rm, s_r, p, p.getY(), treeQ);
                 }
             }
             else {
                 Segment s_lm = getLeftMost(treeT, p, cP.get(0));
-                Segment s_l = getLeftNeighborSegment(treeT, s_lm, null, p.getY() - 0.000001, p.getY(), p.getX(), treeT.findMin().equalSegment(s_lm), true);
+                Segment s_l = getLeftNeighborSegment(treeT, s_lm, null, p.getY() - 0.000001, p.getY(), p.getX(), true);
                 if (s_lm != null && s_l != null){
                     FindNewEvent(s_lm, s_l, p, p.getY(), treeQ);
                 }
                 Segment s_rm = getRightMost(treeT, p, cP.get(0), null);
-                Segment s_r = getRightNeighborSegment(treeT, s_rm, null, p.getY() - 0.000001, p.getY(), p.getX(), treeT.findMax().equalSegment(s_rm),true);
+                Segment s_r = getRightNeighborSegment(treeT, s_rm, null, p.getY() - 0.000001, p.getY(), p.getX(),true);
                 if (s_rm != null && s_r != null){
                     FindNewEvent(s_rm, s_r, p, p.getY(), treeQ);
                 }
             }
         }
+        for (int i = 0; i < justPoint.size(); i++) {
+            treeT.suppressT(justPoint.get(i), p.getY() + 0.000001, p.getY(), p.getX() - 0.000001);
+        }
     }
-
+    /*
     public void addLowerAndInside(ArrayList<Segment> lP,ArrayList<Segment> cP, Point p, T treeT){
         Point p1 = new Point(p.getX(), p.getY());
         Point p2 = new Point(p.getX(), p.getY() - 1);
@@ -135,7 +140,7 @@ public class Intersections {
         boolean oneTimeHorizontal = false;
         boolean stop = false;
         while(!stop){
-            Segment segmentLeft = getLeftNeighborSegment(treeT, segmentIterable, null, p.getY(), p.getY(), p.getX() - 0.000001, treeT.isEmpty() || treeT.findMin().equalSegment(segmentIterable), false);
+            Segment segmentLeft = getLeftNeighborSegment(treeT, segmentIterable, null, p.getY(), p.getY(), p.getX() - 0.000001, false);
             if (segmentLeft == null 
             || (!segmentLeft.isVertical() && !segmentLeft.isHorizontal() && !segmentLeft.isIn(p)) 
             || (segmentLeft.isVertical() && !segmentLeft.isInVertical(p)) 
@@ -145,7 +150,7 @@ public class Intersections {
             else {
                 if (segmentLeft.getLower().getX() == p.getX() && segmentLeft.getLower().getY() == p.getY()){
                     lP.add(segmentLeft);
-                    if(segmentLeft.isVertical() /*&& segmentLeft.doesOverlap(segmentMemoire)*/){
+                    if(segmentLeft.isVertical()){
                         oneTimeVertical = true;
                     }
                     else if (segmentLeft.isHorizontal()){
@@ -154,7 +159,7 @@ public class Intersections {
                 }
                 else if (!(segmentLeft.getUpper().getX() == p.getX() && segmentLeft.getUpper().getY() == p.getY())){
                     cP.add(segmentLeft);
-                    if(segmentLeft.isVertical() /*&& segmentLeft.doesOverlap(segmentMemoire)*/){
+                    if(segmentLeft.isVertical()){
                         oneTimeVertical = true;
                     }
                     else if (segmentLeft.isHorizontal()){
@@ -166,9 +171,8 @@ public class Intersections {
         }
         stop = false;
         segmentIterable = segmentMemoire;
-        //boolean oneTime = false;
         while(!stop){
-            Segment segmentRight = getRightNeighborSegment(treeT, segmentIterable, null, p.getY(), p.getY(), p.getX() - 0.000001, treeT.isEmpty() || treeT.findMax().equalSegment(segmentIterable), false);
+            Segment segmentRight = getRightNeighborSegment(treeT, segmentIterable, null, p.getY(), p.getY(), p.getX() - 0.000001, false);
             if (segmentRight == null 
             || (!segmentRight.isVertical() && !segmentRight.isHorizontal() && !segmentRight.isIn(p)) 
             || (segmentRight.isVertical() && !segmentRight.isInVertical(p)) 
@@ -176,7 +180,7 @@ public class Intersections {
                 stop = true;
             }
             else{
-                if ((!oneTimeVertical || !segmentRight.isVertical()) /*&& segmentMemoire.doesOverlap(segmentRight)*/
+                if ((!oneTimeVertical || !segmentRight.isVertical()) 
                 && (!oneTimeHorizontal || !segmentRight.isHorizontal())){ //on veut empêcher de mettre la racine 2 fois (si elle respecte les conditions de la négation)
                     if (segmentRight.getLower().getX() == p.getX() && segmentRight.getLower().getY() == p.getY()){ //mais on doit pas empêcher le add de se faire les itérations suivantes
                         lP.add(segmentRight);
@@ -185,7 +189,56 @@ public class Intersections {
                         cP.add(segmentRight);
                     }
                 }
-                //oneTime = true;
+                segmentIterable = segmentRight;
+            }
+        }
+    }
+    */
+
+    public void addLowerAndInside(ArrayList<Segment> lP,ArrayList<Segment> cP, Point p, T treeT){
+        Point p1 = new Point(p.getX(), p.getY());
+        Point p2 = new Point(p.getX(), p.getY() - 1);
+        Segment segmentIterable = new Segment(p1, p2);// on utilise p1 car sinon on rajouterait segment iterable aux upper de p
+        //notons que le segment suivant si il est dans treeT appartient à U(p) et L(p) mais comme il est déjà dans U(p) pas besoin de le rajouter dans L(p)
+        Segment segmentMemoire = new Segment(p1, p2); 
+        boolean stop = false;
+        while(!stop){
+            Segment segmentLeft = getLeftNeighborSegment(treeT, segmentIterable, null, p.getY(), p.getY(), p.getX() - 0.000001, false);
+            if (segmentLeft == null 
+            || (!segmentLeft.isVertical() && !segmentLeft.isHorizontal() && !segmentLeft.isIn(p)) 
+            || (segmentLeft.isVertical() && !segmentLeft.isInVertical(p)) 
+            || (segmentLeft.isHorizontal() && !segmentLeft.isInHorizontale(p))){
+                stop = true;
+            }
+            else {
+                if (segmentLeft.getLower().getX() == p.getX() && segmentLeft.getLower().getY() == p.getY()){
+                    lP.add(segmentLeft);
+                }
+                else if (!(segmentLeft.getUpper().getX() == p.getX() && segmentLeft.getUpper().getY() == p.getY())){
+                    cP.add(segmentLeft);
+                }
+                segmentIterable = segmentLeft;
+            }
+        }
+        stop = false;
+        segmentIterable = segmentMemoire;
+        while(!stop){
+            Segment segmentRight = getRightNeighborSegment(treeT, segmentIterable, null, p.getY(), p.getY(), p.getX() - 0.000001, false);
+            if (segmentRight == null 
+            || (!segmentRight.isVertical() && !segmentRight.isHorizontal() && !segmentRight.isIn(p)) 
+            || (segmentRight.isVertical() && !segmentRight.isInVertical(p)) 
+            || (segmentRight.isHorizontal() && !segmentRight.isInHorizontale(p))){
+                stop = true;
+            }
+            else{
+                if (!((lP.size() > 0 && segmentRight.equalSegment(lP.get(0))) || (cP.size() > 0 && segmentRight.equalSegment(cP.get(0))))){ //on veut empêcher de mettre la racine 2 fois (si elle respecte les conditions de la négation)
+                    if (segmentRight.getLower().getX() == p.getX() && segmentRight.getLower().getY() == p.getY()){ //mais on doit pas empêcher le add de se faire les itérations suivantes
+                        lP.add(segmentRight);
+                    }
+                    else if (!(segmentRight.getUpper().getX() == p.getX() && segmentRight.getUpper().getY() == p.getY())){
+                        cP.add(segmentRight);
+                    }
+                }
                 segmentIterable = segmentRight;
             }
         }
@@ -194,17 +247,17 @@ public class Intersections {
     public Segment getLeftNeighborPoint(T treeT, Point p){
         Point p1 = new Point(p.getX(), p.getY());
         Segment leftNeighbor = new Segment(p1, p1);
-        return getLeftNeighborSegment(treeT, leftNeighbor, null, p.getY(), p.getY(), p.getX(), false, false);
+        return getLeftNeighborSegment(treeT, leftNeighbor, null, p.getY(), p.getY(), p.getX(), false);
     }
 
     public Segment getRightNeighborPoint(T treeT, Point p){
         Point p1 = new Point(p.getX(), p.getY());
         Segment rightNeighbor = new Segment(p1, p1);
-        return getRightNeighborSegment(treeT, rightNeighbor, null, p.getY(), p.getY(), p.getX(), false, false);
+        return getRightNeighborSegment(treeT, rightNeighbor, null, p.getY(), p.getY(), p.getX(), false);
     }
     
-    public Segment getLeftNeighborSegment(T treeT, Segment s, Segment saved, double h, double h2, double now_x, boolean sIsMin, boolean justInsert){
-        if (treeT.isEmpty() || sIsMin || (treeT.isLeaf() && treeT.getData().equalSegment(s))){
+    public Segment getLeftNeighborSegment(T treeT, Segment s, Segment saved, double h, double h2, double now_x, boolean justInsert){
+        if (treeT.isEmpty() || (treeT.isLeaf() && treeT.getData().equalSegment(s))){
             return saved;
         }
         else if (treeT.getData().equalSegment(s) && !treeT.leftIsEmpty()){
@@ -231,11 +284,11 @@ public class Intersections {
                         return saved;
                     }
                     else{
-                        return getLeftNeighborSegment((T) treeT.getLeftAVL().getRightAVL(), s, saved, h, h2, now_x, sIsMin, justInsert);
+                        return getLeftNeighborSegment((T) treeT.getLeftAVL().getRightAVL(), s, saved, h, h2, now_x, justInsert);
                     }
                 }
                 else {
-                    return getLeftNeighborSegment((T) treeT.getLeftAVL(), s, saved, h, h2, now_x, sIsMin, justInsert);
+                    return getLeftNeighborSegment((T) treeT.getLeftAVL(), s, saved, h, h2, now_x, justInsert);
                 }
             }
             else{
@@ -244,14 +297,14 @@ public class Intersections {
                     return saved;
                 }
                 else {
-                    return getLeftNeighborSegment((T)treeT.getRightAVL(), s, saved, h, h2, now_x, sIsMin, justInsert);
+                    return getLeftNeighborSegment((T)treeT.getRightAVL(), s, saved, h, h2, now_x, justInsert);
                 }
             }
         }
     }
     
-    public Segment getRightNeighborSegment(T treeT, Segment s, Segment saved, double h, double h2, double now_x, boolean sIsMax, boolean justInsert){
-        if (treeT.isEmpty() || sIsMax || (treeT.isLeaf() && treeT.getData().equalSegment(s))){
+    public Segment getRightNeighborSegment(T treeT, Segment s, Segment saved, double h, double h2, double now_x, boolean justInsert){
+        if (treeT.isEmpty() || (treeT.isLeaf() && treeT.getData().equalSegment(s))){
             return saved;
         }
         else if (treeT.getData().equalSegment(s) && !treeT.rightIsEmpty()){
@@ -269,11 +322,11 @@ public class Intersections {
                         return saved;
                     }
                     else{
-                        return getRightNeighborSegment((T) treeT.getRightAVL().getLeftAVL(), s, saved, h, h2, now_x, sIsMax, justInsert);
+                        return getRightNeighborSegment((T) treeT.getRightAVL().getLeftAVL(), s, saved, h, h2, now_x, justInsert);
                     }
                 }
                 else {
-                    return getRightNeighborSegment((T) treeT.getRightAVL(), s, saved, h, h2, now_x, sIsMax, justInsert);
+                    return getRightNeighborSegment((T) treeT.getRightAVL(), s, saved, h, h2, now_x, justInsert);
                 }
             }
             else{
@@ -282,7 +335,7 @@ public class Intersections {
                     return saved;
                 }
                 else {
-                    return getRightNeighborSegment((T)treeT.getLeftAVL(), s, saved, h, h2, now_x, sIsMax, justInsert);
+                    return getRightNeighborSegment((T)treeT.getLeftAVL(), s, saved, h, h2, now_x, justInsert);
                 }
             }
         }
@@ -307,12 +360,12 @@ public class Intersections {
             return getLeftMost((T) treeT.getRightAVL(), p, s);
         }
     }
-
+    
     public Segment getRightMost(T treeT, Point p, Segment s, Segment saved){
         if (treeT.getData().isHorizontal() && treeT.getData().isInHorizontale(p)){
             return treeT.getData();
         }
-        else if (treeT.getData().equalSegment(s) || treeT.isLeftOrRight(s, p.getY(), p.getY(), p.getX(), true)){ //|| (treeT.getData().isHorizontal() && treeT.getData().isIntersection(s) && treeT.getData().getIntersectionPoint(s).equalPoint(p))
+        else if (treeT.getData().equalSegment(s) || treeT.isLeftOrRight(s, p.getY(), p.getY(), p.getX(), true)){ 
             if (treeT.getData().equalSegment(s) || treeT.isLeftOrRight(s, p.getY(), p.getY(), p.getX(), false)){
                 if (treeT.rightIsEmpty()){
                     return treeT.getData();
@@ -335,5 +388,4 @@ public class Intersections {
             }
         }
     }
-    
 }
