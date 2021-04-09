@@ -15,8 +15,8 @@ public class ReadFile {
     
     /**
      * @param file File.
-     * @return ArrayList<Point[]>.
-     * Lis le fichier en parametre pour obtenir les segments et les retourne en ArrayList<Point[]>.
+     * @return ArrayList de Point[].
+     * Lis le fichier en parametre pour obtenir les segments et les retourne en ArrayList de tableau de 2 Points.
      */
     public static ArrayList<Point[]> read(File file) {
 

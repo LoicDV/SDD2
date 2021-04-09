@@ -101,7 +101,6 @@ public class Q extends AVL<Point> {
                     this.setHeight(new_Q.getHeight());
                 }
                 else {
-                    //this.setData(suppressQMin());
                     this.setData(((Q) this.getLeftAVL()).suppressQMin());
                     this.equilibrate();
                 }
@@ -113,20 +112,6 @@ public class Q extends AVL<Point> {
     public Point suppressQMin() {
         if (this.leftIsEmpty()) {
             Point min = this.getData();
-            /*
-            if (!this.rightIsEmpty()){
-                AVL<Point> new_Q = this.getRightAVL();
-                Point head_new_Q = new_Q.getData();
-                this.setData(head_new_Q);
-                this.setLeftAVL(new_Q.getLeftAVL());
-                this.setRightAVL(new_Q.getRightAVL()); 
-            }
-            else {
-                this.setData(null);
-                this.setLeftAVL(null);
-                this.setRightAVL(null);
-            }
-            */
             this.suppressQRoot();
             return min;
         }

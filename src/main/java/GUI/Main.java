@@ -34,7 +34,7 @@ public class Main extends Application {
 
     
     /** 
-     * @param primaryStage
+     * @param primaryStage Stage.
      * Cree et ouvre notre fenetre principale de notre map overlay.
      */
     @Override
@@ -130,24 +130,24 @@ public class Main extends Application {
     }
 
     /** 
-     * @return ArrayList<Point[]>.
-     * Retourne le ArrayList<Point[]> de la fenetre.
+     * @return ArrayList de Point[].
+     * Retourne le ArrayList de tableau de 2 Points de la fenetre.
      */
     public static ArrayList<Point[]> getContainers() {
         return containers;
     }
     
     /** 
-     * @return ArrayList<Line>.
-     * Retourne le ArrayList<Line> de la fenetre.
+     * @return ArrayList de Line.
+     * Retourne le ArrayList de Line de la fenetre.
      */
     public static ArrayList<Line> getSet() {
         return set;
     }
 
     /** 
-     * @return ArrayList<Circle>.
-     * Retourne le ArrayList<Circle> de la fenetre.
+     * @return ArrayList de Circle.
+     * Retourne le ArrayList de Circle de la fenetre.
      */
     public static ArrayList<Circle> getSetCircle() {
         return setCircle;
@@ -169,7 +169,7 @@ public class Main extends Application {
     }
 
     /** 
-     * @param args
+     * @param args String[].
      * Lance notre fenetre.
      */
     public static void runApp(String[] args) {

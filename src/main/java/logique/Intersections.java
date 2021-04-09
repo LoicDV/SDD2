@@ -15,34 +15,27 @@ public class Intersections {
         this.intersections = intersection;
     }
 
-    
-    /** 
-     * @return ArrayList<Segment>
-     */
     public ArrayList<Segment> getIntersections(){
         return this.intersections;
     }
 
-    
-    /** 
-     * @param new_list
-     */
     public void setIntersections(ArrayList<Segment> new_list){
         this.intersections = new_list;
     }
 
-    
-    /** 
-     * @return ArrayList<Point>
-     */
-    public ArrayList<Point> FindIntersections(){
-        ArrayList<Point> solutions = new ArrayList<Point>();
+    public Q constructQ(){
         Q treeQ = new Q();
         for (int i = 0; i < this.getIntersections().size(); i++){
             Segment new_segment = this.getIntersections().get(i);
             treeQ.insertQ(new_segment.getUpper(), true, new_segment); // on devrait aussi savoir que new_segment contient son upper
             treeQ.insertQ(new_segment.getLower(), false, new_segment);
         }
+        return treeQ;
+    }
+
+    public ArrayList<Point> FindIntersections(){
+        ArrayList<Point> solutions = new ArrayList<Point>();
+        Q treeQ = constructQ();
         T treeT = new T();
         while (!treeQ.isEmpty()){
             Point nextEvent = treeQ.suppressQMin();
@@ -52,13 +45,6 @@ public class Intersections {
         return solutions;
     }
 
-    /**
-     * @param s1 Segment.
-     * @param s2 Segment.
-     * @param p Point.
-     * @param h double.
-     * @param treeQ Q.
-     */
     public void FindNewEvent(Segment s1, Segment s2, Point p, double h, Q treeQ){
         if (s1.isIntersection(s2)){
             Point new_event = s1.getIntersectionPoint(s2);
@@ -74,13 +60,6 @@ public class Intersections {
         }
     }
 
-    
-    /** 
-     * @param p
-     * @param treeQ
-     * @param treeT
-     * @param solutions
-     */
     public void HandleEventPoint(Point p, Q treeQ, T treeT, ArrayList<Point> solutions){
         ArrayList<Segment> uP = p.getIsUpperOf();
         ArrayList<Segment> lP = new ArrayList<Segment>();
@@ -99,12 +78,12 @@ public class Intersections {
             solutions.add(p);
         }
         for (int i = 0; i< lP.size(); i++) {
-            treeT.suppressT(lP.get(i), p.getY(), p.getY(), p.getX() - 0.001);
+            treeT.suppressT(lP.get(i), p.getY() + 0.000001, p.getY(), p.getX() - 0.000001);
         }
         for (int i = 0; i< cP.size(); i++) {
-            treeT.suppressT(cP.get(i), p.getY(), p.getY(), p.getX() - 0.001);
+            treeT.suppressT(cP.get(i), p.getY() + 0.000001, p.getY(), p.getX() - 0.000001);
         }
-        double h = p.getY() - 0.001;
+        double h = p.getY() - 0.000001;
         for (int i = 0; i< uP.size(); i++) { // on insère à hauteur h pour bien avoir l'ordre en dessous de l'intersection
             treeT.insertT(uP.get(i), h, p.getY(), p.getX());
         }
@@ -121,24 +100,24 @@ public class Intersections {
         else{
             if (uP.size() > 0){
                 Segment s_lm = getLeftMost(treeT, p, uP.get(0));
-                Segment s_l = getLeftNeighborSegment(treeT, s_lm, null, p.getY(), p.getY(), p.getX(), treeT.findMin().equalSegment(s_lm), true);
+                Segment s_l = getLeftNeighborSegment(treeT, s_lm, null, p.getY() - 0.000001, p.getY(), p.getX(), treeT.findMin().equalSegment(s_lm), true);
                 if (s_lm != null && s_l != null){
                     FindNewEvent(s_lm, s_l, p, p.getY(), treeQ);
                 }
-                Segment s_rm = getRightMost(treeT, p, uP.get(0));
-                Segment s_r = getRightNeighborSegment(treeT, s_rm, null, p.getY(), p.getY(), p.getX(), treeT.findMax().equalSegment(s_rm), true);
+                Segment s_rm = getRightMost(treeT, p, uP.get(0), null);
+                Segment s_r = getRightNeighborSegment(treeT, s_rm, null, p.getY() - 0.000001, p.getY(), p.getX(), treeT.findMax().equalSegment(s_rm), true);
                 if (s_rm != null && s_r != null){
                     FindNewEvent(s_rm, s_r, p, p.getY(), treeQ);
                 }
             }
             else {
                 Segment s_lm = getLeftMost(treeT, p, cP.get(0));
-                Segment s_l = getLeftNeighborSegment(treeT, s_lm, null, p.getY(), p.getY(), p.getX(), treeT.findMin().equalSegment(s_lm), true);
+                Segment s_l = getLeftNeighborSegment(treeT, s_lm, null, p.getY() - 0.000001, p.getY(), p.getX(), treeT.findMin().equalSegment(s_lm), true);
                 if (s_lm != null && s_l != null){
                     FindNewEvent(s_lm, s_l, p, p.getY(), treeQ);
                 }
-                Segment s_rm = getRightMost(treeT, p, cP.get(0));
-                Segment s_r = getRightNeighborSegment(treeT, s_rm, null, p.getY(), p.getY(), p.getX(), treeT.findMax().equalSegment(s_rm),true);
+                Segment s_rm = getRightMost(treeT, p, cP.get(0), null);
+                Segment s_r = getRightNeighborSegment(treeT, s_rm, null, p.getY() - 0.000001, p.getY(), p.getX(), treeT.findMax().equalSegment(s_rm),true);
                 if (s_rm != null && s_r != null){
                     FindNewEvent(s_rm, s_r, p, p.getY(), treeQ);
                 }
@@ -146,13 +125,6 @@ public class Intersections {
         }
     }
 
-    
-    /** 
-     * @param lP
-     * @param cP
-     * @param p
-     * @param treeT
-     */
     public void addLowerAndInside(ArrayList<Segment> lP,ArrayList<Segment> cP, Point p, T treeT){
         Point p1 = new Point(p.getX(), p.getY());
         Point p2 = new Point(p.getX(), p.getY() - 1);
@@ -163,7 +135,7 @@ public class Intersections {
         boolean oneTimeHorizontal = false;
         boolean stop = false;
         while(!stop){
-            Segment segmentLeft = getLeftNeighborSegment(treeT, segmentIterable, null, p.getY(), p.getY(), p.getX() - 0.001, treeT.isEmpty() || treeT.findMin().equalSegment(segmentIterable), false);
+            Segment segmentLeft = getLeftNeighborSegment(treeT, segmentIterable, null, p.getY(), p.getY(), p.getX() - 0.000001, treeT.isEmpty() || treeT.findMin().equalSegment(segmentIterable), false);
             if (segmentLeft == null 
             || (!segmentLeft.isVertical() && !segmentLeft.isHorizontal() && !segmentLeft.isIn(p)) 
             || (segmentLeft.isVertical() && !segmentLeft.isInVertical(p)) 
@@ -196,8 +168,7 @@ public class Intersections {
         segmentIterable = segmentMemoire;
         //boolean oneTime = false;
         while(!stop){
-            Segment segmentRight = getRightNeighborSegment(treeT, segmentIterable, null, p.getY(), p.getY(), p.getX() - 0.001, treeT.isEmpty() || treeT.findMax().equalSegment(segmentIterable), false);
-            //if (segmentRight == null || !(segmentRight.isIn(p))){
+            Segment segmentRight = getRightNeighborSegment(treeT, segmentIterable, null, p.getY(), p.getY(), p.getX() - 0.000001, treeT.isEmpty() || treeT.findMax().equalSegment(segmentIterable), false);
             if (segmentRight == null 
             || (!segmentRight.isVertical() && !segmentRight.isHorizontal() && !segmentRight.isIn(p)) 
             || (segmentRight.isVertical() && !segmentRight.isInVertical(p)) 
@@ -220,42 +191,18 @@ public class Intersections {
         }
     }
 
-    
-    /** 
-     * @param treeT
-     * @param p
-     * @return Segment
-     */
     public Segment getLeftNeighborPoint(T treeT, Point p){
         Point p1 = new Point(p.getX(), p.getY());
         Segment leftNeighbor = new Segment(p1, p1);
         return getLeftNeighborSegment(treeT, leftNeighbor, null, p.getY(), p.getY(), p.getX(), false, false);
     }
 
-    
-    /** 
-     * @param treeT
-     * @param p
-     * @return Segment
-     */
     public Segment getRightNeighborPoint(T treeT, Point p){
         Point p1 = new Point(p.getX(), p.getY());
         Segment rightNeighbor = new Segment(p1, p1);
         return getRightNeighborSegment(treeT, rightNeighbor, null, p.getY(), p.getY(), p.getX(), false, false);
     }
-
     
-    /** 
-     * @param treeT
-     * @param s
-     * @param saved
-     * @param h
-     * @param h2
-     * @param now_x
-     * @param sIsMin
-     * @param justInsert
-     * @return Segment
-     */
     public Segment getLeftNeighborSegment(T treeT, Segment s, Segment saved, double h, double h2, double now_x, boolean sIsMin, boolean justInsert){
         if (treeT.isEmpty() || sIsMin || (treeT.isLeaf() && treeT.getData().equalSegment(s))){
             return saved;
@@ -273,12 +220,12 @@ public class Intersections {
             }
         }
         else {
-            if (treeT.isLeftOrRight(s, h, h2, now_x, false) && !(treeT.isLeftOrRight(s, h, h2, now_x, false) && treeT.isLeftOrRight(s, h, h2, now_x, true) && treeT.isLeftOrRight(s, h + 0.001, h2, now_x, !justInsert))){
+            if (treeT.isLeftOrRight(s, h, h2, now_x, false) && !(treeT.isLeftOrRight(s, h, h2, now_x, false) && treeT.isLeftOrRight(s, h, h2, now_x, true) && treeT.isLeftOrRight(s, h + 0.000001, h2, now_x, !justInsert))){
                 if ((treeT.isLeftOrRight(s, h, h2, now_x, true) && treeT.isLeaf()) || treeT.leftIsEmpty()){
                     return saved;
                 }
                 else if ((((T) treeT.getLeftAVL()).isLeftOrRight(s, h, h2, now_x, true) && !(((T) treeT.getLeftAVL()).isLeftOrRight(s, h, h2, now_x, false)) && !(treeT.getLeftAVL().getData().equalSegment(s)))
-                || (((T) treeT.getLeftAVL()).isLeftOrRight(s, h, h2, now_x, true) && ((T) treeT.getLeftAVL()).isLeftOrRight(s, h, h2, now_x, false) && !(treeT.getLeftAVL().getData().equalSegment(s)) && ((T) treeT.getLeftAVL()).isLeftOrRight(s, h + 0.001, h2, now_x, true))){
+                || (((T) treeT.getLeftAVL()).isLeftOrRight(s, h, h2, now_x, true) && ((T) treeT.getLeftAVL()).isLeftOrRight(s, h, h2, now_x, false) && !(treeT.getLeftAVL().getData().equalSegment(s)) && ((T) treeT.getLeftAVL()).isLeftOrRight(s, h + 0.000001, h2, now_x, true))){
                     saved = treeT.getLeftAVL().getData();
                     if (treeT.getLeftAVL().rightIsEmpty()){
                         return saved;
@@ -302,19 +249,7 @@ public class Intersections {
             }
         }
     }
-
     
-    /** 
-     * @param treeT
-     * @param s
-     * @param saved
-     * @param h
-     * @param h2
-     * @param now_x
-     * @param sIsMax
-     * @param justInsert
-     * @return Segment
-     */
     public Segment getRightNeighborSegment(T treeT, Segment s, Segment saved, double h, double h2, double now_x, boolean sIsMax, boolean justInsert){
         if (treeT.isEmpty() || sIsMax || (treeT.isLeaf() && treeT.getData().equalSegment(s))){
             return saved;
@@ -323,12 +258,12 @@ public class Intersections {
             return treeT.getRightAVL().findMin();
         }
         else {
-            if (treeT.isLeftOrRight(s, h, h2, now_x, true) && !(treeT.isLeftOrRight(s, h, h2, now_x, true) && treeT.isLeftOrRight(s, h, h2, now_x, false) && treeT.isLeftOrRight(s, h + 0.001, h2, now_x, justInsert))){
+            if (treeT.isLeftOrRight(s, h, h2, now_x, true) && !(treeT.isLeftOrRight(s, h, h2, now_x, true) && treeT.isLeftOrRight(s, h, h2, now_x, false) && treeT.isLeftOrRight(s, h + 0.000001, h2, now_x, justInsert))){
                 if ((treeT.isLeftOrRight(s, h, h2, now_x, false) && treeT.isLeaf()) || treeT.rightIsEmpty()){
                     return saved;
                 }
                 else if ((((T) treeT.getRightAVL()).isLeftOrRight(s, h, h2, now_x, false) && !(((T) treeT.getRightAVL()).isLeftOrRight(s, h, h2, now_x, true)) && !(treeT.getRightAVL().getData().equalSegment(s)))
-                || (((T) treeT.getRightAVL()).isLeftOrRight(s, h, h2, now_x, false) && ((T) treeT.getRightAVL()).isLeftOrRight(s, h, h2, now_x, true) && !(treeT.getRightAVL().getData().equalSegment(s)) && ((T) treeT.getRightAVL()).isLeftOrRight(s, h + 0.001, h2, now_x, false))){
+                || (((T) treeT.getRightAVL()).isLeftOrRight(s, h, h2, now_x, false) && ((T) treeT.getRightAVL()).isLeftOrRight(s, h, h2, now_x, true) && !(treeT.getRightAVL().getData().equalSegment(s)) && ((T) treeT.getRightAVL()).isLeftOrRight(s, h + 0.000001, h2, now_x, false))){
                     saved = treeT.getRightAVL().getData();
                     if (treeT.getRightAVL().leftIsEmpty()){
                         return saved;
@@ -354,14 +289,7 @@ public class Intersections {
     }
     
     
-    
-    /** 
-     * @param treeT
-     * @param p
-     * @param s
-     * @return Segment
-     */
-    public Segment getLeftMost(T treeT, Point p, Segment s) {        
+    public Segment getLeftMost(T treeT, Point p, Segment s){
         if (treeT.getData().equalSegment(s) ||treeT.isLeftOrRight(s, p.getY(), p.getY(), p.getX(), false)){
             if (treeT.getData().equalSegment(s) || treeT.isLeftOrRight(s, p.getY(), p.getY(), p.getX(), true) || (treeT.getData().isHorizontal() && treeT.getData().isInHorizontale(p))){
                 if (treeT.leftIsEmpty() || treeT.getLeftAVL().isLeaf()){
@@ -380,33 +308,31 @@ public class Intersections {
         }
     }
 
-    
-    /** 
-     * @param treeT
-     * @param p
-     * @param s
-     * @return Segment
-     */
-    public Segment getRightMost(T treeT, Point p, Segment s){
+    public Segment getRightMost(T treeT, Point p, Segment s, Segment saved){
         if (treeT.getData().isHorizontal() && treeT.getData().isInHorizontale(p)){
             return treeT.getData();
         }
         else if (treeT.getData().equalSegment(s) || treeT.isLeftOrRight(s, p.getY(), p.getY(), p.getX(), true)){ //|| (treeT.getData().isHorizontal() && treeT.getData().isIntersection(s) && treeT.getData().getIntersectionPoint(s).equalPoint(p))
             if (treeT.getData().equalSegment(s) || treeT.isLeftOrRight(s, p.getY(), p.getY(), p.getX(), false)){
-                if (treeT.rightIsEmpty() 
-                || (!((T) treeT.getRightAVL()).isLeftOrRight(s, p.getY(), p.getY(), p.getX(), true) && !treeT.getRightAVL().getData().equalSegment(s) && !(treeT.getRightAVL().getData().isHorizontal() && treeT.getRightAVL().getData().isInHorizontale(p)))){
+                if (treeT.rightIsEmpty()){
                     return treeT.getData();
                 }
                 else {
-                    return getRightMost((T) treeT.getRightAVL(), p, s);
+                    saved = treeT.getData();
+                    return getRightMost((T) treeT.getRightAVL(), p, s, saved);
                 }
             }
             else {
-                return getRightMost((T) treeT.getRightAVL(), p, s);
+                return getRightMost((T) treeT.getRightAVL(), p, s, saved);
             }
         }
         else {
-            return getRightMost((T) treeT.getLeftAVL(), p, s);
+            if(!treeT.leftIsEmpty()){
+                return getRightMost((T) treeT.getLeftAVL(), p, s, saved);
+            }
+            else{
+                return saved;
+            }
         }
     }
     

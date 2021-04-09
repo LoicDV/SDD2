@@ -99,7 +99,7 @@ public class Point {
 
     public boolean equalPoint(Point p){
         boolean verif = false;
-        if (this.getY() == p.getY() && this.getX() == p.getX()){
+        if (Math.abs(this.getY() - p.getY()) <= 0.00000001 && Math.abs(this.getX() - p.getX()) <= 0.00000001){
             verif = true;
         }
         return verif;

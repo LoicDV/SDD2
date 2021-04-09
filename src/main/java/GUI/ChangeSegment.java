@@ -94,7 +94,8 @@ public class ChangeSegment {
 
     
     /** 
-     * @param line
+     * @param line Line.
+     * Cree une fenetre pour ajuster un segment.
      */
     public static void changeSegment(Line line) {
 

@@ -2,14 +2,14 @@ logique/Segment.java
  src.main.java.logique.Segment
 logique/AVL.java
  src.main.java.logique.AVL
-GUI/DrawSegment.java
- src.main.java.GUI.DrawSegment
 logique/Point.java
  src.main.java.logique.Point
+Test.java
+ src.main.java.Test
 logique/Intersections.java
  src.main.java.logique.Intersections
-GUI/ClearPane.java
- src.main.java.GUI.ClearPane
+GUI/AddSegment.java
+ src.main.java.GUI.AddSegment
 GUI/Main.java
  src.main.java.GUI.Main
 GUI/ReadFile.java
@@ -20,23 +20,23 @@ logique/T.java
  src.main.java.logique.T
 GUI/Exception.java
  src.main.java.GUI.Exception
-GUI/Compilation.java
- src.main.java.GUI.Compilation
-logique/Q.java
- src.main.java.logique.Q
-GUI/DisplayIntersection.java
- src.main.java.GUI.DisplayIntersection
-Test.java
- src.main.java.Test
-GUI/OpenScript.java
- src.main.java.GUI.OpenScript
-GUI/Helper.java
- src.main.java.GUI.Helper
-GUI/MyMenuBar.java
- src.main.java.GUI.MyMenuBar
-GUI/AddSegment.java
- src.main.java.GUI.AddSegment
 GUI/ChangeSegment.java
  src.main.java.GUI.ChangeSegment
 GUI/DisplayContainers.java
  src.main.java.GUI.DisplayContainers
+logique/Q.java
+ src.main.java.logique.Q
+GUI/Helper.java
+ src.main.java.GUI.Helper
+GUI/OpenScript.java
+ src.main.java.GUI.OpenScript
+GUI/DrawSegment.java
+ src.main.java.GUI.DrawSegment
+GUI/MyMenuBar.java
+ src.main.java.GUI.MyMenuBar
+GUI/ClearPane.java
+ src.main.java.GUI.ClearPane
+GUI/Compilation.java
+ src.main.java.GUI.Compilation
+GUI/DisplayIntersection.java
+ src.main.java.GUI.DisplayIntersection

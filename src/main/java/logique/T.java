@@ -166,10 +166,9 @@ public class T extends AVL<Segment> {
             double segment_pente = segment.getPente();
             double head_param_p= head.getParam_P();
             double segment_param_p = segment.getParam_P();
-
             double head_x = (h - head_param_p) / head_pente;
             double segment_x = (h - segment_param_p) / segment_pente;
-
+            
             if (left) {
                 if (head_x <= segment_x || head_x - segment_x <= 0.00000001) {
                     verif = true;

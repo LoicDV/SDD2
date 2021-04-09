@@ -28,7 +28,7 @@ public class ClearPane {
         
         // Partie effacement des donnees.
         for (int i = 0; i < lengthCircle; i++) {
-            setCircle.remove(i);
+            setCircle.remove(0);
         }
         for (int i = 0; i < lengthSegment; i++) {
             containers.remove(0);
