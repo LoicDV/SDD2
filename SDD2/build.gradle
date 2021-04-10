@@ -1,0 +1,18 @@
+plugins {
+    id 'application'
+    id 'java'
+    id 'org.openjfx.javafxplugin' version '0.0.8'
+}
+
+application {
+    mainClassName = 'src/main/java/Test'
+}
+
+repositories {
+    mavenCentral()
+}
+
+javafx {
+    version = "11.0.2"
+    modules = [ 'javafx.controls', 'javafx.graphics', 'javafx.base']
+}
