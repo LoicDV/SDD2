@@ -19,13 +19,13 @@ import javafx.scene.control.ScrollPane;
  */
 public class DrawSegment extends ScrollPane{
 
-    // Variable globale.
+    // Variable instance.
     private static int zoom = 3;
     
     /**
-     * @param file File.
      * Fonction utilisee lors de l'ouverture d'un fichier.
      * Permet de dessiner chaque segment s'y trouvant.
+     * @param file File.
      */
     public static void draw(File file) {
         // ArrayList contenant tous les segments du fichier.
@@ -34,7 +34,7 @@ public class DrawSegment extends ScrollPane{
         ArrayList<Point[]> containers = Main.getContainers();
         ArrayList<Line> set = Main.getSet();
         
-        // On itere sur l'ArrayList pour creer nos segments et les rajouter à la fois à notre ArrayList de segment + la zone de dessin.
+        // On itere sur l'ArrayList pour creer nos segments et les rajouter a la fois a notre ArrayList de segment + la zone de dessin.
         for (Point[] smallPoints : tab) {
             Line line = new Line(smallPoints[0].getX() * zoom, smallPoints[0].getY() * zoom,
                                  smallPoints[1].getX() * zoom, smallPoints[1].getY() * zoom);
@@ -49,17 +49,17 @@ public class DrawSegment extends ScrollPane{
     }
 
     /**
+     * Rajoute un segment a notre zone de dessin.
      * @param point1X double.
      * @param point1Y double.
      * @param point2X double.
      * @param point2Y double.
-     * Rajoute un segment à notre zone de dessin.
      */
     public static void addLineDouble(Double point1X, Double point1Y, Double point2X, Double point2Y) {
         // Enleve tout les cercles et tant donne qu'il faudra recompiler pour avoir potentiellement d'autres intersections.
         Compilation.noCircle();
         Line line = new Line(point1X * zoom, point1Y * zoom, point2X * zoom, point2Y * zoom);
-        // Check si pas de Overlap. Si non, on rajoute le segment à notre fenetre.
+        // Check si pas de Overlap. Si non, on rajoute le segment a notre fenetre.
         if (noDoubleLine(line, point1X, point1Y, point2X, point2Y, false)) {
             Main.getPane().getChildren().add(line);
             Main.getSet().add(line);
@@ -69,20 +69,20 @@ public class DrawSegment extends ScrollPane{
             updatScrollPane();
         }
         else {
-            // Si oui, c'est qu'il y a un overlap et donc une exception est lancée.
+            // Si oui, c'est qu'il y a un overlap et donc une exception est lancee.
             Exception.doubleLineException();
         }
     }
 
     /**
+     * Rajoute un tableau Point a notre display.
      * @param point1X douvble.
      * @param point1Y double.
      * @param point2X double.
      * @param point2Y double.
-     * Rajoute un tableau Point à notre display.
      */
     public static void addContainers(Double point1X, Double point1Y, Double point2X, Double point2Y) {
-        // Le tableau de Point est ajouté au display.
+        // Le tableau de Point est ajoute au display.
         Point[] tab = new Point[]{new Point(point1X, point1Y), new Point(point2X, point2Y)};
         Main.getContainers().add(tab);
         // MAJ du display.
@@ -91,6 +91,9 @@ public class DrawSegment extends ScrollPane{
     }
 
     /**
+     * Check si les Segments ne s'overlap pas.
+     * flag = true : on remplace un segment. Donc un segment en moins a regarder.
+     * flag = false : on ajoute un segment. Donc on regarde tous les segments.
      * @param linePane Line.
      * @param point1X double.
      * @param point1Y double.
@@ -98,9 +101,6 @@ public class DrawSegment extends ScrollPane{
      * @param point2Y double.
      * @param flag boolean
      * @return boolean
-     * Check si les Segments ne s'overlap pas.
-     * flag = true : on remplace un segment. Donc un segment en moins a regarder.
-     * flag = false : on ajoute un segment. Donc on regarde tous les segments.
      */
     public static boolean noDoubleLine(Line linePane, Double point1X, Double point1Y, Double point2X, Double point2Y, boolean flag) {
         ArrayList<Point[]> containers = Main.getContainers();
@@ -125,10 +125,10 @@ public class DrawSegment extends ScrollPane{
     }
 
     /**
+     * Dessine des cercles de couleurs pour les intersections et les stocke dans une ArrayList.
      * @param posX double.
      * @param posY double.
      * @param red Color.
-     * Dessine des cercles de couleurs pour les intersections et les stocke dans une ArrayList.
      */
     public static void drawCircle(double posX, double posY, Color red) {
         Circle circle = new Circle(posX * zoom, posY * zoom, 3);
@@ -140,16 +140,16 @@ public class DrawSegment extends ScrollPane{
     }
 
     /**
+     * Convertit un objet Line en un objet Segment.
      * @param line Line.
      * @return Segment.
-     * Convertit un objet Line en un objet Segment.
      */
     public static Segment convertLineToSegment(Line line) {
         return new Segment(new Point(line.getStartX() / zoom, line.getStartY() / zoom), new Point(line.getEndX() / zoom, line.getEndY() / zoom));
     }
 
     /**
-     * Permet de mettre à jour notre ScrollPane.
+     * Permet de mettre a jour notre ScrollPane.
      */
     private static void updatScrollPane() {
         Main.getScrollPane().setPrefViewportWidth(Main.getPane().getPrefWidth());

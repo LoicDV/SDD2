@@ -33,11 +33,11 @@ public class Compilation {
     private int compteurIntersection = 0;
     
     /**
-     * @param flag boolean.
      * Objet qui va compiler notre code logique pour trouver les intersections.
+     * @param flag boolean.
      */
     public Compilation(boolean flag) {
-        // Réinitialise les cercles.
+        // Reinitialise les cercles.
         noCircle();
         
         // Adaptation car on a besoin d'une ArrayList de Segment et non d'une ArrayList de Point[].
@@ -78,7 +78,7 @@ public class Compilation {
             // Fenetre pour faire avancer les etapes.
             Stage stage = new Stage();
 
-            // Zone pour mettre notre texte qu'on va créer.
+            // Zone pour mettre notre texte qu'on va creer.
             GridPane gridPane = new GridPane();
 
             // Nos 2 boutons.
@@ -87,7 +87,7 @@ public class Compilation {
             btnNextStep.setPrefSize(136, 50);
             btnAllStep.setPrefSize(136, 50);
             
-            // Différentes action pour les boutons.
+            // Differentes action pour les boutons.
             btnNextStep.setOnAction(event -> {
                 // Si pas de segments ni d'intersection.
                 if ((setLowerAndUpperPoints.size() == 0)) {
@@ -174,7 +174,7 @@ public class Compilation {
         Pane pane = Main.getPane();
         
         boolean flag = true;
-        // On itere jusqu'à ne plus avoir de cercle.
+        // On itere jusqu'a ne plus avoir de cercle.
         while (flag) {
             // Taille de la Pane.
             int index = Main.getSetCircle().size() + Main.getSet().size();

@@ -36,7 +36,7 @@ public class OpenScript {
         if ((file = fileChooser.showOpenDialog(Main.getStage())) == null) {
             Exception.noFileOpen();
         }
-        // Si un fichier selectionné.
+        // Si un fichier selectionne.
         else {
             Main.setFile(file);
             DrawSegment.draw(file);

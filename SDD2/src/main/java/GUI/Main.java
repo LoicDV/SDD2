@@ -37,8 +37,8 @@ public class Main extends Application {
 
     
     /** 
-     * @param primaryStage Stage.
      * Cree et ouvre notre fenetre principale de notre map overlay.
+     * @param primaryStage Stage.
      */
     @Override
     public void start(Stage primaryStage) {
@@ -77,80 +77,80 @@ public class Main extends Application {
     }
 
     /** 
-     * @return Stage.
      * Retourne le Stage de la fenetre.
+     * @return Stage.
      */
     public static Stage getStage() {
         return stage;
     }
 
     /** 
-     * @return Pane.
      * Retourne le Pane de la fenetre.
+     * @return Pane.
      */
     public static Pane getPane() {
         return pane;
     }
 
     /** 
-     * @param newPane Pane.
      * Remplace l'ancien Pane par le nouveau en parametre.
+     * @param newPane Pane.
      */
     public void setPane(Pane newPane) {
         pane = newPane;
     }
 
     /** 
-     * @return BorderPane.
      * Retourne le BorderPane de la fenetre.
+     * @return BorderPane.
      */
     public static BorderPane getBorderPane() {
         return root;
     }
     
-    /** 
-     * @return ScrollPane.
+    /**
      * Retourne la ScrollPane de la fenetre.
+     * @return ScrollPane.
      */
     public static ScrollPane getScrollPane() {
         return scrollPane;
     }
 
     /** 
-     * @return File.
      * Retourne la File de la fenetre.
+     * @return File.
      */
     public static File getFile() {
         return file;
     }
 
     /** 
-     * @param newFile File.
      * Remplace l'ancien File par le nouveau en parametre.
+     * @param newFile File.
      */
     public static void setFile(File newFile) {
         file = newFile;
     }
 
     /** 
-     * @return ArrayList de Point[].
      * Retourne le ArrayList de tableau de 2 Points de la fenetre.
+     * @return ArrayList de Point[].
      */
     public static ArrayList<Point[]> getContainers() {
         return containers;
     }
     
     /** 
-     * @return ArrayList de Line.
      * Retourne le ArrayList de Line de la fenetre.
+     * @return ArrayList de Line.
      */
     public static ArrayList<Line> getSet() {
         return set;
     }
 
     /** 
-     * @return ArrayList de Circle.
      * Retourne le ArrayList de Circle de la fenetre.
+     * @return ArrayList de Circle.
      */
     public static ArrayList<Circle> getSetCircle() {
         return setCircle;
@@ -164,16 +164,16 @@ public class Main extends Application {
     }
 
     /** 
-     * @return DisplayContainers.
      * Retourne le DisplayContainers de la fenetre.
+     * @return DisplayContainers.
      */
     public static DisplayContainers getDisplayContainers() {
         return grid;
     }
 
     /** 
-     * @param args String[].
      * Lance notre fenetre.
+     * @param args String[].
      */
     public static void runApp(String[] args) {
         launch(args);

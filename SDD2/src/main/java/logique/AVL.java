@@ -10,7 +10,7 @@ import java.lang.Math;
 public class AVL<Fg> {
     
     //Variables d'instances.
-    //La donnée de racine de l'arbre.
+    //La donnee de racine de l'arbre.
     private Fg data;
     //Les sous arbres gauche et droit de l'arbre.
     private AVL<Fg> leftAVL, rightAVL;
@@ -20,11 +20,11 @@ public class AVL<Fg> {
 
     //Constructeurs.
     /**
+     * Constructeur de la classe AVL qui specifie la donnee de la racine data, le sous arbre gauche leftAVL 
+     * et le sous arbre droit rightAVL.
      * @param data Fg.
      * @param leftAVL AVL de Fg.
      * @param rightAVL AVL de Fg.
-     * Constructeur de la classe AVL qui spécifie la donnée de la racine data, le sous arbre gauche leftAVL 
-     * et le sous arbre droit rightAVL.
      */
     public AVL(Fg data, AVL<Fg> leftAVL, AVL<Fg> rightAVL) {
         this.data = data;
@@ -35,7 +35,7 @@ public class AVL<Fg> {
 
 
     /**
-     * Constructeur par défaut.
+     * Constructeur par defaut.
      */
     public AVL() {
         this.data = null;
@@ -48,8 +48,8 @@ public class AVL<Fg> {
     //Assesseurs et getteurs.
     //(Attention n'utilisez les assesseurs que lorsque le changement respecte l'ordre interne de l'arbre.)
     /** 
-     * @return Fg.
      * Getteur de la racine de l'arbre qui retourne cette racine.
+     * @return Fg.
      */
     public Fg getDataAVL() {
         return this.data;
@@ -57,8 +57,8 @@ public class AVL<Fg> {
 
     
     /** 
-     * @return AVL de Fg.
      * Getteur du sous arbre gauche de l'arbre qui retourne ce sous arbre gauche.
+     * @return AVL de Fg.
      */
     public AVL<Fg> getLeftAVL() {
         return this.leftAVL;
@@ -66,8 +66,8 @@ public class AVL<Fg> {
 
     
     /** 
+     * Getteur du sous arbre gauche de l'arbre qui retourne ce sous arbre gauche.
      * @return AVL de Fg.
-     * Getteur du sous arbre droit de l'arbre qui retourne ce sous arbre droit.
      */
     public AVL<Fg> getRightAVL() {
         return this.rightAVL;
@@ -75,8 +75,8 @@ public class AVL<Fg> {
 
     
     /** 
-     * @return int.
      * Getteur de la hauteur de l'arbre qui retourne cette hauteur.
+     * @return int.
      */
     public int getHeightAVL() {
         return this.height;
@@ -84,8 +84,8 @@ public class AVL<Fg> {
     
 
     /** 
-     * @param new_data Fg.
-     * Assesseur de la racine de l'arbre qui remplace la donnée de la racine (data) par new_data. 
+     * Assesseur de la racine de l'arbre qui remplace la donnee de la racine (data) par new_data.
+     * @param new_data Fg. 
      */
     public void setDataAVL(Fg new_data) {
         this.data = new_data;
@@ -93,8 +93,8 @@ public class AVL<Fg> {
 
     
     /** 
-     * @param new_tree AVL de Fg.
      * Assesseur du sous arbre gauche de l'arbre qui remplace ce sous arbre gauche (leftAVL) par new_tree.
+     * @param new_tree AVL de Fg.
      */
     public void setLeftAVL(AVL<Fg> new_tree) {
         this.leftAVL = new_tree;
@@ -102,8 +102,8 @@ public class AVL<Fg> {
 
     
     /** 
-     * @param new_tree AVL de Fg.
      * Assesseur du sous arbre droit de l'arbre qui remplace ce sous arbre droit (rightAVL) par new_tree.
+     * @param new_tree AVL de Fg.
      */
     public void setRightAVL(AVL<Fg> new_tree) {
         this.rightAVL = new_tree;
@@ -111,8 +111,8 @@ public class AVL<Fg> {
 
     
     /** 
-     * @param new_height int.
      * Assesseur de la hauteur de l'arbre qui remplace cette hauteur (height) par new_height.
+     * @param new_height int.
      */
     public void setHeightAVL(int new_height) {
         this.height = new_height;
@@ -120,8 +120,8 @@ public class AVL<Fg> {
 
     
     /** 
-     * @return boolean.
      * Retourne true si l'arbre est vide, false sinon.
+     * @return boolean.
      */
     public boolean isEmpty() {
 		if (this.getDataAVL() == null && this.leftAVL == null && this.rightAVL == null) {
@@ -132,8 +132,8 @@ public class AVL<Fg> {
 
     
     /** 
+     * Retourne true si l'arbre est reduit a sa racine, false sinon.
      * @return boolean.
-     * Retourne true si l'arbre est réduit à sa racine, false sinon.
      */
     public boolean isLeaf() {
         boolean verif = false;
@@ -145,8 +145,8 @@ public class AVL<Fg> {
 
     
     /** 
-     * @return boolean.
      * Retourne true si le sous arbre gauche de l'arbre est vide ou bien false sinon.
+     * @return boolean.
      */
     public boolean leftIsEmpty() {
         boolean verif = false;
@@ -158,8 +158,8 @@ public class AVL<Fg> {
 
     
     /** 
-     * @return boolean.
      * Retourne true si le sous arbre droit de l'arbre est vide ou bien false sinon.
+     * @return boolean.
      */
     public boolean rightIsEmpty() {
         boolean verif = false;
@@ -171,8 +171,8 @@ public class AVL<Fg> {
     
     
     /** 
-     * @return int.
      * Calcule la hauteur de l'arbre et retourne cette hauteur.
+     * @return int.
      */
     public int calculHeight() {
         if (isEmpty()) {
@@ -202,8 +202,8 @@ public class AVL<Fg> {
 
     
     /** 
-     * @return int.
      * Calcule la balance de l'arbre et la retourne.
+     * @return int.
      */
 	public int balance() {
         int x = 0;
@@ -223,7 +223,7 @@ public class AVL<Fg> {
 
 
     /**
-     * Applique une rotation gauche à l'arbre.
+     * Applique une rotation gauche a l'arbre.
      */
     public void leftRotation() {
 		Fg data = this.getDataAVL();
@@ -240,7 +240,7 @@ public class AVL<Fg> {
 
 
     /**
-     * Applique une rotation droite à l'arbre.
+     * Applique une rotation droite a l'arbre.
      */
 	public void rightRotation() {
 		Fg data = this.getDataAVL();
@@ -257,7 +257,7 @@ public class AVL<Fg> {
 
 
     /**
-     * Rééquilibre notre arbre.
+     * Reequilibre notre arbre.
      */
     public void equilibrate() {
         if (balance() == 2) {
@@ -279,8 +279,8 @@ public class AVL<Fg> {
 
     
     /** 
+     * Retourne la donnee maximum (la plus a droite) de l'arbre.
      * @return Fg.
-     * Retourne la donnée maximum (la plus à droite) de l'arbre.
      */
     public Fg findMax() {
         Fg maximum;
@@ -295,8 +295,8 @@ public class AVL<Fg> {
 
     
     /** 
+     * Retourne la donnee minimum (la plus a gauche) de l'arbre.
      * @return Fg.
-     * Retourne la donnée minimum (la plus à gauche) de l'arbre.
      */
     public Fg findMin() {
         Fg minimum;
@@ -311,7 +311,7 @@ public class AVL<Fg> {
 
 
     /**
-     * Affiche les données de l'arbre selon l'affichage "inordre" vu au cours de sddI.
+     * Affiche les donnees de l'arbre selon l'affichage "inordre" vu au cours de sddI.
      */
     public void inordre() {
 		if (this != null) {

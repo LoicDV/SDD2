@@ -48,8 +48,8 @@ public class ClearPane {
     }
 
     /**
-     * @param line Line.
      * Retire un segment de notre zone de dessin.
+     * @param line Line.
      */
     public static void removeSegment(Line line) {
         // On retire tous les cercles.
@@ -76,10 +76,10 @@ public class ClearPane {
     }
 
     /**
+     * Regarde si 2 lignes sont equivalentes ou non.
      * @param line1 Line.
      * @param line2 Line.
      * @return boolean.
-     * Regarde si 2 lignes sont équivalentes ou non.
      */
     public static boolean checkEquals(Line line1, Line line2) {
         // Verifie avec une certaine erreur de precision. (10^-8).

@@ -20,11 +20,11 @@ import javafx.stage.FileChooser.ExtensionFilter;
 public class SaveFile {
 
     /**
-     * @param file File.
-     * @param other boolean.
      * Objet qui permet de gerer la sauvegarde de fichier.
      * boolean qui dit si on sauvegarde sur le meme fichier ou non.
      * true = meme fichier // false = fichier different.
+     * @param file File.
+     * @param other boolean.
      */
     public SaveFile(File file, boolean other) {
         // Simple sauvegarde.
@@ -65,9 +65,9 @@ public class SaveFile {
     }
 
     /** 
+     * Ecrit dans le fichier les segments presents dans la fenetre.
      * @param file File.
-     * @throws IOException
-     * Ecrit dans le fichier les segments présents dans la fenetre.
+     * @throws IOException IOException.
      */
     public void save(File file) throws IOException{
         FileWriter fileWriter = new FileWriter(file);

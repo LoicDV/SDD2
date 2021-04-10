@@ -29,8 +29,8 @@ public class ChangeSegment {
     private static Stage stage;
     
     /**
-     * @param text String.
      * Object qui va lancer la fonction start().
+     * @param text String.
      */
     public ChangeSegment(String text) {
         start(text);
@@ -38,11 +38,11 @@ public class ChangeSegment {
 
     
     /** 
-     * @param text String.
      * Cette fonction va creer une fenetre possedant 3 boutons :
      *      Change : permet de modifier un segment.
      *      Remove : retire un segment.
      *      Nothing : Ne fais rien.
+     * @param text String.
      */
     public static void start(String text) {
         // Notre fenetre.
@@ -64,7 +64,7 @@ public class ChangeSegment {
                              Double.parseDouble(tabText[2]) * zoom,
                              Double.parseDouble(tabText[3]) * zoom);
 
-        // Différentes action pour les boutons.
+        // Differentes action pour les boutons.
         btnChange.setOnAction(event -> {
             stage.close();
             changeSegment(line);
@@ -97,15 +97,15 @@ public class ChangeSegment {
 
     
     /** 
-     * @param line Line.
      * Cree une fenetre pour ajuster un segment.
+     * @param line Line.
      */
     public static void changeSegment(Line line) {
 
         // Pour le x1.
         TextField textField_x1 = new TextField();
         textField_x1.setPrefSize(100, 50);
-        // Pour mettre notre texte en arriere plan et donner une idee à l'utilisateur
+        // Pour mettre notre texte en arriere plan et donner une idee a l'utilisateur
         // ce qu'il doit mettre dans la case.
         textField_x1.setPromptText("x de p1");
         textField_x1.setFocusTraversable(false);
@@ -113,7 +113,7 @@ public class ChangeSegment {
         // Pour le y1.
         TextField textField_y1 = new TextField();
         textField_y1.setPrefSize(100, 50);
-        // Pour mettre notre texte en arriere plan et donner une idee à l'utilisateur
+        // Pour mettre notre texte en arriere plan et donner une idee a l'utilisateur
         // ce qu'il doit mettre dans la case.
         textField_y1.setPromptText("y de p1");
         textField_y1.setFocusTraversable(false);
@@ -121,7 +121,7 @@ public class ChangeSegment {
         // Pour le x2.
         TextField textField_x2 = new TextField();
         textField_x2.setPrefSize(100, 50);
-        // Pour mettre notre texte en arriere plan et donner une idee à l'utilisateur
+        // Pour mettre notre texte en arriere plan et donner une idee a l'utilisateur
         // ce qu'il doit mettre dans la case.
         textField_x2.setPromptText("x de p2");
         textField_x2.setFocusTraversable(false);
@@ -129,7 +129,7 @@ public class ChangeSegment {
         // Pour le y2.
         TextField textField_y2 = new TextField();
         textField_y2.setPrefSize(100, 50);
-        // Pour mettre notre texte en arriere plan et donner une idee à l'utilisateur
+        // Pour mettre notre texte en arriere plan et donner une idee a l'utilisateur
         // ce qu'il doit mettre dans la case.
         textField_y2.setPromptText("y de p2");
         textField_y2.setFocusTraversable(false);
@@ -165,12 +165,12 @@ public class ChangeSegment {
     }
 
     /**
+     * Teste si ce qui est mis dans les TextFields sont des nombres et ensuite dessine le segment.
      * @param line Line.
      * @param textField_x1 TextField.
      * @param textField_y1 TextField.
      * @param textField_x2 TextField.
      * @param textField_y2 TextField.
-     * Teste si ce qui est mis dans les TextFields sont des nombres et ensuite dessine le segment.
      */
     public static void isDoubleTextField(Line line, TextField textField_x1, TextField textField_y1, TextField textField_x2, TextField textField_y2) {
         try {
@@ -198,12 +198,12 @@ public class ChangeSegment {
 
     
     /** 
+     * Rajoute notre segment au dessin en supprimant la ligne selectionnee precedemment.
      * @param line Line.
      * @param point1X double.
      * @param point1Y double.
      * @param point2X double.
      * @param point2Y double.
-     * Rajoute notre segment au dessin en supprimant la ligne selectionnee precedemment.
      */
     public static void coordSegment(Line line, Double point1X, Double point1Y, Double point2X, Double point2Y) {
         // On cree le nouveau segment qui va etre ajoute.

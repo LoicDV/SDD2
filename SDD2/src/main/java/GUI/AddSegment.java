@@ -27,13 +27,13 @@ public class AddSegment extends Stage {
      */
     public void start() {
 
-        // Notre fenêtre
+        // Notre fenetre
         Stage stage = new Stage();
 
         // Pour le x1.
         TextField textField_x1 = new TextField();
         textField_x1.setPrefSize(100, 50);
-        // Pour mettre notre texte en arriere plan et donner une idee à l'utilisateur
+        // Pour mettre notre texte en arriere plan et donner une idee a l'utilisateur
         // ce qu'il doit mettre dans la case.
         textField_x1.setPromptText("x de p1");
         textField_x1.setFocusTraversable(false);
@@ -41,7 +41,7 @@ public class AddSegment extends Stage {
         // Pour le y1.
         TextField textField_y1 = new TextField();
         textField_y1.setPrefSize(100, 50);
-        // Pour mettre notre texte en arriere plan et donner une idee à l'utilisateur
+        // Pour mettre notre texte en arriere plan et donner une idee a l'utilisateur
         // ce qu'il doit mettre dans la case.
         textField_y1.setPromptText("y de p1");
         textField_y1.setFocusTraversable(false);
@@ -49,7 +49,7 @@ public class AddSegment extends Stage {
         // Pour le x2.
         TextField textField_x2 = new TextField();
         textField_x2.setPrefSize(100, 50);
-        // Pour mettre notre texte en arriere plan et donner une idee à l'utilisateur
+        // Pour mettre notre texte en arriere plan et donner une idee a l'utilisateur
         // ce qu'il doit mettre dans la case.
         textField_x2.setPromptText("x de p2");
         textField_x2.setFocusTraversable(false);
@@ -57,7 +57,7 @@ public class AddSegment extends Stage {
         // Pour le y2.
         TextField textField_y2 = new TextField();    
         textField_y2.setPrefSize(100, 50);
-        // Pour mettre notre texte en arriere plan et donner une idee à l'utilisateur
+        // Pour mettre notre texte en arriere plan et donner une idee a l'utilisateur
         // ce qu'il doit mettre dans la case.
         textField_y2.setPromptText("y de p2");
         textField_y2.setFocusTraversable(false);  
@@ -92,11 +92,11 @@ public class AddSegment extends Stage {
     }
 
     /**
+     * Teste si ce qui est mis dans les TextFields sont des nombres et ensuite dessine le segment.
      * @param textField_x1 TestField.
      * @param textField_y1 TextField.
      * @param textField_x2 TextField.
      * @param textField_y2 TextField.
-     * Teste si ce qui est mis dans les TextFields sont des nombres et ensuite dessine le segment.
      */
     public static void addSegment(TextField textField_x1, TextField textField_y1, TextField textField_x2, TextField textField_y2) {
         try {

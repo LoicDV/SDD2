@@ -6,17 +6,17 @@ package src.main.java.logique;
 public class Segment {
 
     //Variables d'instances.
-    //upper est le point qui est l'extrémité supérieure du segment et lower est le point
-    //qui est l'extrémité inférieure du segment.
+    //upper est le point qui est l'extremite superieure du segment et lower est le point
+    //qui est l'extremite inferieure du segment.
     private Point upper, lower;
     
     //Constructeur.
     /**
      * @param p1 Point.
      * @param p2 Point.
-     * Constructeur de la classe Segment qui prend en argument deux points p1 et p2, le plus haut est désigné 
-     * comme étant le upper (dans ce cas on ajoute le segment à la liste isUpperOf du point) et le plus bas est 
-     * désigné comme étant le lower.
+     * Constructeur de la classe Segment qui prend en argument deux points p1 et p2, le plus haut est designe 
+     * comme etant le upper (dans ce cas on ajoute le segment a la liste isUpperOf du point) et le plus bas est 
+     * designe comme etant le lower.
      */
     public Segment(Point p1, Point p2) {
         if (p1.isUpper(p2)) {
@@ -52,8 +52,8 @@ public class Segment {
     
     /** 
      * @param new_point Point.
-     * Setteur du upper du segment : on remplace le upper par new_point seulement si il est plus haut ou à la 
-     * même hauteur mais à gauche du lower du segment sinon new_point devient le lower et l'ancien lower 
+     * Setteur du upper du segment : on remplace le upper par new_point seulement si il est plus haut ou a la 
+     * meme hauteur mais a gauche du lower du segment sinon new_point devient le lower et l'ancien lower 
      * devient le upper.
      */
     public void setUpper(Point new_point) {
@@ -69,8 +69,8 @@ public class Segment {
     
     /** 
      * @param new_point Point.
-     * Setteur du lower du segment : on remplace le lower par new_point seulement si il est plus bas ou à la même 
-     * hauteur et à gauche du upper du segment sinon new_point devient le upper et l'ancien upper devient le lower.
+     * Setteur du lower du segment : on remplace le lower par new_point seulement si il est plus bas ou a la meme 
+     * hauteur et a gauche du upper du segment sinon new_point devient le upper et l'ancien upper devient le lower.
      */
     public void setLower(Point new_point) {
         if (new_point.isUpper(this.getUpper())) {
@@ -85,8 +85,8 @@ public class Segment {
     
     /** 
      * @return String.
-     * Retourne une écriture du segment en un string sous le format "upper lower" où upper et lower sont écrit 
-     * selon le format précisé dans la classe Point (avec un espace entre upper et lower).
+     * Retourne une ecriture du segment en un string sous le format "upper lower" ou upper et lower sont ecrit 
+     * selon le format precise dans la classe Point (avec un espace entre upper et lower).
      */
     public String toString() {
         String chaine = this.getUpper().toString() + " " + this.getLower().toString();
@@ -106,7 +106,7 @@ public class Segment {
     
     /** 
      * @return double.
-     * Calcule le parametre p de l'équation y = mx + p et retourne un double qui est ce p.
+     * Calcule le parametre p de l'equation y = mx + p et retourne un double qui est ce p.
      */
     public double getParam_P() {
         double pente = this.getPente();
@@ -176,8 +176,8 @@ public class Segment {
      * @param s Segment.
      * @return Point.
      * Calcule l'intersection de nos segments (celui avec lequel on appelle la fonction et s), qui sont non 
-     * verticaux, prolongés en droite et la retourne (on appelle cette fonction seulement lorsque l'on sait que 
-     * ces deux droites ne sont pas parallèles et ont donc bien une intersection).
+     * verticaux, prolonges en droite et la retourne (on appelle cette fonction seulement lorsque l'on sait que 
+     * ces deux droites ne sont pas paralleles et ont donc bien une intersection).
      */
     public Point getIntersectionDroite(Segment s) {
         Point point_intersection = new Point(0, 0);
@@ -205,7 +205,7 @@ public class Segment {
      * @param s Segment.
      * @return boolean.
      * Retourne true si les deux segements (celui avec lequel on appelle la fonction et s) partagent une 
-     * extrémité commune et retourne false sinon.
+     * extremite commune et retourne false sinon.
      */
     public boolean isIntersectionExtremite(Segment s) {
         boolean verif = false;
@@ -220,7 +220,7 @@ public class Segment {
      * @param s Segment.
      * @return Point.
      * Calcule l'intersection entre nos deux segments (celui avec lequel on appelle la fonction et s). On appelle
-     * cette fonction lorsque l'on sait que cette intersection est une extrémité commune des deux segments.
+     * cette fonction lorsque l'on sait que cette intersection est une extremite commune des deux segments.
      */ 
     public Point intersectionExtremite(Segment s) {
         Point point_intersection = new Point(0, 0);
@@ -275,7 +275,7 @@ public class Segment {
                         verif = true;
                     }
                 }
-                //Cas général pour s.
+                //Cas general pour s.
                 else {
                     if (s.getLower().getY() <= this.getUpper().getY() && this.getUpper().getY() <= s.getUpper().getY()){
                         double m = s.getPente();
@@ -297,7 +297,7 @@ public class Segment {
                     verif = true;
                 }
             }
-            //Cas général de segment.
+            //Cas general de segment.
             else {
                 if (s.getLower().getY() <= this.getUpper().getY() && this.getUpper().getY() <= s.getUpper().getY()){
                     double m = this.getPente();
@@ -317,7 +317,7 @@ public class Segment {
                     verif = true;
                 }
             }
-            //Cas général pour s.
+            //Cas general pour s.
             else {
                 point_intersection_droite = this.getIntersectionPointVertical(s, false, point_intersection_droite);
                 if ((this.isInVertical(point_intersection_droite)) && s.isIn(point_intersection_droite)) {
@@ -332,7 +332,7 @@ public class Segment {
                 verif = true;
             }
         }
-        //Cas général.
+        //Cas general.
         else {
             double s1_pente = this.getPente();
             double s2_pente = s.getPente();
@@ -409,8 +409,8 @@ public class Segment {
      * @param sIsVertical boolean.
      * @param point_intersection Point.
      * @return Point.
-     * Calcule le point d'intersection entre nos segments où celui avec lequel on appelle la fonction 
-     * est vertical (le second segment utilisé est le segment s) et retourne un point qui est cette intersection 
+     * Calcule le point d'intersection entre nos segments ou celui avec lequel on appelle la fonction 
+     * est vertical (le second segment utilise est le segment s) et retourne un point qui est cette intersection 
      * (on appelle cette fonction uniquement si on est certain qu'il y a une intersection entre les deux segments).
      */
     public Point getIntersectionPointVertical(Segment s, boolean sIsVertical, Point point_intersection) {
@@ -428,7 +428,7 @@ public class Segment {
         return point_intersection;
     }
     /**
-     * Affiche notre segment dans la console sous le format donné par la fonction toString.
+     * Affiche notre segment dans la console sous le format donne par la fonction toString.
      */
     public void print() {
         System.out.println(this.toString());
@@ -438,7 +438,7 @@ public class Segment {
     /** 
      * @param s Segment.
      * @return boolean.
-     * Retourne true si le segment avec lequel on appelle la fonction est le même que le segment s 
+     * Retourne true si le segment avec lequel on appelle la fonction est le meme que le segment s 
      * et retourne false sinon.
      */
     public boolean equalSegment(Segment s){

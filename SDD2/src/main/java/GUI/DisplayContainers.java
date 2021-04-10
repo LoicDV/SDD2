@@ -21,7 +21,7 @@ public class DisplayContainers extends ScrollPane {
      * Affiche sur la fenetre la liste des segments presents dans la zone de dessin.
      */
     public void displayContainers() {
-        // Notre GridPane qui va être affiché en écrasant l'ancien.
+        // Notre GridPane qui va etre affiche en ecrasant l'ancien.
         GridPane grid = new GridPane();
 
         // Affiche les cases.

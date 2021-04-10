@@ -69,6 +69,7 @@ public class DisplayIntersection {
     }
 
     /**
+     * Produit la compilation avec la sweepLine.
      * @param sweepLine1 Line.
      * @param sweepLine2 Line.
      * @param setLowerAndUpperPoints ArrayList de Point.
@@ -77,7 +78,6 @@ public class DisplayIntersection {
      * @param compteurIntersection int.
      * @param flag boolean.
      * @return Tableau de int.
-     * Produit la compilation avec la sweepLine
      */
     public static int[] displayIntersectionSweep(Line sweepLine1, Line sweepLine2, ArrayList<Point> setLowerAndUpperPoints, ArrayList<Point> setIntersection, int compteurLowerUpper, int compteurIntersection, boolean flag) {
 
@@ -203,7 +203,7 @@ public class DisplayIntersection {
         // Tout d'un coup.
         else {
 
-            // Si on a fait des étapes avant.
+            // Si on a fait des etapes avant.
             if (compteurIntersection + compteurLowerUpper != 0) {
                 // On retire la sweep line.
                 Main.getPane().getChildren().remove(Main.getPane().getChildren().size()-1);
@@ -248,9 +248,9 @@ public class DisplayIntersection {
     }
 
     /**
+     * Transforme un arbre Q en ArrayList de Point (le premier etant le plus haut et le dernier le plus bas).
      * @param treeQ Q.
      * @param tab Arraylist de Point.
-     * Transforme un arbre Q en ArrayList de Point (le premier etant le plus haut et le dernier le plus bas).
      */
     public static void addInordreQ(Q treeQ, ArrayList<Point> tab) {
         // Base sur l'affichage inordre des AVL.
@@ -268,11 +268,11 @@ public class DisplayIntersection {
     }
 
     /**
+     * Affiche sur notre fenetre le point d'intersection ainsi que la sweep line.
      * @param sweepLine1 Line.
      * @param sweepLine2 Line.
      * @param setIntersection ArrayList de Point.
      * @param compteurIntersection int.
-     * Affiche sur notre fenetre le point d'intersection ainsi que la sweep line.
      */
     public static void intersectionSweepLine(Line sweepLine1, Line sweepLine2, ArrayList<Point> setIntersection, int compteurIntersection) {
         // Point d'intersection donc on le marque.
@@ -293,11 +293,11 @@ public class DisplayIntersection {
     }
 
     /**
+     * Affiche sur notre fenetre un point Lower ou Upper ainsi que la sweep line.
      * @param sweepLine1 Line.
      * @param sweepLine2 Line.
      * @param setLowerAndUpperPoints ArrayList de Point.
      * @param compteurLowerUpper int.
-     * Affiche sur notre fenetre un point Lower ou Upper ainsi que la sweep line.
      */
     public static void LowerAndUpperSweepLine (Line sweepLine1, Line sweepLine2, ArrayList<Point> setLowerAndUpperPoints, int compteurLowerUpper) {
         // On remet la sweepLine au bon endroit.

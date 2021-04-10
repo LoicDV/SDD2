@@ -15,8 +15,8 @@ import javafx.scene.text.Text;
 public class Helper {
 
     /**
-     * @param num int.
      * Cree une fenetre d'aide pour l'utilisateur.
+     * @param num int.
      */
     public Helper(int num) {
         // Notre fenetre.

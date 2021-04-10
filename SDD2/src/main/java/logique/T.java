@@ -2,20 +2,20 @@ package src.main.java.logique;
 
 /**
  * Classe qui nous permet de manipuler des arbres de type T.
- * Ces arbres contiennent les segments croisés par la sweep line.
- * Les feuilles sont ordonnées selon l'ordre de gauche à droite des segments et pour 
+ * Ces arbres contiennent les segments croises par la sweep line.
+ * Les feuilles sont ordonnees selon l'ordre de gauche a droite des segments et pour 
  * chaque noeud interne, le segment qu'il contient est le segment se situant dans la
- * feuille la plus à droite de son sous arbre gauche.
+ * feuille la plus a droite de son sous arbre gauche.
  */
 public class T extends AVL<Segment> {
 
     //Constructeurs.
     /**
+     * Constructeur de la classe T qui specifie la donnee de la racine head, le sous arbre gauche left 
+     * et le sous arbre droit right.
      * @param data Segment.
      * @param left T.
      * @param right T.
-     * Constructeur de la classe T qui spécifie la donnée de la racine head, le sous arbre gauche left 
-     * et le sous arbre droit right.
      */
     public T(Segment data, T left, T right) {
         super(data, left, right);
@@ -23,7 +23,7 @@ public class T extends AVL<Segment> {
 
 
     /**
-     * Constructeur par défaut.
+     * Constructeur par defaut.
      */
     public T() {
         super();
@@ -31,8 +31,8 @@ public class T extends AVL<Segment> {
 
 
     /** 
-     * @return Segment.
      * Getteur de la racine de l'arbre qui retourne cette racine.
+     * @return Segment.
      */
     public Segment getDataT(){
         return getDataAVL();
@@ -40,8 +40,8 @@ public class T extends AVL<Segment> {
 
 
     /**
-     * @return T.
      * Getteur du sous arbre gauche de l'arbre qui retourne ce sous arbre gauche.
+     * @return T.
      */
     public T getLeftT(){
         return (T) getLeftAVL();
@@ -49,8 +49,8 @@ public class T extends AVL<Segment> {
 
 
     /**
-     * @return T.
      * Getteur du sous arbre droit de l'arbre qui retourne ce sous arbre droit.
+     * @return T.
      */
     public T getRightT(){
         return (T) getRightAVL();
@@ -58,16 +58,16 @@ public class T extends AVL<Segment> {
 
 
     /**
-     * @return int.
      * Getteur de la hauteur de l'arbre qui retourne cette hauteur.
+     * @return int.
      */
     public int getHeightT(){
         return getHeightAVL();
     }
 
     /**
+     * Assesseur de la racine de l'arbre qui remplace la donnee de la racine (dataT) par new_dataT.
      * @param new_dataT Segment.
-     *  Assesseur de la racine de l'arbre qui remplace la donnée de la racine (dataT) par new_dataT.
      */
     public void setDataT(Segment new_dataT){
         setDataAVL(new_dataT);;
@@ -75,8 +75,8 @@ public class T extends AVL<Segment> {
 
 
     /**
-     * @param new_leftT T.
      * Assesseur du sous arbre gauche de l'arbre qui remplace ce sous arbre gauche (leftT) par new_leftT.
+     * @param new_leftT T.
      */
     public void setLeftT(T new_leftT){
         setLeftAVL(new_leftT);
@@ -84,8 +84,8 @@ public class T extends AVL<Segment> {
 
 
     /**
-     * @param new_rightT T.
      * Assesseur du sous arbre droit de l'arbre qui remplace ce sous arbre droit (rightT) par new_treeT.
+     * @param new_rightT T.
      */
     public void setRightT(T new_rightT){
         setRightAVL(new_rightT);;
@@ -93,8 +93,8 @@ public class T extends AVL<Segment> {
     
 
     /**
-     * @param new_heightT int.
      * Assesseur de la hauteur de l'arbre qui remplace cette hauteur (heightT) par new_heightT.
+     * @param new_heightT int.
      */
     public void setHeightT(int new_heightT){
         setHeightAVL(new_heightT);;
@@ -102,32 +102,32 @@ public class T extends AVL<Segment> {
 
 
     /** 
+     * Retourne true si le segment en racine se trouve a gauche (si boolean left = true)
+     * ou a droite (si boolean left = false) du segment en parametre, sinon retourne false.
+     * Le test se fait en prenant les points appartenants a ces deux segments se trouvant a une certaine hauteur
+     * et en regardant lequel de ces points a l'abscisse la plus ou la moins elevee selon si on veut savoir 
+     * si un segment est a gauche ou a droite de l'autre. Cette hauteur est generalement le double h, cependant, 
+     * selon le moment ou l'on se trouve lorsque l'on appelle la fonction, cette hauteur peut etre legerement 
+     * superieure ou inferieure a la hauteur de la sweep line. C'est pour cela que dans le cas ou l'un des 
+     * segments est horizontal, on utilisera h2 qui est la hauteur reelle de la sweep line et le double now_x 
+     * qui nous permettra de savoir si le segment horizontal doit etre considere comme etant a gauche ou a droite
+     * de l'autre segment. Notez que pour certains branchements des conditions sont rajoutees afin de gerer les 
+     * erreurs de precisions. Il est egalement important de remarquer que si les deux segments se croisent en un  
+     * point ayant son ordonnee egale a la hauteur utilisee dans le test (h ou h2), ils sont consideres comme
+     * etant a gauche et a droite l'un de l'autre.
      * @param segment Segment.
      * @param h double.
      * @param h2 double.
      * @param now_x double.
      * @param left boolean.
      * @return boolean.
-     * Retourne true si le segment en racine se trouve à gauche (si boolean left = true)
-     * ou à droite (si boolean left = false) du segment en parametre, sinon retourne false.
-     * Le test se fait en prenant les points appartenants à ces deux segments se trouvant à une certaine hauteur
-     * et en regardant lequel de ces points à l'abscisse la plus ou la moins élevée selon si on veut savoir 
-     * si un segment est à gauche ou à droite de l'autre. Cette hauteur est généralement le double h, cependant, 
-     * selon le moment où l'on se trouve lorsque l'on appelle la fonction, cette hauteur peut être légèrement 
-     * supérieure ou inférieure à la hauteur de la sweep line. C'est pour cela que dans le cas où l'un des 
-     * segments est horizontal, on utilisera h2 qui est la hauteur réelle de la sweep line et le double now_x 
-     * qui nous permettra de savoir si le segment horizontal doit être considéré comme étant à gauche ou à droite
-     * de l'autre segment. Notez que pour certains branchements des conditions sont rajoutées afin de gérer les 
-     * erreurs de précisions. Il est également important de remarquer que si les deux segments se croisent en un  
-     * point ayant son ordonnée égale à la hauteur utilisée dans le test (h ou h2), ils sont considérés comme
-     * étant à gauche et à droite l'un de l'autre.
      */
     public boolean isLeftOrRight(Segment segment, double h, double h2, double now_x, boolean left) {
         boolean verif = false;
         Segment head = this.getDataT();
-        //Cas où le segment head est horizontal.
+        //Cas ou le segment head est horizontal.
         if (head.isHorizontal()){
-            //Cas où "segment" est horizontal.
+            //Cas ou "segment" est horizontal.
             if (segment.isHorizontal()){
                 if (left){
                     if (head.getLower().getX() <= segment.getUpper().getX() || head.getLower().getX() - segment.getUpper().getX() <= 0.00000001){
@@ -140,7 +140,7 @@ public class T extends AVL<Segment> {
                     }
                 }
             }
-            //Cas où "segment" est vertical.
+            //Cas ou "segment" est vertical.
             else if (segment.isVertical()) {
                 if (left){
                     if (now_x < segment.getUpper().getX()
@@ -154,7 +154,7 @@ public class T extends AVL<Segment> {
                     }
                 }
             }
-            //Cas général pour "segment".
+            //Cas general pour "segment".
             else {
                 double segment_pente = segment.getPente();
                 double segment_param_p = segment.getParam_P();
@@ -172,9 +172,9 @@ public class T extends AVL<Segment> {
                 }
             }
         }
-        //Cas où "segment" est horizontal.
+        //Cas ou "segment" est horizontal.
         else if (segment.isHorizontal()) {
-            //Cas où le segment head est vertical.
+            //Cas ou le segment head est vertical.
             if (head.isVertical()) {
                 if (left){
                     if (now_x >= head.getUpper().getX() || head.getUpper().getX() - now_x <= 0.00000001) {
@@ -188,7 +188,7 @@ public class T extends AVL<Segment> {
                     }
                 }
             }
-            //Cas général pour le segment head.
+            //Cas general pour le segment head.
             else {
                 double head_pente = head.getPente();
                 double head_param_p = head.getParam_P();
@@ -206,9 +206,9 @@ public class T extends AVL<Segment> {
                 }
             }
         }
-        //Cas où le segment head est vertical.
+        //Cas ou le segment head est vertical.
         else if (head.isVertical()) {
-            //Cas où "segment" est vertical.
+            //Cas ou "segment" est vertical.
             if (segment.isVertical()) {
                 if (left) {
                     if (head.getUpper().getX() <= segment.getUpper().getX() || head.getUpper().getX() - segment.getUpper().getX() <= 0.00000001) {
@@ -221,7 +221,7 @@ public class T extends AVL<Segment> {
                     }
                 }
             }
-            //Cas général pour "segment".
+            //Cas general pour "segment".
             else {
                 double segment_pente = segment.getPente();
                 double segment_param_p = segment.getParam_P();
@@ -239,7 +239,7 @@ public class T extends AVL<Segment> {
                 }
             }
         }
-        //Cas où "segment" est vertical et head est non horizontal et non vertical.
+        //Cas ou "segment" est vertical et head est non horizontal et non vertical.
         else if (segment.isVertical()) {
             double head_pente = head.getPente();
             double head_param_p = head.getParam_P();
@@ -256,7 +256,7 @@ public class T extends AVL<Segment> {
                 }
             }
         }
-        //Cas général.
+        //Cas general.
         else {
             double head_pente = head.getPente();
             double segment_pente = segment.getPente();
@@ -281,13 +281,13 @@ public class T extends AVL<Segment> {
 
 
     /** 
+     * Insere le segment "segment" dans l'arbre, les parametres h, h2 et now_x sont utiles lorsque l'on doit
+     * appeller la fonction isLeftOrRight afin de se "diriger" dans l'arbre. L'insertion respecte la 
+     * definition des arbres de type T.
      * @param segment Segment.
      * @param h double.
      * @param h2 double.
      * @param now_x double.
-     * Insère le segment "segment" dans l'arbre, les paramètres h, h2 et now_x sont utiles lorsque l'on doit
-     * appeller la fonction isLeftOrRight afin de se "diriger" dans l'arbre. L'insertion respecte la 
-     * définition des arbres de type T.
      */
     public void insertT(Segment segment, double h, double h2, double now_x) {
         if (this.isEmpty()) {
@@ -325,8 +325,8 @@ public class T extends AVL<Segment> {
 
     
     /** 
+     * Insere le segment "segment" dans l'arbre qui est vide.
      * @param segment Segment.
-     * Insère le segment "segment" dans l'arbre qui est vide.
      */
     public void insertTEmpty(Segment segment) {
         this.setHeightT(this.getHeightT() + 1);
@@ -335,13 +335,13 @@ public class T extends AVL<Segment> {
 
     
     /** 
+     * Supprime le segment "segment" de l'arbre, a nouveau, les parametres h, h2 et now_x sont utiles 
+     * lorsque l'on doit appeller la fonction isLeftOrRight afin de se "diriger" dans l'arbre et la suppression 
+     * respecte bien la definition des arbres de type T.
      * @param segment Segment.
      * @param h double.
      * @param h2 double.
      * @param now_x double.
-     * Supprime le segment "segment" de l'arbre, à nouveau, les paramètres h, h2 et now_x sont utiles 
-     * lorsque l'on doit appeller la fonction isLeftOrRight afin de se "diriger" dans l'arbre et la suppression 
-     * respecte bien la définition des arbres de type T.
      */
     public void suppressT(Segment segment, double h, double h2, double now_x) {
         if (!this.isEmpty()) {
@@ -383,12 +383,12 @@ public class T extends AVL<Segment> {
     
     
     /** 
+     * Supprime la racine de l'arbre, encore une fois, les parametres h, h2 et now_x sont utiles lorsque l'on 
+     * doit appeller la fonction isLeftOrRight afin de se "diriger" dans l'arbre et onrespecte bien la 
+     * definition des arbres de type T.
      * @param h double.
      * @param h2 double.
      * @param now_x double.
-     * Supprime la racine de l'arbre, encore une fois, les paramètres h, h2 et now_x sont utiles lorsque l'on 
-     * doit appeller la fonction isLeftOrRight afin de se "diriger" dans l'arbre et onrespecte bien la 
-     * définition des arbres de type T.
      */
     public void suppressTRoot(double h, double h2, double now_x) {
         if(isLeaf()) {

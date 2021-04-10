@@ -17,9 +17,9 @@ import java.io.IOException;
 public class ReadFile {
     
     /**
+     * Lis le fichier en parametre pour obtenir les segments et les retourne en ArrayList de tableau de 2 Points.
      * @param file File.
      * @return ArrayList de Point[].
-     * Lis le fichier en parametre pour obtenir les segments et les retourne en ArrayList de tableau de 2 Points.
      */
     public static ArrayList<Point[]> read(File file) {
 
