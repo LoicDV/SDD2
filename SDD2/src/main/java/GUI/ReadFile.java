@@ -15,7 +15,7 @@ import java.io.IOException;
  * Consiste a lire le fichier en question.
  */
 public class ReadFile {
-    
+
     /**
      * Lis le fichier en parametre pour obtenir les segments et les retourne en ArrayList de tableau de 2 Points.
      * @param file File.
@@ -26,13 +26,13 @@ public class ReadFile {
         // Composant pour lire le fichier.
         FileReader fileReader = null;
         BufferedReader bufferedReader = null;
-        
+
         // Tableau -> Tableau de points a 2 dimensions.
         ArrayList<Point[]> stockTabPoints = new ArrayList<Point[]>();
 
         // Test avant.
         try {
-            
+
             fileReader = new FileReader(file);
             bufferedReader = new BufferedReader(fileReader);
 
@@ -44,7 +44,7 @@ public class ReadFile {
 
         // Code.
         try {
-  
+
             String line = bufferedReader.readLine();
 
             while (line != null) {
@@ -54,10 +54,10 @@ public class ReadFile {
                 Double[] tabDoubles = new Double[tabStrings.length];
 
                 // Passage String -> Double.
-                for (int i = 0; i < tabStrings.length; i++) {  
+                for (int i = 0; i < tabStrings.length; i++) {
 
                     tabDoubles[i] = Double.parseDouble(tabStrings[i]);
-                
+
                 }
 
                 // Creation des 2 points.

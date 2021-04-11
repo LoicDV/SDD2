@@ -24,11 +24,11 @@ public class ClearPane {
         ArrayList<Point[]> containers = Main.getContainers();
         ArrayList<Circle> setCircle = Main.getSetCircle();
         ArrayList<Line> set = Main.getSet();
-        
+
         // Notre valeur pour iterer.
         int lengthCircle = setCircle.size();
         int lengthSegment = containers.size();
-        
+
         // Partie effacement des donnees.
         for (int i = 0; i < lengthCircle; i++) {
             setCircle.remove(0);
@@ -42,7 +42,7 @@ public class ClearPane {
         // On enleve le fichier du programme pour la remise a zero.
         Main.setFile(null);
 
-        // On remet a jour 
+        // On remet a jour
         DisplayContainers grid = Main.getDisplayContainers();
         grid.displayContainers();
     }
@@ -54,14 +54,14 @@ public class ClearPane {
     public static void removeSegment(Line line) {
         // On retire tous les cercles.
         Compilation.noCircle();
-        
+
         // Notre ArrayList de ligne
         ArrayList<Line> set = Main.getSet();
-        
+
         // On boucle sur une ArrayList pour trouver le segment qu'on doit retirer.
         for (int i = 0; i < set.size(); i++) {
             // On check pour trouver la ligne qu'on veut retirer.
-            
+
             if (checkEquals(set.get(i), line)) {
                 // On procede a l'effacement complete de la donnee
                 Main.getContainers().remove(i);

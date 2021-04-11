@@ -32,14 +32,14 @@ public class DisplayContainers extends ScrollPane {
         // On regarde l'ArrayList de tous nos segments.
         ArrayList<Point[]> containers = Main.getContainers();
         int compteur = 0;
-        
+
         // On itere sur chaque element de cette ArrayList pour les transformer
         // en texte et les afficher dans la GridPane.
         for (Point[] tab : containers) {
             Text text = new Text();
             String string = (new Segment(tab[0], tab[1])).toString();
             text.setText(string);
-            
+
             // Permet de rendre la case clickable et permettre le changement de ce segment.
             text.setOnMouseClicked(event -> {
                 new ChangeSegment(text.getText());

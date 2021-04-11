@@ -4,11 +4,11 @@ package src.main.java.logique;
 import java.lang.Math;
 
 /**
- * Classe permettant de manipuler des AVL. 
+ * Classe permettant de manipuler des AVL.
  * Dans notre cadre, Fg est soit le type Point soit le type Segment.
  */
 public class AVL<Fg> {
-    
+
     //Variables d'instances.
     //La donnee de racine de l'arbre.
     private Fg data;
@@ -16,11 +16,11 @@ public class AVL<Fg> {
     private AVL<Fg> leftAVL, rightAVL;
     //La hauteur de l'arbre.
     private int height;
-    
+
 
     //Constructeurs.
     /**
-     * Constructeur de la classe AVL qui specifie la donnee de la racine data, le sous arbre gauche leftAVL 
+     * Constructeur de la classe AVL qui specifie la donnee de la racine data, le sous arbre gauche leftAVL
      * et le sous arbre droit rightAVL.
      * @param data Fg.
      * @param leftAVL AVL de Fg.
@@ -44,10 +44,10 @@ public class AVL<Fg> {
         this.height = 0;
     }
 
-    
+
     //Assesseurs et getteurs.
     //(Attention n'utilisez les assesseurs que lorsque le changement respecte l'ordre interne de l'arbre.)
-    /** 
+    /**
      * Getteur de la racine de l'arbre qui retourne cette racine.
      * @return Fg.
      */
@@ -55,8 +55,8 @@ public class AVL<Fg> {
         return this.data;
     }
 
-    
-    /** 
+
+    /**
      * Getteur du sous arbre gauche de l'arbre qui retourne ce sous arbre gauche.
      * @return AVL de Fg.
      */
@@ -64,8 +64,8 @@ public class AVL<Fg> {
         return this.leftAVL;
     }
 
-    
-    /** 
+
+    /**
      * Getteur du sous arbre gauche de l'arbre qui retourne ce sous arbre gauche.
      * @return AVL de Fg.
      */
@@ -73,26 +73,26 @@ public class AVL<Fg> {
         return this.rightAVL;
     }
 
-    
-    /** 
+
+    /**
      * Getteur de la hauteur de l'arbre qui retourne cette hauteur.
      * @return int.
      */
     public int getHeightAVL() {
         return this.height;
     }
-    
 
-    /** 
+
+    /**
      * Assesseur de la racine de l'arbre qui remplace la donnee de la racine (data) par new_data.
-     * @param new_data Fg. 
+     * @param new_data Fg.
      */
     public void setDataAVL(Fg new_data) {
         this.data = new_data;
     }
 
-    
-    /** 
+
+    /**
      * Assesseur du sous arbre gauche de l'arbre qui remplace ce sous arbre gauche (leftAVL) par new_tree.
      * @param new_tree AVL de Fg.
      */
@@ -100,8 +100,8 @@ public class AVL<Fg> {
         this.leftAVL = new_tree;
     }
 
-    
-    /** 
+
+    /**
      * Assesseur du sous arbre droit de l'arbre qui remplace ce sous arbre droit (rightAVL) par new_tree.
      * @param new_tree AVL de Fg.
      */
@@ -109,8 +109,8 @@ public class AVL<Fg> {
         this.rightAVL = new_tree;
     }
 
-    
-    /** 
+
+    /**
      * Assesseur de la hauteur de l'arbre qui remplace cette hauteur (height) par new_height.
      * @param new_height int.
      */
@@ -118,8 +118,8 @@ public class AVL<Fg> {
         this.height = new_height;
     }
 
-    
-    /** 
+
+    /**
      * Retourne true si l'arbre est vide, false sinon.
      * @return boolean.
      */
@@ -130,8 +130,8 @@ public class AVL<Fg> {
 		return false;
     }
 
-    
-    /** 
+
+    /**
      * Retourne true si l'arbre est reduit a sa racine, false sinon.
      * @return boolean.
      */
@@ -143,8 +143,8 @@ public class AVL<Fg> {
         return verif;
     }
 
-    
-    /** 
+
+    /**
      * Retourne true si le sous arbre gauche de l'arbre est vide ou bien false sinon.
      * @return boolean.
      */
@@ -156,8 +156,8 @@ public class AVL<Fg> {
         return verif;
     }
 
-    
-    /** 
+
+    /**
      * Retourne true si le sous arbre droit de l'arbre est vide ou bien false sinon.
      * @return boolean.
      */
@@ -168,9 +168,9 @@ public class AVL<Fg> {
         }
         return verif;
     }
-    
-    
-    /** 
+
+
+    /**
      * Calcule la hauteur de l'arbre et retourne cette hauteur.
      * @return int.
      */
@@ -191,7 +191,7 @@ public class AVL<Fg> {
                         this.height = 1 + this.getLeftAVL().getHeightAVL();
                     }
                     else {
-                        this.height = 1 + 
+                        this.height = 1 +
                         Math.max(this.getLeftAVL().getHeightAVL(), this.getRightAVL().getHeightAVL());
                     }
                 }
@@ -200,14 +200,14 @@ public class AVL<Fg> {
         return this.height;
     }
 
-    
-    /** 
+
+    /**
      * Calcule la balance de l'arbre et la retourne.
      * @return int.
      */
 	public int balance() {
         int x = 0;
-		if (isEmpty() || isLeaf()) 
+		if (isEmpty() || isLeaf())
 			x = 0;
         else if (getRightAVL() == null) {
             x = - getLeftAVL().getHeightAVL();
@@ -277,8 +277,8 @@ public class AVL<Fg> {
         }
     }
 
-    
-    /** 
+
+    /**
      * Retourne la donnee maximum (la plus a droite) de l'arbre.
      * @return Fg.
      */
@@ -293,8 +293,8 @@ public class AVL<Fg> {
         return maximum;
     }
 
-    
-    /** 
+
+    /**
      * Retourne la donnee minimum (la plus a gauche) de l'arbre.
      * @return Fg.
      */

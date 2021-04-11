@@ -24,7 +24,7 @@ public class Helper {
 
         // Pour afficher notre text.
         VBox vBox = new VBox();
- 
+
         // Differents aides pouvant etre selectionnes.
         switch (num) {
             // Ouvrir un fichier.
@@ -93,10 +93,10 @@ public class Helper {
                 vBox.getChildren().addAll(case8text1, case8text2, case8text3, case8text4, case8text5);
                 break;
         }
- 
+
         // Contenu de la fenetre
         Scene scene = new Scene(vBox, 600, 100);
-         
+
         // Settings de la fenetre.
         stage.setTitle("Helper");
         stage.getIcons().add(new Image("question.jpg"));
@@ -105,5 +105,5 @@ public class Helper {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.showAndWait();
     }
-    
+
 }

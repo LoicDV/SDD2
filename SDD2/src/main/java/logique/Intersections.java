@@ -28,8 +28,8 @@ public class Intersections {
         this.intersections = intersections;
     }
 
-    
-    /** 
+
+    /**
      * Getteur de la liste intersections qui retourne cette liste.
      * @return ArrayList de Segment.
      */
@@ -38,7 +38,7 @@ public class Intersections {
     }
 
 
-    /** 
+    /**
      * Assesseur de la liste intersections qui la remplace par new_list.
      * @param new_list Arraylist de Segment.
      */
@@ -47,9 +47,9 @@ public class Intersections {
     }
 
 
-    /** 
-     * Construit l'arbre treeQ qui contient les points d'evenement. On insere les upper et les lower de chaque 
-     * segment dans treeQ. Les upper sont inseres avec le parametre insertionUpper valant true afin de pouvoir 
+    /**
+     * Construit l'arbre treeQ qui contient les points d'evenement. On insere les upper et les lower de chaque
+     * segment dans treeQ. Les upper sont inseres avec le parametre insertionUpper valant true afin de pouvoir
      * ajouter des segments dans la liste isUpperOf du upper si cela est necessaire alors que les lower sont
      * inseres avec le parametre insertionUpper valant false. On retourne ensuite l'arbre treeQ.
      * @return Q.
@@ -58,19 +58,19 @@ public class Intersections {
         Q treeQ = new Q();
         for (int i = 0; i < this.getIntersections().size(); i++){
             Segment new_segment = this.getIntersections().get(i);
-            treeQ.insertQ(new_segment.getUpper(), true, new_segment); 
+            treeQ.insertQ(new_segment.getUpper(), true, new_segment);
             treeQ.insertQ(new_segment.getLower(), false, new_segment);
         }
         return treeQ;
     }
 
-    
-    /** 
+
+    /**
      * Algorithme qui va determiner les points d'intersections des segments se trouvant dans la liste intersections.
      * On commence par creer une ArrayList solutions qui contiendra les points d'intersections, on construit ensuite
-     * un arbre de type Q qui contiendra les points d'evenement et qui , initialement, contient tous les upper et 
+     * un arbre de type Q qui contiendra les points d'evenement et qui , initialement, contient tous les upper et
      * lower des segments consideres. On initialise aussi un arbre de type T qui contiendra les segments croises
-     * par la sweep line. On gere ensuite chaque point d'evenement avec HandleEventPoint. Finalement on retourne 
+     * par la sweep line. On gere ensuite chaque point d'evenement avec HandleEventPoint. Finalement on retourne
      * la liste solutions qui contient toutes les intersections.
      * @return ArrayList de Point.
      */
@@ -85,12 +85,12 @@ public class Intersections {
         return solutions;
     }
 
-    
-    /** 
-     * Determine si les segments s1 et s2 ont une intersection et, si c'est le cas, on ajoute alors 
-     * cette intersection dans l'arbre de type Q (treeQ) si il est plus bas que la sweep line (le parametre h est 
+
+    /**
+     * Determine si les segments s1 et s2 ont une intersection et, si c'est le cas, on ajoute alors
+     * cette intersection dans l'arbre de type Q (treeQ) si il est plus bas que la sweep line (le parametre h est
      * la hauteur de la sweep line) ou a la meme hauteur mais a droite du point d'evenement (le parametre p est
-     * ce point d'evenement) que l'on est en train de gerer. Notez que des conditions ont ete rajoutee afin 
+     * ce point d'evenement) que l'on est en train de gerer. Notez que des conditions ont ete rajoutee afin
      * d'eviter certaines erreurs de precisions.
      * @param s1 Segment.
      * @param s2 Segment.
@@ -107,16 +107,16 @@ public class Intersections {
             if (new_event.getX() - Math.floor(new_event.getX()) <= 0.00000001){
                 new_event.setX(Math.floor(new_event.getX()));
             }
-            if ((new_event.getY() < h) || (new_event.getY() == h && new_event.getX() > p.getX())) { 
+            if ((new_event.getY() < h) || (new_event.getY() == h && new_event.getX() > p.getX())) {
                 treeQ.insertQ(new_event, false, null);
             }
         }
     }
-    
-    
-    /** 
-     * Gere le point d'evenement p en detectant si p est un point d'intersection de plusieurs segments, 
-     * en inserant ou supprimant certains segment dans treeT et en detectant d'autres points d'evenements 
+
+
+    /**
+     * Gere le point d'evenement p en detectant si p est un point d'intersection de plusieurs segments,
+     * en inserant ou supprimant certains segment dans treeT et en detectant d'autres points d'evenements
      * si on peut les detecter a ce stade.
      * @param p Point.
      * @param treeQ Q.
@@ -126,13 +126,13 @@ public class Intersections {
     public void HandleEventPoint(Point p, Q treeQ, T treeT, ArrayList<Point> solutions){
         //On initialise justPoint qui contiendra les segments qui sont reduits a un point.
         ArrayList<Segment> justPoint = new ArrayList<Segment>();
-        //On cree uP, lP et cP qui vont contenir les segments dont p est le upper, le lower ou un point interieur 
+        //On cree uP, lP et cP qui vont contenir les segments dont p est le upper, le lower ou un point interieur
         //grâce au isUpperOf de p et a AddLowerAndInside.
         ArrayList<Segment> uP = p.getIsUpperOf();
         ArrayList<Segment> lP = new ArrayList<Segment>();
         ArrayList<Segment> cP = new ArrayList<Segment>();
         addLowerAndInside(lP, cP, p, treeT);
-        //S'il y a au moins deux segments dans l'union de uP, lP et cP p est une intersection de ces segments 
+        //S'il y a au moins deux segments dans l'union de uP, lP et cP p est une intersection de ces segments
         //et on le traite comme tel.
         if (uP.size() + lP.size() + cP.size() >= 2){
             for (int i = 0; i< uP.size(); i++) {
@@ -146,9 +146,9 @@ public class Intersections {
             }
             solutions.add(p);
         }
-        //On supprime ensuite les segments dont p est le lower ou un point interieur, puis on insere 
+        //On supprime ensuite les segments dont p est le lower ou un point interieur, puis on insere
         //les segments dont le point est le upper ou un point interieur.
-        //On supprime a hauteur p.getY() + 0.000001 et avec now_x valant p.getX() - 0.000001 pour bien avoir 
+        //On supprime a hauteur p.getY() + 0.000001 et avec now_x valant p.getX() - 0.000001 pour bien avoir
         //l'ordre avant d'atteindre l'intersection.
         for (int i = 0; i< lP.size(); i++) {
             treeT.suppressT(lP.get(i), p.getY() + 0.000001, p.getY(), p.getX() - 0.000001);
@@ -158,7 +158,7 @@ public class Intersections {
         }
         //On insere a hauteur h pour bien avoir l'ordre en dessous de l'intersection.
         double h = p.getY() - 0.000001;
-        for (int i = 0; i< uP.size(); i++) { 
+        for (int i = 0; i< uP.size(); i++) {
             treeT.insertT(uP.get(i), h, p.getY(), p.getX());
             if (uP.get(i).getUpper().equalPoint(uP.get(i).getLower())){
                 justPoint.add(uP.get(i));
@@ -167,7 +167,7 @@ public class Intersections {
         for (int i = 0; i< cP.size(); i++) {
             treeT.insertT(cP.get(i), h, p.getY(), p.getX());
         }
-        //On effectue differentes operations qui visent a rajouter des points d'evenement dans treeQ 
+        //On effectue differentes operations qui visent a rajouter des points d'evenement dans treeQ
         //si cela est necessaire.
         if (uP.isEmpty() && cP.isEmpty()){
             Segment s_l = getLeftNeighborPoint(treeT, p);
@@ -208,8 +208,8 @@ public class Intersections {
         }
     }
 
-    
-    /** 
+
+    /**
      * Ajoute les segments de treeT qui ont p comme lower p dans lP, et ceux qui contiennent p dans leur interieur
      * a cP.
      * @param lP ArrayList de Segment.
@@ -224,16 +224,16 @@ public class Intersections {
         //On cree un segment "artificiel" segmentIterable qui contient p.
         Segment segmentIterable = new Segment(p1, p2);
         //On "sauvegarde" ce segment.
-        Segment segmentMemoire = new Segment(p1, p2); 
+        Segment segmentMemoire = new Segment(p1, p2);
         boolean stop = false;
         //On prend le voisin gauche de segmentIterable et on regarde si il contient p.
         //On repete l'operation sur le segment jusqu'a ce qu'il n'y ait plus de voisin
         //gauche ou que le voisin gauche ne contienne pas p.
         while(!stop){
             Segment segmentLeft = getLeftNeighborSegment(treeT, segmentIterable, null, p.getY(), p.getY(), p.getX() - 0.000001, false);
-            if (segmentLeft == null 
-            || (!segmentLeft.isVertical() && !segmentLeft.isHorizontal() && !segmentLeft.isIn(p)) 
-            || (segmentLeft.isVertical() && !segmentLeft.isInVertical(p)) 
+            if (segmentLeft == null
+            || (!segmentLeft.isVertical() && !segmentLeft.isHorizontal() && !segmentLeft.isIn(p))
+            || (segmentLeft.isVertical() && !segmentLeft.isInVertical(p))
             || (segmentLeft.isHorizontal() && !segmentLeft.isInHorizontale(p))){
                 stop = true;
             }
@@ -257,9 +257,9 @@ public class Intersections {
         //droit au lieu du voisin gauche.
         while(!stop){
             Segment segmentRight = getRightNeighborSegment(treeT, segmentIterable, null, p.getY(), p.getY(), p.getX() - 0.000001, false);
-            if (segmentRight == null 
-            || (!segmentRight.isVertical() && !segmentRight.isHorizontal() && !segmentRight.isIn(p)) 
-            || (segmentRight.isVertical() && !segmentRight.isInVertical(p)) 
+            if (segmentRight == null
+            || (!segmentRight.isVertical() && !segmentRight.isHorizontal() && !segmentRight.isIn(p))
+            || (segmentRight.isVertical() && !segmentRight.isInVertical(p))
             || (segmentRight.isHorizontal() && !segmentRight.isInHorizontale(p))){
                 stop = true;
             }
@@ -268,10 +268,10 @@ public class Intersections {
                 //gauche et le voisin droit de notre segment "artificiel", si c'est le cas ce segment a
                 //deja ete ajoute dans cP ou lP. Le test suivant vise juste a veiller a ce que ce segment
                 //ne soit pas ajoute une deuxieme fois.
-                if (oneTime || (!((lP.size() > 0 && segmentRight.equalSegment(lP.get(0))) || (cP.size() > 0 && segmentRight.equalSegment(cP.get(0)))))){ 
+                if (oneTime || (!((lP.size() > 0 && segmentRight.equalSegment(lP.get(0))) && !(cP.size() > 0 && segmentRight.equalSegment(cP.get(0)))))){
                     //Conditions qui determine si le segment qui contient p doit etre rajoute
                     //a lP ou cP.
-                    if (segmentRight.getLower().getX() == p.getX() && segmentRight.getLower().getY() == p.getY()){ 
+                    if (segmentRight.getLower().getX() == p.getX() && segmentRight.getLower().getY() == p.getY()){
                         lP.add(segmentRight);
                     }
                     else if (!(segmentRight.getUpper().getX() == p.getX() && segmentRight.getUpper().getY() == p.getY())){
@@ -284,8 +284,8 @@ public class Intersections {
         }
     }
 
-    
-    /** 
+
+    /**
      * Retourne un segment qui est le voisin gauche d'un point.
      * Pour ce faire on construit un segment "artificiel" qui contient p et obtient
      * son voisin gauche grâce a getLeftNeighborSegment.
@@ -299,8 +299,8 @@ public class Intersections {
         return getLeftNeighborSegment(treeT, leftNeighbor, null, p.getY(), p.getY(), p.getX(), false);
     }
 
-    
-    /** 
+
+    /**
      * Retourne un segment qui est le voisin droit d'un point.
      * Pour ce faire on construit un segment "artificiel" qui contient p et obtient
      * son voisin droit grâce a getRightNeighborSegment.
@@ -313,11 +313,11 @@ public class Intersections {
         Segment rightNeighbor = new Segment(p1, p1);
         return getRightNeighborSegment(treeT, rightNeighbor, null, p.getY(), p.getY(), p.getX(), false);
     }
-    
-    
+
+
     /**
      * Explore l'arbre treeT et retourne le voisin gauche du segment s.
-     * Les parametres h, h2 et now_x sont les memes que d'habitude, justInsert vaut true si s vient 
+     * Les parametres h, h2 et now_x sont les memes que d'habitude, justInsert vaut true si s vient
      * d'etre insere dans treeT et false sinon et saved nous sert a retenir notre "meilleur candidat"
      * pour le voisin gauche.
      * @param treeT T.
@@ -335,9 +335,9 @@ public class Intersections {
         if (treeT.isEmpty() || (treeT.isLeaf() && treeT.getDataT().equalSegment(s))){
             return saved;
         }
-        //Si on trouve le segment s dans treeT et que c'est un noeud interne, on sait exactement ou se trouve son 
-        //voisin gauche dans treeT (s'il existe). Le branchement qui suit va donc directement chercher ce 
-        //voisin gauche s'il existe. 
+        //Si on trouve le segment s dans treeT et que c'est un noeud interne, on sait exactement ou se trouve son
+        //voisin gauche dans treeT (s'il existe). Le branchement qui suit va donc directement chercher ce
+        //voisin gauche s'il existe.
         else if (treeT.getDataT().equalSegment(s) && !treeT.leftIsEmpty()){
             //Cas a le sous arbre gauche est une feuille qui contient donc le meme segment que la racine.
             //Dans ce cas il n'y a pas de voisin gauche et on retourne saved.
@@ -363,8 +363,8 @@ public class Intersections {
                 if ((treeT.isLeftOrRight(s, h, h2, now_x, true) && treeT.isLeaf()) || treeT.leftIsEmpty()){
                     return saved;
                 }
-                //Cas ou la racine du sous arbre gauche est a gauche de s, cette racine est donc un candidat 
-                //potentiel et on explore, si c'est possible, le sous arbre droit du sous arbre gauche afin 
+                //Cas ou la racine du sous arbre gauche est a gauche de s, cette racine est donc un candidat
+                //potentiel et on explore, si c'est possible, le sous arbre droit du sous arbre gauche afin
                 //d'essayer de trouver un "meilleur candidat".
                 else if (((treeT.getLeftT()).isLeftOrRight(s, h, h2, now_x, true) && !(treeT.getLeftT().isLeftOrRight(s, h, h2, now_x, false)) && !(treeT.getLeftT().getDataT().equalSegment(s)))
                 || (treeT.getLeftT().isLeftOrRight(s, h, h2, now_x, true) && treeT.getLeftT().isLeftOrRight(s, h, h2, now_x, false) && !(treeT.getLeftT().getDataT().equalSegment(s)) && treeT.getLeftT().isLeftOrRight(s, h + 0.000001, h2, now_x, true))){
@@ -376,7 +376,7 @@ public class Intersections {
                         return getLeftNeighborSegment(treeT.getLeftT().getRightT(), s, saved, h, h2, now_x, justInsert);
                     }
                 }
-                //Cas ou la racine du sous arbre gauche de treeT est a droite de s, il faut donc aller dans 
+                //Cas ou la racine du sous arbre gauche de treeT est a droite de s, il faut donc aller dans
                 //le sous arbre gauche afin d'aller "encore plus a gauche" a l'etape suivante.
                 else {
                     return getLeftNeighborSegment(treeT.getLeftT(), s, saved, h, h2, now_x, justInsert);
@@ -395,11 +395,11 @@ public class Intersections {
             }
         }
     }
-    
-    
-    /** 
+
+
+    /**
      * Explore l'arbre treeT et retourne le voisin droit du segment s.
-     * Les parametres h, h2 et now_x sont les memes que d'habitude, justInsert vaut true si s vient 
+     * Les parametres h, h2 et now_x sont les memes que d'habitude, justInsert vaut true si s vient
      * d'etre insere dans treeT et false sinon et saved nous sert a retenir notre "meilleur candidat"
      * pour le voisin gauche.
      * @param treeT T.
@@ -430,8 +430,8 @@ public class Intersections {
                 if ((treeT.isLeftOrRight(s, h, h2, now_x, false) && treeT.isLeaf()) || treeT.rightIsEmpty()){
                     return saved;
                 }
-                //Cas ou la racine du sous arbre droit est a droite de s, cette racine est donc un candidat 
-                //potentiel et on explore, si c'est possible, le sous arbre gauche du sous arbre droit afin 
+                //Cas ou la racine du sous arbre droit est a droite de s, cette racine est donc un candidat
+                //potentiel et on explore, si c'est possible, le sous arbre gauche du sous arbre droit afin
                 //d'essayer de trouver un "meilleur candidat".
                 else if ((treeT.getRightT().isLeftOrRight(s, h, h2, now_x, false) && !(treeT.getRightT().isLeftOrRight(s, h, h2, now_x, true)) && !(treeT.getRightT().getDataT().equalSegment(s)))
                 || (treeT.getRightT().isLeftOrRight(s, h, h2, now_x, false) && treeT.getRightT().isLeftOrRight(s, h, h2, now_x, true) && !(treeT.getRightT().getDataT().equalSegment(s)) && treeT.getRightT().isLeftOrRight(s, h + 0.000001, h2, now_x, false))){
@@ -443,7 +443,7 @@ public class Intersections {
                         return getRightNeighborSegment(treeT.getRightT().getLeftT(), s, saved, h, h2, now_x, justInsert);
                     }
                 }
-                //Cas ou la racine du sous arbre droit de treeT est a gauche de s, il faut donc aller dans 
+                //Cas ou la racine du sous arbre droit de treeT est a gauche de s, il faut donc aller dans
                 //le sous arbre droit afin d'aller "encore plus a droite" a l'etape suivante.
                 else {
                     return getRightNeighborSegment(treeT.getRightT(), s, saved, h, h2, now_x, justInsert);
@@ -462,10 +462,10 @@ public class Intersections {
             }
         }
     }
-    
-    
-    
-    /** 
+
+
+
+    /**
      * Retourne le segment le plus a gauche de uP et cP dans treeT, ou p est le point en train d'etre traite
      * par HandleEventPoint et s est un segment de uP ou cP.
      * @param treeT T.
@@ -477,20 +477,20 @@ public class Intersections {
         //Cas ou la racine est le segment s ou bien ou la racine est a droite de s, le segment le plus
         //a gauche de uP et cP est donc dans le sous arbre gauche.
         if (treeT.getDataT().equalSegment(s) ||treeT.isLeftOrRight(s, p.getY(), p.getY(), p.getX(), false)){
-            //Cas ou le segment en racine contient p. 
+            //Cas ou le segment en racine contient p.
             if (treeT.getDataT().equalSegment(s) || treeT.isLeftOrRight(s, p.getY(), p.getY(), p.getX(), true) || (treeT.getDataT().isHorizontal() && treeT.getDataT().isInHorizontale(p))){
                 //Cas ou on ne peut pas aller plus a gauche donc la racine est le segment recherche.
                 if (treeT.leftIsEmpty() || treeT.getLeftT().isLeaf()){
                     return treeT.getDataT();
                 }
                 //Cas ou on peut aller plus a gauche, on est sûr qu'il y a encore au moins un segment qui contient
-                //p dans le sous arbre gauche car le segment racine contient p et la feuille la plus a droite 
-                //de son sous arbre gauche represente le meme segment. On explore donc le sous arbre gauche. 
+                //p dans le sous arbre gauche car le segment racine contient p et la feuille la plus a droite
+                //de son sous arbre gauche represente le meme segment. On explore donc le sous arbre gauche.
                 else {
                     return getLeftMost(treeT.getLeftT(), p, s);
                 }
             }
-            //Cas ou le segment racine ne contient pas p, comme ce segment est a droite de s, il faut 
+            //Cas ou le segment racine ne contient pas p, comme ce segment est a droite de s, il faut
             //explorer le sous arbre gauche.
             else {
                 return getLeftMost(treeT.getLeftT(), p, s);
@@ -502,9 +502,9 @@ public class Intersections {
             return getLeftMost(treeT.getRightT(), p, s);
         }
     }
-    
-    
-    /** 
+
+
+    /**
      * Retourne le segment le plus a droite de uP et cP dans treeT, ou p est le point en train d'etre traite
      * par HandleEventPoint, s est un segment de uP ou cP et saved nous permet de retenir notre "meilleur
      * candidat".
@@ -522,7 +522,7 @@ public class Intersections {
         }
         //Cas ou la racine est le segment s ou bien ou la racine est a gauche de s, le segment le plus
         //a droite de uP et cP est donc dans le sous arbre gauche.
-        else if (treeT.getDataT().equalSegment(s) || treeT.isLeftOrRight(s, p.getY(), p.getY(), p.getX(), true)){ 
+        else if (treeT.getDataT().equalSegment(s) || treeT.isLeftOrRight(s, p.getY(), p.getY(), p.getX(), true)){
             //Cas ou le segment en racine contient p.
             if (treeT.getDataT().equalSegment(s) || treeT.isLeftOrRight(s, p.getY(), p.getY(), p.getX(), false)){
                 //Cas ou on ne peut pas aller plus a droite donc la racine est le segment recherche.
@@ -537,7 +537,7 @@ public class Intersections {
                     return getRightMost(treeT.getRightT(), p, s, saved);
                 }
             }
-            //Cas ou le segment racine ne contient pas p, comme ce segment est a gauche de s, il faut 
+            //Cas ou le segment racine ne contient pas p, comme ce segment est a gauche de s, il faut
             //explorer le sous arbre droit.
             else {
                 return getRightMost(treeT.getRightT(), p, s, saved);

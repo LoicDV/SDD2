@@ -3,7 +3,7 @@ package src.main.java.logique;
 /**
  * Classe qui nous permet de manipuler des arbres de type T.
  * Ces arbres contiennent les segments croises par la sweep line.
- * Les feuilles sont ordonnees selon l'ordre de gauche a droite des segments et pour 
+ * Les feuilles sont ordonnees selon l'ordre de gauche a droite des segments et pour
  * chaque noeud interne, le segment qu'il contient est le segment se situant dans la
  * feuille la plus a droite de son sous arbre gauche.
  */
@@ -11,7 +11,7 @@ public class T extends AVL<Segment> {
 
     //Constructeurs.
     /**
-     * Constructeur de la classe T qui specifie la donnee de la racine head, le sous arbre gauche left 
+     * Constructeur de la classe T qui specifie la donnee de la racine head, le sous arbre gauche left
      * et le sous arbre droit right.
      * @param data Segment.
      * @param left T.
@@ -30,7 +30,7 @@ public class T extends AVL<Segment> {
     }
 
 
-    /** 
+    /**
      * Getteur de la racine de l'arbre qui retourne cette racine.
      * @return Segment.
      */
@@ -90,7 +90,7 @@ public class T extends AVL<Segment> {
     public void setRightT(T new_rightT){
         setRightAVL(new_rightT);;
     }
-    
+
 
     /**
      * Assesseur de la hauteur de l'arbre qui remplace cette hauteur (heightT) par new_heightT.
@@ -101,18 +101,18 @@ public class T extends AVL<Segment> {
     }
 
 
-    /** 
+    /**
      * Retourne true si le segment en racine se trouve a gauche (si boolean left = true)
      * ou a droite (si boolean left = false) du segment en parametre, sinon retourne false.
      * Le test se fait en prenant les points appartenants a ces deux segments se trouvant a une certaine hauteur
-     * et en regardant lequel de ces points a l'abscisse la plus ou la moins elevee selon si on veut savoir 
-     * si un segment est a gauche ou a droite de l'autre. Cette hauteur est generalement le double h, cependant, 
-     * selon le moment ou l'on se trouve lorsque l'on appelle la fonction, cette hauteur peut etre legerement 
-     * superieure ou inferieure a la hauteur de la sweep line. C'est pour cela que dans le cas ou l'un des 
-     * segments est horizontal, on utilisera h2 qui est la hauteur reelle de la sweep line et le double now_x 
+     * et en regardant lequel de ces points a l'abscisse la plus ou la moins elevee selon si on veut savoir
+     * si un segment est a gauche ou a droite de l'autre. Cette hauteur est generalement le double h, cependant,
+     * selon le moment ou l'on se trouve lorsque l'on appelle la fonction, cette hauteur peut etre legerement
+     * superieure ou inferieure a la hauteur de la sweep line. C'est pour cela que dans le cas ou l'un des
+     * segments est horizontal, on utilisera h2 qui est la hauteur reelle de la sweep line et le double now_x
      * qui nous permettra de savoir si le segment horizontal doit etre considere comme etant a gauche ou a droite
-     * de l'autre segment. Notez que pour certains branchements des conditions sont rajoutees afin de gerer les 
-     * erreurs de precisions. Il est egalement important de remarquer que si les deux segments se croisent en un  
+     * de l'autre segment. Notez que pour certains branchements des conditions sont rajoutees afin de gerer les
+     * erreurs de precisions. Il est egalement important de remarquer que si les deux segments se croisent en un
      * point ayant son ordonnee egale a la hauteur utilisee dans le test (h ou h2), ils sont consideres comme
      * etant a gauche et a droite l'un de l'autre.
      * @param segment Segment.
@@ -160,14 +160,14 @@ public class T extends AVL<Segment> {
                 double segment_param_p = segment.getParam_P();
                 double segment_x = (h2 - segment_param_p) / segment_pente;
                 if (left) {
-                    if (now_x < segment_x 
+                    if (now_x < segment_x
                     || (now_x - segment_x <= 0.00000001 && now_x != segment_x)){
                         verif = true;
                     }
                 }
                 else {
                     if (now_x >= segment_x || segment_x - now_x <= 0.00000001){
-                        verif = true; 
+                        verif = true;
                     }
                 }
             }
@@ -182,7 +182,7 @@ public class T extends AVL<Segment> {
                     }
                 }
                 else {
-                    if (now_x < head.getUpper().getX() 
+                    if (now_x < head.getUpper().getX()
                     || (now_x - head.getUpper().getX() <= 0.00000001 && now_x != head.getUpper().getX())) {
                         verif = true;
                     }
@@ -199,9 +199,9 @@ public class T extends AVL<Segment> {
                     }
                 }
                 else {
-                    if (now_x < head_x 
+                    if (now_x < head_x
                     || (now_x - head_x <= 0.00000001 && now_x != head_x)){
-                        verif = true; 
+                        verif = true;
                     }
                 }
             }
@@ -264,7 +264,7 @@ public class T extends AVL<Segment> {
             double segment_param_p = segment.getParam_P();
             double head_x = (h - head_param_p) / head_pente;
             double segment_x = (h - segment_param_p) / segment_pente;
-            
+
             if (left) {
                 if (head_x <= segment_x || head_x - segment_x <= 0.00000001) {
                     verif = true;
@@ -280,9 +280,9 @@ public class T extends AVL<Segment> {
     }
 
 
-    /** 
+    /**
      * Insere le segment "segment" dans l'arbre, les parametres h, h2 et now_x sont utiles lorsque l'on doit
-     * appeller la fonction isLeftOrRight afin de se "diriger" dans l'arbre. L'insertion respecte la 
+     * appeller la fonction isLeftOrRight afin de se "diriger" dans l'arbre. L'insertion respecte la
      * definition des arbres de type T.
      * @param segment Segment.
      * @param h double.
@@ -323,8 +323,8 @@ public class T extends AVL<Segment> {
         }
     }
 
-    
-    /** 
+
+    /**
      * Insere le segment "segment" dans l'arbre qui est vide.
      * @param segment Segment.
      */
@@ -333,10 +333,10 @@ public class T extends AVL<Segment> {
         this.setDataT(segment);
     }
 
-    
-    /** 
-     * Supprime le segment "segment" de l'arbre, a nouveau, les parametres h, h2 et now_x sont utiles 
-     * lorsque l'on doit appeller la fonction isLeftOrRight afin de se "diriger" dans l'arbre et la suppression 
+
+    /**
+     * Supprime le segment "segment" de l'arbre, a nouveau, les parametres h, h2 et now_x sont utiles
+     * lorsque l'on doit appeller la fonction isLeftOrRight afin de se "diriger" dans l'arbre et la suppression
      * respecte bien la definition des arbres de type T.
      * @param segment Segment.
      * @param h double.
@@ -380,11 +380,11 @@ public class T extends AVL<Segment> {
             }
         }
     }
-    
-    
-    /** 
-     * Supprime la racine de l'arbre, encore une fois, les parametres h, h2 et now_x sont utiles lorsque l'on 
-     * doit appeller la fonction isLeftOrRight afin de se "diriger" dans l'arbre et onrespecte bien la 
+
+
+    /**
+     * Supprime la racine de l'arbre, encore une fois, les parametres h, h2 et now_x sont utiles lorsque l'on
+     * doit appeller la fonction isLeftOrRight afin de se "diriger" dans l'arbre et onrespecte bien la
      * definition des arbres de type T.
      * @param h double.
      * @param h2 double.

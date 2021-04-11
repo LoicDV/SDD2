@@ -25,7 +25,7 @@ public class OpenScript {
      */
     public static void openFile() {
 
-        // Composant javaFX pour ouvrir un fichier 
+        // Composant javaFX pour ouvrir un fichier
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Scene");
         // Extension du fichier.

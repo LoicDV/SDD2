@@ -64,7 +64,7 @@ public class SaveFile {
         }
     }
 
-    /** 
+    /**
      * Ecrit dans le fichier les segments presents dans la fenetre.
      * @param file File.
      * @throws IOException IOException.

@@ -21,7 +21,7 @@ public class DrawSegment extends ScrollPane{
 
     // Variable instance.
     private static int zoom = 3;
-    
+
     /**
      * Fonction utilisee lors de l'ouverture d'un fichier.
      * Permet de dessiner chaque segment s'y trouvant.
@@ -30,10 +30,10 @@ public class DrawSegment extends ScrollPane{
     public static void draw(File file) {
         // ArrayList contenant tous les segments du fichier.
         ArrayList<Point[]> tab = ReadFile.read(file);
-        
+
         ArrayList<Point[]> containers = Main.getContainers();
         ArrayList<Line> set = Main.getSet();
-        
+
         // On itere sur l'ArrayList pour creer nos segments et les rajouter a la fois a notre ArrayList de segment + la zone de dessin.
         for (Point[] smallPoints : tab) {
             Line line = new Line(smallPoints[0].getX() * zoom, smallPoints[0].getY() * zoom,

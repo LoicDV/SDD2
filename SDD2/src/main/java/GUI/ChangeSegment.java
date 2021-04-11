@@ -23,11 +23,11 @@ import javafx.scene.shape.Line;
  * Cree la fenetre pour retirer ou remplacer le segment selectionne.
  */
 public class ChangeSegment {
-    
+
     // Variables instances.
     private static int zoom = 3;
     private static Stage stage;
-    
+
     /**
      * Object qui va lancer la fonction start().
      * @param text String.
@@ -36,8 +36,8 @@ public class ChangeSegment {
         start(text);
     }
 
-    
-    /** 
+
+    /**
      * Cette fonction va creer une fenetre possedant 3 boutons :
      *      Change : permet de modifier un segment.
      *      Remove : retire un segment.
@@ -81,7 +81,7 @@ public class ChangeSegment {
         HBox layout = new HBox(3);
         layout.getChildren().addAll(btnChange, btnRemove, btnNothing);
         layout.setSpacing(50);
-        
+
         // Le contenu de la fenetre
         Scene scene = new Scene(layout, 325, 50);
 
@@ -95,8 +95,8 @@ public class ChangeSegment {
         stage.show();
     }
 
-    
-    /** 
+
+    /**
      * Cree une fenetre pour ajuster un segment.
      * @param line Line.
      */
@@ -140,7 +140,7 @@ public class ChangeSegment {
             stage.close();
             isDoubleTextField(line, textField_x1, textField_y1, textField_x2, textField_y2);
         });
-        
+
         // Notre Pane pour stocker notre bouton et le centrer.
         BorderPane borderPane = new BorderPane();
         borderPane.setCenter(button);
@@ -179,12 +179,12 @@ public class ChangeSegment {
             Double point1Y = Double.parseDouble(textField_y1.getText());
             Double point2X = Double.parseDouble(textField_x2.getText());
             Double point2Y = Double.parseDouble(textField_y2.getText());
-            
+
             // Check pour savoir si pas de 'overlap'.
             if (DrawSegment.noDoubleLine(line, point1X, point1Y, point2X, point2Y, true)) {
                 coordSegment(line, point1X, point1Y, point2X, point2Y);
             }
-            
+
             else {
                 // Exception car il y a un 'overlap'.
                 Exception.doubleLineException();
@@ -196,8 +196,8 @@ public class ChangeSegment {
         }
     }
 
-    
-    /** 
+
+    /**
      * Rajoute notre segment au dessin en supprimant la ligne selectionnee precedemment.
      * @param line Line.
      * @param point1X double.
@@ -208,19 +208,19 @@ public class ChangeSegment {
     public static void coordSegment(Line line, Double point1X, Double point1Y, Double point2X, Double point2Y) {
         // On cree le nouveau segment qui va etre ajoute.
         Line newLine = new Line(point1X * zoom, point1Y * zoom, point2X * zoom, point2Y * zoom);
-        
+
         // On recupere nos objets de notre Main.
         ArrayList<Line> set = Main.getSet();
         ArrayList<Point[]> containers = Main.getContainers();
         DisplayContainers grid = Main.getDisplayContainers();
         Pane pane = Main.getPane();
-        
+
         // On boucle sur une ArrayList pour trouver le segment qu'on doit remplacer.
         for (int i = 0; i < set.size(); i++) {
-            
+
             // Check si les segments sont identiques.
             if (ClearPane.checkEquals(line, set.get(i))) {
-                
+
                 // Remplacement total du segment.
                 set.set(i, newLine);
                 containers.set(i, new Point[]{new Point(point1X, point1Y), new Point(point2X, point2Y)});

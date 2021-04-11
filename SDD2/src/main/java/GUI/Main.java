@@ -23,7 +23,7 @@ import javafx.scene.shape.Circle;
  * Fenetre principale de notre programme.
  */
 public class Main extends Application {
-    
+
     // Variables instances.
     private static ArrayList<Point[]> containers;
     private static ArrayList<Line> set;
@@ -35,8 +35,8 @@ public class Main extends Application {
     private static DisplayContainers grid;
     private static ScrollPane scrollPane;
 
-    
-    /** 
+
+    /**
      * Cree et ouvre notre fenetre principale de notre map overlay.
      * @param primaryStage Stage.
      */
@@ -76,7 +76,7 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-    /** 
+    /**
      * Retourne le Stage de la fenetre.
      * @return Stage.
      */
@@ -84,7 +84,7 @@ public class Main extends Application {
         return stage;
     }
 
-    /** 
+    /**
      * Retourne le Pane de la fenetre.
      * @return Pane.
      */
@@ -92,7 +92,7 @@ public class Main extends Application {
         return pane;
     }
 
-    /** 
+    /**
      * Remplace l'ancien Pane par le nouveau en parametre.
      * @param newPane Pane.
      */
@@ -100,14 +100,14 @@ public class Main extends Application {
         pane = newPane;
     }
 
-    /** 
+    /**
      * Retourne le BorderPane de la fenetre.
      * @return BorderPane.
      */
     public static BorderPane getBorderPane() {
         return root;
     }
-    
+
     /**
      * Retourne la ScrollPane de la fenetre.
      * @return ScrollPane.
@@ -116,7 +116,7 @@ public class Main extends Application {
         return scrollPane;
     }
 
-    /** 
+    /**
      * Retourne la File de la fenetre.
      * @return File.
      */
@@ -124,7 +124,7 @@ public class Main extends Application {
         return file;
     }
 
-    /** 
+    /**
      * Remplace l'ancien File par le nouveau en parametre.
      * @param newFile File.
      */
@@ -132,15 +132,15 @@ public class Main extends Application {
         file = newFile;
     }
 
-    /** 
+    /**
      * Retourne le ArrayList de tableau de 2 Points de la fenetre.
      * @return ArrayList de Point[].
      */
     public static ArrayList<Point[]> getContainers() {
         return containers;
     }
-    
-    /** 
+
+    /**
      * Retourne le ArrayList de Line de la fenetre.
      * @return ArrayList de Line.
      */
@@ -148,7 +148,7 @@ public class Main extends Application {
         return set;
     }
 
-    /** 
+    /**
      * Retourne le ArrayList de Circle de la fenetre.
      * @return ArrayList de Circle.
      */
@@ -163,7 +163,7 @@ public class Main extends Application {
         setCircle = new ArrayList<Circle>();
     }
 
-    /** 
+    /**
      * Retourne le DisplayContainers de la fenetre.
      * @return DisplayContainers.
      */
@@ -171,7 +171,7 @@ public class Main extends Application {
         return grid;
     }
 
-    /** 
+    /**
      * Lance notre fenetre.
      * @param args String[].
      */

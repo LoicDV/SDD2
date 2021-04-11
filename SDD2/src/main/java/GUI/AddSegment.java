@@ -55,12 +55,12 @@ public class AddSegment extends Stage {
         textField_x2.setFocusTraversable(false);
 
         // Pour le y2.
-        TextField textField_y2 = new TextField();    
+        TextField textField_y2 = new TextField();
         textField_y2.setPrefSize(100, 50);
         // Pour mettre notre texte en arriere plan et donner une idee a l'utilisateur
         // ce qu'il doit mettre dans la case.
         textField_y2.setPromptText("y de p2");
-        textField_y2.setFocusTraversable(false);  
+        textField_y2.setFocusTraversable(false);
 
         // Notre bouton add.
         Button button = new Button("Add");
@@ -68,7 +68,7 @@ public class AddSegment extends Stage {
             addSegment(textField_x1, textField_y1, textField_x2, textField_y2);
             stage.close();
         });
-        
+
         // Notre Pane pour stocker notre bouton et le centrer.
         BorderPane borderPane = new BorderPane();
         borderPane.setCenter(button);

@@ -6,23 +6,23 @@ import java.util.ArrayList;
  * Sert a manipuler des Objets Point.
  */
 public class Point {
-    
+
     //Variables d'instances.
     //Coordonnees du point.
     private double x, y;
     //Liste dans laquelle on insere les segments dont le point est l'extremite superieure.
     private ArrayList<Segment> isUpperOf;
-    //Liste dans laquelle on insere les segments dont le point est l'intersection de ce segment 
+    //Liste dans laquelle on insere les segments dont le point est l'intersection de ce segment
     //avec au moins un autre segment.
     private ArrayList<Segment> isIntersectionOf;
 
 
     //Constructeurs.
-    /** 
+    /**
      * Constructeur de la classe Point qui specifie uniquement les coordonnees x et y du point.
      * @param x double.
      * @param y double.
-     */ 
+     */
     public Point(double x, double y) {
         this.x = x;
         this.y = y;
@@ -31,8 +31,8 @@ public class Point {
     }
 
 
-    /**  
-     * Constructeur de la classe Point qui specifie les coordonnees x et y, 
+    /**
+     * Constructeur de la classe Point qui specifie les coordonnees x et y,
      * la liste isUpperOf et la liste isIntersectionOf du point.
      * @param x double.
      * @param y double.
@@ -48,16 +48,16 @@ public class Point {
 
 
     //Assesseurs et getteurs.
-    /** 
+    /**
      * Getteur de l'abscisse du point qui retourne cette abscisse.
      * @return double.
      */
     public double getX() {
         return this.x;
     }
-    
-    
-    /** 
+
+
+    /**
      * Getteur de l'ordonnee du point qui retourne cette ordonnee.
      * @return double.
      */
@@ -65,17 +65,17 @@ public class Point {
         return this.y;
     }
 
-    
-    /** 
-     * Getteur de la liste IsUpperOf du point qui retourne cette liste. 
+
+    /**
+     * Getteur de la liste IsUpperOf du point qui retourne cette liste.
      * @return ArrayList de Segment.
      */
     public ArrayList<Segment> getIsUpperOf(){
         return this.isUpperOf;
     }
 
-    
-    /** 
+
+    /**
      * Getteur de la liste isIntersectionOf du point qui retourne cette liste.
      * @return ArrayList de Segment.
      */
@@ -83,17 +83,17 @@ public class Point {
         return this.isIntersectionOf;
     }
 
-    
-    /** 
+
+    /**
      * Assesseur de l'abscisse du point qui remplace cette abscisse par new_x.
      * @param new_x double.
      */
     public void setX(double new_x) {
         this.x = new_x;
     }
-    
-    
-    /** 
+
+
+    /**
      * Assesseur de l'ordonnee du point qui remplace cette ordonnee par new_y.
      * @param new_y double.
      */
@@ -101,8 +101,8 @@ public class Point {
         this.y = new_y;
     }
 
-    
-    /** 
+
+    /**
      * Assesseur qui remplaces les coordonnees x et y par new_x et new_y.
      * @param new_x double.
      * @param new_y double.
@@ -112,8 +112,8 @@ public class Point {
         setY(new_y);
     }
 
-    
-    /** 
+
+    /**
      * Assesseur qui remplace tous les attributs du point par ceux du point ajout.
      * @param ajout Point.
      */
@@ -124,8 +124,8 @@ public class Point {
         this.isIntersectionOf = ajout.isIntersectionOf;
     }
 
-    
-    /** 
+
+    /**
      * Assesseur qui remplace la liste isUpperOf du point par new_list.
      * @param new_list ArrayList de Segment.
      */
@@ -133,8 +133,8 @@ public class Point {
         this.isUpperOf = new_list;
     }
 
-    
-    /** 
+
+    /**
      * Assesseur qui remplace la liste isIntersectionOf du point par new_list.
      * @param new_list ArrayList de Segment.
      */
@@ -142,9 +142,9 @@ public class Point {
         this.isIntersectionOf = new_list;
     }
 
-    
-    /** 
-     * Ecriture du point en un string sous le format "abscisse du point ordonnee du point" 
+
+    /**
+     * Ecriture du point en un string sous le format "abscisse du point ordonnee du point"
      * (avec un espace entre l'abscisse et l'ordonnee) et on retourne ce string.
      * @return String.
      */
@@ -154,8 +154,8 @@ public class Point {
     }
 
 
-    /** 
-     * Retourne true si notre point est plus haut ou de meme hauteur mais plus a gauche que le point p donne 
+    /**
+     * Retourne true si notre point est plus haut ou de meme hauteur mais plus a gauche que le point p donne
      * en argument et retourne false sinon.
      * @param p Point.
      * @return boolean.
@@ -176,9 +176,9 @@ public class Point {
         System.out.println(this.toString());
     }
 
-    
-    /** 
-     * Compare les deux points (celui sur lequel la fonction est appellee et p) et retourne le booleen true 
+
+    /**
+     * Compare les deux points (celui sur lequel la fonction est appellee et p) et retourne le booleen true
      * s'ils sont identiques (a une erreur de precision pres) et retourne le booleen false sinon.
      * @param p Point.
      * @return boolean.

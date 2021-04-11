@@ -13,10 +13,10 @@ public class MyMenuBar extends MenuBar{
      * Objet qui cree le menu avec les sous-menus de notre programme.
      */
     public MyMenuBar() {
-        
+
         // Onglet 1.
         Menu menu1 = new Menu("File");
-        
+
         // Sous-menu 1.
         MenuItem menu1Item1 = new MenuItem("Open");
         menu1Item1.setOnAction(event -> {
@@ -30,7 +30,7 @@ public class MyMenuBar extends MenuBar{
         menu1Item3.setOnAction(event -> {
             new SaveFile(Main.getFile(), false);
         });
-        
+
         // Ajout du sous-menu 1 au menu 1.
         menu1.getItems().add(menu1Item1);
         menu1.getItems().add(menu1Item2);

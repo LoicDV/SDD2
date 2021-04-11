@@ -31,7 +31,7 @@ public class Compilation {
     // Pour iterer sur nos ArrayLists. (Sweep Line).
     private int compteurLowerUpper = 0;
     private int compteurIntersection = 0;
-    
+
     /**
      * Objet qui va compiler notre code logique pour trouver les intersections.
      * @param flag boolean.
@@ -39,7 +39,7 @@ public class Compilation {
     public Compilation(boolean flag) {
         // Reinitialise les cercles.
         noCircle();
-        
+
         // Adaptation car on a besoin d'une ArrayList de Segment et non d'une ArrayList de Point[].
         ArrayList<Point[]> contains = Main.getContainers();
         ArrayList<Segment> newContains = new ArrayList<Segment>(contains.size());
@@ -86,7 +86,7 @@ public class Compilation {
             Button btnAllStep = new Button(">>>");
             btnNextStep.setPrefSize(136, 50);
             btnAllStep.setPrefSize(136, 50);
-            
+
             // Differentes action pour les boutons.
             btnNextStep.setOnAction(event -> {
                 // Si pas de segments ni d'intersection.
@@ -153,7 +153,7 @@ public class Compilation {
                 Main.getPane().getChildren().remove(Main.getPane().getChildren().size() - 1);
                 Main.getPane().getChildren().remove(Main.getPane().getChildren().size() - 1);
             });
-            
+
             // Setup de la fenetre.
             stage.setScene(scene);
             stage.setTitle("Sweep Line");
@@ -162,7 +162,7 @@ public class Compilation {
             // Empeche l'utilisateur d'utiliser la fenetre principale lorsque celle-ci est a l'ecran.
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.show();
-            
+
         }
     }
 
@@ -172,13 +172,13 @@ public class Compilation {
     public static void noCircle() {
         // On recupere notre zone de dessin.
         Pane pane = Main.getPane();
-        
+
         boolean flag = true;
         // On itere jusqu'a ne plus avoir de cercle.
         while (flag) {
             // Taille de la Pane.
             int index = Main.getSetCircle().size() + Main.getSet().size();
-            
+
             // Test pour savoir s'il y a au moins un segment.
             if (index == 0) {
                 flag = false;
